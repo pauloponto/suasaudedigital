@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sua Saúde Digital — Encontre profissionais de saúde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7F5F0;
+    --ink:#1B2420;
+    --ink-soft:#5B6560;
+    --teal:#0F6E56;
+    --teal-deep:#0A4A3A;
+    --teal-pale:#E1F0EA;
+    --line:#DCD8CE;
+    --card:#FFFFFF;
+    --coral:#D85A30;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* HEADER */
+  header{
+    padding:28px 0 0;
+    border-bottom:1px solid var(--line);
+    padding-bottom:20px;
+  }
+  .header-row{display:flex;align-items:center;justify-content:space-between;}
+  .logo{
+    display:flex;align-items:baseline;gap:8px;
+  }
+  .logo-mark{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:23px;
+    letter-spacing:-0.5px;
+    color:var(--teal-deep);
+    white-space:nowrap;
+  }
+  .logo-mark span{color:var(--coral);}
+  .logo-sub{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .cta-cadastro{
+    font-size:13px;
+    font-weight:600;
+    color:var(--teal-deep);
+    text-decoration:none;
+    border:1px solid var(--teal-deep);
+    padding:9px 18px;
+    border-radius:100px;
+    transition:all .15s ease;
+    white-space:nowrap;
+  }
+  .cta-cadastro:hover{background:var(--teal-deep);color:#fff;}
+
+  /* HERO */
+  .hero{
+    padding:64px 0 40px;
+    text-align:center;
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:clamp(32px,5vw,52px);
+    line-height:1.08;
+    letter-spacing:-1px;
+    color:var(--ink);
+    max-width:680px;
+    margin:0 auto 14px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--teal);
+  }
+  .hero p{
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:440px;
+    margin:0 auto;
+    line-height:1.6;
+  }
+
+  /* CATEGORY SECTION */
+  .tabs-section{padding:8px 0 4px;}
+
+  /* SELETORES (dropdown slim) */
+  .filters-row{
+    display:flex;
+    gap:12px;
+    max-width:560px;
+    margin:0 0 28px;
+  }
+  .selector-wrap{
+    position:relative;
+    flex:1;
+    min-width:0;
+  }
+  .selector-btn{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:13px 16px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    cursor:pointer;
+    font-size:14px;
+    color:var(--ink);
+    user-select:none;
+  }
+  .selector-btn:hover{border-color:var(--teal);}
+  .selector-icon{font-size:15px;color:var(--ink-soft);flex-shrink:0;}
+  .selector-label{flex:1;text-align:left;}
+  .selector-label.placeholder{color:var(--ink-soft);}
+  .selector-chevron{
+    font-size:12px;color:var(--ink-soft);
+    transition:transform .18s ease;
+  }
+  .selector-wrap.open .selector-chevron{transform:rotate(180deg);}
+  .selector-dropdown{
+    position:absolute;
+    top:calc(100% + 6px);
+    left:0;right:0;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    box-shadow:0 12px 28px rgba(20,26,23,0.1);
+    padding:6px;
+    z-index:20;
+    display:none;
+  }
+  .selector-wrap.open .selector-dropdown{display:block;}
+  .selector-option{
+    padding:11px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+    color:var(--ink);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .selector-option:hover{background:var(--cream);}
+  .selector-option.active{background:var(--teal-pale);color:var(--teal-deep);font-weight:600;}
+  .selector-option-count{font-size:12px;color:var(--ink-soft);}
+
+  /* GEOLOCALIZAÇÃO */
+  .btn-geoloc{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:none;
+    border:none;
+    color:var(--teal-deep);
+    font-size:12.5px;
+    font-weight:600;
+    font-family:'Inter',sans-serif;
+    cursor:pointer;
+    padding:0 0 16px;
+    text-decoration:underline;
+    text-underline-offset:2px;
+  }
+  .btn-geoloc:hover{color:var(--teal);}
+  .btn-geoloc:disabled{color:var(--ink-soft);cursor:default;text-decoration:none;}
+  .card-distance{
+    font-size:12px;
+    color:var(--teal-deep);
+    font-weight:600;
+    margin-bottom:2px;
+  }
+
+  /* BUSCA POR TAG/PROCEDIMENTO */
+  .tag-search-wrap{
+    position:relative;
+    max-width:560px;
+    margin:0 0 16px;
+    display:flex;
+    align-items:center;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:0 14px;
+  }
+  .tag-search-wrap:focus-within{border-color:var(--teal);}
+  .tag-search-icon{font-size:14px;flex-shrink:0;margin-right:8px;}
+  .tag-search-input{
+    flex:1;
+    border:none;
+    outline:none;
+    background:transparent;
+    padding:12px 0;
+    font-size:14px;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+  }
+  .tag-search-input::placeholder{color:var(--ink-soft);}
+  .tag-search-clear{
+    font-size:13px;
+    color:var(--ink-soft);
+    cursor:pointer;
+    padding:4px;
+    flex-shrink:0;
+  }
+  .tag-search-clear:hover{color:var(--teal-deep);}
+
+  .result-count{
+    font-size:13px;
+    color:var(--ink-soft);
+    padding-bottom:20px;
+  }
+  .result-count strong{color:var(--ink);font-weight:600;}
+
+  /* GRID */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+    gap:20px;
+    padding-bottom:70px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease;
+    animation:fadeIn .35s ease both;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 24px rgba(15,110,86,0.08);
+  }
+  @keyframes fadeIn{
+    from{opacity:0;transform:translateY(6px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .card-media{
+    width:100%;
+    aspect-ratio:1/1;
+    background:var(--teal-pale);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .card-media img{width:100%;height:100%;object-fit:cover;object-position:center 15%;}
+  .avatar-fallback{
+    font-family:'Fraunces',serif;
+    font-size:40px;
+    font-weight:500;
+    color:var(--teal);
+  }
+  .card-body{padding:16px 18px 18px;}
+  .card-category{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  .card-name{
+    font-family:'Fraunces',serif;
+    font-size:19px;
+    font-weight:500;
+    color:var(--ink);
+    margin-bottom:6px;
+  }
+  .card-desc{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    line-height:1.5;
+    margin-bottom:12px;
+    min-height:40px;
+  }
+  .card-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:16px;
+  }
+  .tag-pill{
+    font-size:11.5px;
+    font-weight:600;
+    color:var(--teal-deep);
+    background:var(--teal-pale);
+    padding:4px 10px;
+    border-radius:100px;
+    white-space:nowrap;
+  }
+  .empty-state{
+    grid-column:1/-1;
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-soft);
+    font-size:14px;
+  }
+  .card-actions{display:flex;gap:8px;}
+  .btn-whats{
+    flex:1;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    background:var(--teal-deep);
+    color:#fff;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    padding:11px 12px;
+    border-radius:10px;
+    transition:background .15s ease;
+  }
+  .btn-whats:hover{background:var(--teal);}
+  .btn-link{
+    display:flex;align-items:center;justify-content:center;
+    width:40px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    color:var(--ink-soft);
+    text-decoration:none;
+    transition:border-color .15s ease;
+  }
+  .btn-link:hover{border-color:var(--teal);color:var(--teal);}
+
+  .card{cursor:pointer;}
+
+  /* MODAL */
+  .modal-overlay{
+    position:fixed;inset:0;
+    background:rgba(20,26,23,0.55);
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    padding:40px 20px;
+    overflow-y:auto;
+    z-index:100;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--card);
+    border-radius:20px;
+    max-width:520px;
+    width:100%;
+    overflow:hidden;
+    animation:modalIn .22s ease both;
+  }
+  @keyframes modalIn{
+    from{opacity:0;transform:translateY(10px) scale(.98);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+  }
+  .modal-media{
+    width:100%;
+    aspect-ratio:16/9;
+    background:var(--teal-pale);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .modal-media img{width:100%;height:100%;object-fit:cover;object-position:center 15%;}
+  .modal-media .avatar-fallback{font-size:52px;}
+  .modal-close{
+    position:absolute;top:14px;right:14px;
+    width:34px;height:34px;
+    border-radius:50%;
+    background:rgba(27,36,32,0.55);
+    color:#fff;
+    border:none;
+    font-size:16px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .modal-body{padding:24px 26px 26px;}
+  .modal-category{
+    font-size:11px;text-transform:uppercase;letter-spacing:1px;
+    color:var(--teal);font-weight:600;margin-bottom:6px;
+  }
+  .modal-name{
+    font-family:'Fraunces',serif;
+    font-size:26px;font-weight:500;
+    color:var(--ink);margin-bottom:14px;
+  }
+  .modal-desc{
+    font-size:14.5px;line-height:1.65;
+    color:var(--ink);
+    margin-bottom:20px;
+  }
+  .modal-meta{
+    display:flex;flex-direction:column;gap:10px;
+    padding:16px 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    margin-bottom:20px;
+  }
+  .meta-row{
+    display:flex;gap:10px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .meta-row strong{
+    color:var(--ink);
+    font-weight:600;
+    min-width:70px;
+  }
+  .modal-actions{display:flex;gap:10px;}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:28px 0;
+    text-align:center;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width:560px){
+    .header-row{gap:12px;}
+    .logo-sub{display:none;}
+    .logo-mark{font-size:18px;}
+    .hero{padding:44px 0 28px;}
+    .filters-row{flex-direction:column;max-width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="header-row">
+      <div class="logo">
+        <div class="logo-mark">sua saúde<span>.</span>digital</div>
+      </div>
+      <a href="cadastro.html" class="cta-cadastro">Cadastrar meu atendimento</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Encontre o profissional de saúde <em>certo</em>, sem se perder no Google</h1>
+    <p>Um caderninho de profissionais organizado por especialidade — direto, confiável e fácil de navegar.</p>
+  </section>
+
+  <section class="tabs-section">
+    <div class="filters-row">
+      <div class="selector-wrap" id="selectorCidadeWrap">
+        <div class="selector-btn" id="selectorCidadeBtn">
+          <span class="selector-icon">📍</span>
+          <span class="selector-label placeholder" id="selectorCidadeLabel">Cidade</span>
+          <span class="selector-chevron">⌄</span>
+        </div>
+        <div class="selector-dropdown" id="selectorCidadeDropdown"></div>
+      </div>
+      <div class="selector-wrap" id="selectorWrap">
+        <div class="selector-btn" id="selectorBtn">
+          <span class="selector-icon">🔍</span>
+          <span class="selector-label placeholder" id="selectorLabel">Especialidade</span>
+          <span class="selector-chevron">⌄</span>
+        </div>
+        <div class="selector-dropdown" id="selectorDropdown"></div>
+      </div>
+    </div>
+    <button type="button" class="btn-geoloc" id="btnGeoloc">
+      <span id="geolocIcon">📍</span>
+      <span id="geolocLabel">Usar minha localização</span>
+    </button>
+    <div class="tag-search-wrap">
+      <span class="tag-search-icon">🏷️</span>
+      <input type="text" id="tagSearchInput" class="tag-search-input" placeholder="O que você está buscando? Ex: teste ergométrico, clareamento dental...">
+      <span class="tag-search-clear" id="tagSearchClear" style="display:none;">✕</span>
+    </div>
+    <div class="result-count" id="resultCount"></div>
+  </section>
+
+  <section class="grid" id="grid"></section>
+</div>
+
+<footer>sua saúde.digital — um jeito mais simples de encontrar quem cuida de você.</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<script>
+const profissionais = [
+  {nome:"Dra. Camila Torres", categoria:"Cardiologia", cidade:"Ribeirão Preto", lat:-21.1775, lon:-47.8100, foto: "fotos/camila-torres.jpg", tags:["check-up cardíaco","hipertensão","prevenção"], desc:"Cardiologista com foco em prevenção e saúde do coração adulto.", descCompleta:"Atua há 12 anos com foco em prevenção cardiovascular, check-up completo do coração e acompanhamento de pacientes hipertensos. Formada pela USP, com residência em cardiologia clínica.", crm:"CRM-SP 123456", endereco:"Av. Independência, 1200 — Centro, Ribeirão Preto/SP", whats:"5511999990001"},
+  {nome:"Dr. Ricardo Alves", categoria:"Cardiologia", cidade:"Bebedouro", lat:-20.9500, lon:-48.4770, tags:["arritmia","hipertensão"], desc:"Atendimento humanizado, especialista em hipertensão e arritmias.", descCompleta:"Cardiologista dedicado ao diagnóstico e tratamento de arritmias e hipertensão arterial. Atendimento próximo e explicações claras sobre exames e condutas.", crm:"CRM-SP 234567", endereco:"Rua Nove, 850 — Centro, Bebedouro/SP", whats:"5511999990002"},
+  {nome:"Dra. Fernanda Lima", categoria:"Nutrição", cidade:"Ribeirão Preto", lat:-21.1650, lon:-47.8350, tags:["nutrição esportiva","emagrecimento"], desc:"Nutrição clínica e esportiva, planos personalizados.", descCompleta:"Nutricionista especializada em nutrição esportiva e emagrecimento saudável. Planos alimentares individualizados, sem dietas restritivas ou modismos.", crm:"CRN-3 45678", endereco:"Av. Nove de Julho, 300 — Jardim Sumaré, Ribeirão Preto/SP", whats:"5511999990003"},
+  {nome:"Dr. Bruno Castro", categoria:"Nutrição", cidade:"Bebedouro", lat:-20.9480, lon:-48.4800, tags:["reeducação alimentar"], desc:"Reeducação alimentar sem dietas restritivas.", descCompleta:"Foco em reeducação alimentar de longo prazo, trabalhando a relação da pessoa com a comida em vez de dietas temporárias.", crm:"CRN-3 56789", endereco:"Av. Presidente Vargas, 1500 — Centro, Bebedouro/SP", whats:"5511999990004"},
+  {nome:"Dra. Juliana Prado", categoria:"Psicologia", cidade:"Ribeirão Preto", lat:-21.1900, lon:-47.7950, tags:["ansiedade","terapia cognitivo-comportamental"], desc:"Terapia cognitivo-comportamental para ansiedade e estresse.", descCompleta:"Psicóloga clínica com abordagem cognitivo-comportamental, atendendo casos de ansiedade, estresse e questões do dia a dia. Sessões online ou presenciais.", crm:"CRP 06/78901", endereco:"Rua Alagoas, 400 — Higienópolis, Ribeirão Preto/SP", whats:"5511999990005"},
+  {nome:"Dr. Marcelo Ide", categoria:"Psicologia", cidade:"Bebedouro", lat:-20.9510, lon:-48.4810, tags:["terapia de casal","desenvolvimento pessoal"], desc:"Psicoterapia de casal e desenvolvimento pessoal.", descCompleta:"Atende casais e indivíduos em processos de autoconhecimento e desenvolvimento pessoal, com escuta ativa e sem julgamentos.", crm:"CRP 06/89012", endereco:"Rua Amazonas, 700 — Centro, Bebedouro/SP", whats:"5511999990006"},
+  {nome:"Dra. Patrícia Nunes", categoria:"Dermatologia", cidade:"Ribeirão Preto", lat:-21.1780, lon:-47.8090, tags:["botox","pele","prevenção câncer de pele"], desc:"Dermatologia clínica e estética, pele saudável em todas as idades.", descCompleta:"Dermatologista clínica e estética, com foco em saúde da pele, prevenção de câncer de pele e tratamentos estéticos seguros.", crm:"CRM-SP 345678", endereco:"Av. Presidente Vargas, 2000 — Centro, Ribeirão Preto/SP", whats:"5511999990007"},
+  {nome:"Dr. André Farias", categoria:"Ortopedia", cidade:"Ribeirão Preto", lat:-21.2050, lon:-47.8500, tags:["lesão esportiva","coluna"], desc:"Especialista em lesões esportivas e coluna.", descCompleta:"Ortopedista especializado em medicina esportiva e coluna vertebral, com experiência em reabilitação de atletas amadores e profissionais.", crm:"CRM-SP 456789", endereco:"Av. Braz Olaia Acosta, 2500 — Jardim América, Ribeirão Preto/SP", whats:"5511999990008"},
+  {nome:"Dra. Beatriz Rocha", categoria:"Pediatria", cidade:"Bebedouro", lat:-20.9495, lon:-48.4785, tags:["primeira infância","acompanhamento infantil"], desc:"Acompanhamento infantil do nascimento à adolescência.", descCompleta:"Pediatra dedicada ao acompanhamento do desenvolvimento infantil desde o nascimento até a adolescência, com atenção especial à primeira infância.", crm:"CRM-SP 567890", endereco:"Rua Sete, 600 — Centro, Bebedouro/SP", whats:"5511999990009"},
+  {nome:"Dra. Renata Souza", categoria:"Odontologia", cidade:"Ribeirão Preto", lat:-21.1770, lon:-47.8095, tags:["limpeza","alinhador invisível","clareamento dental"], desc:"Dentista com atendimento clínico e estético completo.", descCompleta:"Dentista com mais de 10 anos de experiência, oferecendo desde limpeza e prevenção até procedimentos estéticos como clareamento e alinhadores invisíveis.", crm:"CRO-SP 78901", endereco:"Av. Presidente Vargas, 900 — Centro, Ribeirão Preto/SP", whats:"5511999990010"},
+];
+
+const categorias = [...new Set(profissionais.map(p => p.categoria))];
+const cidades = [...new Set(profissionais.map(p => p.cidade))];
+
+// Coordenadas das cidades cadastradas, usadas para calcular distância até o visitante
+const coordenadasCidades = {
+  'Ribeirão Preto': { lat: -21.1767, lon: -47.8208 },
+  'Bebedouro': { lat: -20.9496, lon: -48.4789 },
+};
+
+// Fórmula de Haversine: calcula distância em km entre duas coordenadas
+function calcularDistanciaKm(lat1, lon1, lat2, lon2){
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat/2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+let localizacaoUsuario = null; // {lat, lon} quando detectado
+let distanciasPorProfissional = {}; // {indice: km}
+let categoriaAtiva = null; // null = todas
+let cidadeAtiva = null; // null = todas
+
+const gridEl = document.getElementById('grid');
+const countEl = document.getElementById('resultCount');
+
+function iniciais(nome){
+  return nome.replace(/^(Dra?\.\s?)/,'').split(' ').slice(0,2).map(p=>p[0]).join('').toUpperCase();
+}
+
+// Configura um seletor genérico: retorna funções pra renderizar e ligar eventos
+function setupSelector({wrapId, btnId, labelId, dropdownId, placeholder, todasLabel, opcoesFn, getValor, setValor}){
+  const wrap = document.getElementById(wrapId);
+  const btn = document.getElementById(btnId);
+  const label = document.getElementById(labelId);
+  const dropdown = document.getElementById(dropdownId);
+  let aberto = false;
+
+  function renderOptions(){
+    const valorAtual = getValor();
+    const opcoes = [{nome:todasLabel, valor:null}, ...opcoesFn().map(v => ({nome:v, valor:v}))];
+    dropdown.innerHTML = opcoes.map(o => `
+      <div class="selector-option ${valorAtual===o.valor ? 'active' : ''}" data-valor="${o.valor ?? ''}">
+        <span>${o.nome}</span>
+      </div>
+    `).join('');
+
+    dropdown.querySelectorAll('.selector-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        setValor(opt.dataset.valor || null);
+        aberto = false;
+        wrap.classList.remove('open');
+        const novoValor = getValor();
+        label.textContent = novoValor || placeholder;
+        label.classList.toggle('placeholder', !novoValor);
+        render();
+      });
+    });
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    aberto = !aberto;
+    wrap.classList.toggle('open', aberto);
+  });
+
+  document.addEventListener('click', (e) => {
+    if(!wrap.contains(e.target)){
+      aberto = false;
+      wrap.classList.remove('open');
+    }
+  });
+
+  renderOptions();
+  return { renderOptions };
+}
+
+const seletorCidade = setupSelector({
+  wrapId:'selectorCidadeWrap', btnId:'selectorCidadeBtn', labelId:'selectorCidadeLabel', dropdownId:'selectorCidadeDropdown',
+  placeholder:'Cidade', todasLabel:'Todas as cidades',
+  opcoesFn:() => cidades,
+  getValor:() => cidadeAtiva,
+  setValor:(v) => cidadeAtiva = v,
+});
+
+const seletorEspecialidade = setupSelector({
+  wrapId:'selectorWrap', btnId:'selectorBtn', labelId:'selectorLabel', dropdownId:'selectorDropdown',
+  placeholder:'Especialidade', todasLabel:'Todas as especialidades',
+  opcoesFn:() => categorias,
+  getValor:() => categoriaAtiva,
+  setValor:(v) => categoriaAtiva = v,
+});
+
+let buscaTag = '';
+
+function render(){
+  const buscaNormalizada = buscaTag.trim().toLowerCase();
+  let filtrados = profissionais.filter(p =>
+    (!categoriaAtiva || p.categoria === categoriaAtiva) &&
+    (!cidadeAtiva || p.cidade === cidadeAtiva) &&
+    (!buscaNormalizada || p.tags.some(t => t.toLowerCase().includes(buscaNormalizada)))
+  );
+
+  // Se a localização foi usada, ordena por proximidade (mais perto primeiro)
+  if(localizacaoUsuario){
+    filtrados = filtrados.slice().sort((a, b) => {
+      const distA = distanciasPorProfissional[profissionais.indexOf(a)] ?? Infinity;
+      const distB = distanciasPorProfissional[profissionais.indexOf(b)] ?? Infinity;
+      return distA - distB;
+    });
+  }
+
+  countEl.innerHTML = `<strong>${filtrados.length}</strong> profissional${filtrados.length!==1?'is':''} encontrado${filtrados.length!==1?'s':''}`;
+
+  gridEl.innerHTML = filtrados.length ? filtrados.map(p => {
+    const idx = profissionais.indexOf(p);
+    const distancia = distanciasPorProfissional[idx];
+    return `
+    <div class="card" data-idx="${idx}">
+      <div class="card-media">
+        ${p.foto ? `<img src="${p.foto}" alt="Foto de ${p.nome}">` : `<span class="avatar-fallback">${iniciais(p.nome)}</span>`}
+      </div>
+      <div class="card-body">
+        <div class="card-category">${p.categoria} · ${p.cidade}</div>
+        ${distancia !== undefined ? `<div class="card-distance">📍 ${formatarDistancia(distancia)} de você</div>` : ''}
+        <div class="card-name">${p.nome}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-tags">${p.tags.map(t => `<span class="tag-pill">#${t}</span>`).join('')}</div>
+        <div class="card-actions">
+          <a class="btn-whats" href="https://wa.me/${p.whats}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Chamar no WhatsApp</a>
+          <a class="btn-link" href="#" title="Ver no Google" target="_blank" rel="noopener" onclick="event.stopPropagation()">↗</a>
+        </div>
+      </div>
+    </div>
+  `;
+  }).join('') : `<div class="empty-state">Nenhum profissional encontrado com esses filtros.</div>`;
+
+  gridEl.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => abrirModal(profissionais[card.dataset.idx]));
+  });
+}
+
+const modalOverlay = document.getElementById('modalOverlay');
+const modalContent = document.getElementById('modalContent');
+
+function abrirModal(p){
+  modalContent.innerHTML = `
+    <div class="modal-media">
+      ${p.foto ? `<img src="${p.foto}" alt="Foto de ${p.nome}">` : `<span class="avatar-fallback">${iniciais(p.nome)}</span>`}
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-category">${p.categoria}</div>
+      <div class="modal-name">${p.nome}</div>
+      <div class="modal-desc">${p.descCompleta}</div>
+      <div class="card-tags">${p.tags.map(t => `<span class="tag-pill">#${t}</span>`).join('')}</div>
+      <div class="modal-meta">
+        <div class="meta-row"><strong>Registro</strong>${p.crm}</div>
+        <div class="meta-row"><strong>Endereço</strong>${p.endereco}</div>
+      </div>
+      <div class="modal-actions">
+        <a class="btn-whats" href="https://wa.me/${p.whats}" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+        <a class="btn-link" href="#" title="Ver no Google" target="_blank" rel="noopener">↗</a>
+      </div>
+    </div>
+  `;
+  modalOverlay.classList.add('open');
+  document.getElementById('modalClose').addEventListener('click', fecharModal);
+}
+
+function fecharModal(){
+  modalOverlay.classList.remove('open');
+}
+
+modalOverlay.addEventListener('click', (e) => {
+  if(e.target === modalOverlay) fecharModal();
+});
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape') fecharModal();
+});
+
+const tagSearchInput = document.getElementById('tagSearchInput');
+const tagSearchClear = document.getElementById('tagSearchClear');
+
+tagSearchInput.addEventListener('input', () => {
+  buscaTag = tagSearchInput.value;
+  tagSearchClear.style.display = buscaTag ? 'block' : 'none';
+  render();
+});
+
+tagSearchClear.addEventListener('click', () => {
+  buscaTag = '';
+  tagSearchInput.value = '';
+  tagSearchClear.style.display = 'none';
+  render();
+});
+
+function formatarDistancia(km){
+  if(km < 1) return 'menos de 1 km';
+  return `${Math.round(km)} km`;
+}
+
+const btnGeoloc = document.getElementById('btnGeoloc');
+const geolocIcon = document.getElementById('geolocIcon');
+const geolocLabel = document.getElementById('geolocLabel');
+
+btnGeoloc.addEventListener('click', () => {
+  if(!navigator.geolocation){
+    geolocLabel.textContent = 'Localização não suportada neste navegador';
+    return;
+  }
+
+  btnGeoloc.disabled = true;
+  geolocIcon.textContent = '⏳';
+  geolocLabel.textContent = 'Detectando sua localização...';
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      localizacaoUsuario = {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+      };
+
+      // Calcula a distância exata até cada profissional (usando o endereço dele, não só a cidade)
+      distanciasPorProfissional = {};
+      profissionais.forEach((p, idx) => {
+        if(p.lat !== undefined && p.lon !== undefined){
+          distanciasPorProfissional[idx] = calcularDistanciaKm(localizacaoUsuario.lat, localizacaoUsuario.lon, p.lat, p.lon);
+        }
+      });
+
+      // Descobre a cidade mais próxima (pela distância média dos profissionais dela) para preencher o filtro
+      let cidadeMaisProxima = null;
+      let menorDistancia = Infinity;
+      cidades.forEach(cidade => {
+        const coord = coordenadasCidades[cidade];
+        if(!coord) return;
+        const dist = calcularDistanciaKm(localizacaoUsuario.lat, localizacaoUsuario.lon, coord.lat, coord.lon);
+        if(dist < menorDistancia){
+          menorDistancia = dist;
+          cidadeMaisProxima = cidade;
+        }
+      });
+
+      // Preenche o filtro de cidade com a mais próxima, mas a pessoa pode trocar depois
+      if(cidadeMaisProxima){
+        cidadeAtiva = cidadeMaisProxima;
+        seletorCidade.renderOptions();
+        document.getElementById('selectorCidadeLabel').textContent = cidadeMaisProxima;
+        document.getElementById('selectorCidadeLabel').classList.remove('placeholder');
+      }
+
+      geolocIcon.textContent = '✅';
+      geolocLabel.textContent = `Localização usada: ${cidadeMaisProxima}`;
+      btnGeoloc.disabled = false;
+      render();
+    },
+    (error) => {
+      geolocIcon.textContent = '📍';
+      geolocLabel.textContent = 'Não foi possível obter sua localização — tente novamente';
+      btnGeoloc.disabled = false;
+    }
+  );
+});
+
+render();
+</script>
+
+</body>
+</html>
