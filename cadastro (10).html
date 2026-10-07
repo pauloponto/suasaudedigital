@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastre-se — Sua Saúde Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Urbanist:wght@300..800&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7F5F0;
+    --ink:#1B2420;
+    --ink-soft:#5B6560;
+    --teal:#0F6E56;
+    --teal-deep:#0A4A3A;
+    --teal-pale:#E1F0EA;
+    --line:#DCD8CE;
+    --card:#FFFFFF;
+    --coral:#D85A30;
+    --danger:#B3261E;
+    --r-lg:28px;
+    --r-md:20px;
+    --r-sm:14px;
+    --float:0 1px 2px rgba(10,74,58,.05), 0 14px 34px -18px rgba(10,74,58,.28);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px;}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  .icon{width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* HEADER */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,245,240,.84);
+    -webkit-backdrop-filter:saturate(1.4) blur(14px);
+    backdrop-filter:saturate(1.4) blur(14px);
+    border-bottom:1px solid transparent;
+    transition:border-color .2s ease;
+  }
+  header.scrolled{border-bottom-color:var(--line);}
+  .header-row{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px;}
+  .logo-mark{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:23px;
+    font-variation-settings:"opsz" 24;
+    letter-spacing:-0.5px;
+    color:var(--teal-deep);
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .logo-mark span{color:var(--coral);}
+  .voltar{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13.5px;font-weight:600;
+    color:var(--teal-deep);
+    text-decoration:none;
+    border:1px solid var(--line);
+    padding:10px 16px 10px 12px;
+    border-radius:100px;
+    transition:border-color .15s ease, background .15s ease;
+    white-space:nowrap;
+  }
+  .voltar .icon{width:16px;height:16px;}
+  .voltar:hover{border-color:var(--teal-deep);background:#fff;}
+
+  /* HERO (painel) */
+  .hero-panel{
+    display:grid;
+    grid-template-columns:1.25fr 1fr;
+    gap:40px;
+    align-items:end;
+    background:var(--teal-deep);
+    color:var(--cream);
+    border-radius:var(--r-lg);
+    padding:72px 56px 48px;
+    margin-top:8px;
+    animation:panelIn .6s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes panelIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+  .hero h1{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-weight:400;
+    font-size:clamp(36px,5.6vw,68px);
+    line-height:1.02;
+    letter-spacing:-0.03em;
+    color:var(--cream);
+    text-wrap:balance;
+  }
+  .hero h1::after{content:".";color:var(--coral);}
+  .hero h1 strong{font-weight:700;}
+  .hero p{
+    font-size:16.5px;
+    line-height:1.6;
+    color:rgba(247,245,240,.74);
+    max-width:460px;
+    margin-top:20px;
+  }
+
+  /* PLANO */
+  .plano-card{
+    background:var(--card);
+    color:var(--ink);
+    border-radius:var(--r-md);
+    padding:26px 26px 24px;
+    box-shadow:0 28px 50px -28px rgba(0,0,0,.45);
+  }
+  .plano-tag{
+    display:inline-block;
+    font-size:12px;font-weight:600;
+    color:var(--teal-deep);
+    background:var(--teal-pale);
+    padding:5px 12px;border-radius:100px;
+    margin-bottom:14px;
+  }
+  .plano-nome{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:22px;font-weight:600;
+    letter-spacing:-0.01em;
+    line-height:1.2;
+    margin-bottom:6px;
+  }
+  .plano-desc{font-size:14px;color:var(--ink-soft);line-height:1.55;}
+  .plano-preco{
+    margin-top:20px;padding-top:18px;
+    border-top:1px solid var(--line);
+    display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+  .plano-preco .valor{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:30px;font-weight:600;
+    color:var(--teal-deep);line-height:1;
+  }
+  .plano-preco .valor-consulta{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:20px;font-weight:700;
+    letter-spacing:-0.01em;
+    color:var(--teal-deep);
+    line-height:1.3;
+  }
+  .plano-preco .periodo{font-size:13px;color:var(--ink-soft);}
+
+  /* COLUNA DO FORMULÁRIO */
+  .form-col{max-width:720px;margin:48px auto 0;padding-bottom:88px;}
+
+  .aviso-midia{
+    display:flex;gap:14px;align-items:flex-start;
+    background:var(--teal-pale);
+    border-radius:var(--r-md);
+    padding:18px 20px;
+    margin-bottom:20px;
+    font-size:14px;
+    color:var(--teal-deep);
+    line-height:1.6;
+  }
+  .form-col:has(.preview-screen.show) .aviso-midia,
+  .form-col:has(.success-box.show) .aviso-midia{display:none;}
+  .aviso-midia .icon{width:20px;height:20px;margin-top:2px;}
+  .aviso-midia strong{font-weight:600;}
+  .aviso-midia a{color:var(--teal-deep);font-weight:600;}
+
+  /* FORM */
+  .form-card{
+    background:var(--card);
+    border-radius:var(--r-lg);
+    padding:40px 40px 36px;
+    box-shadow:var(--float);
+  }
+  .field-group{margin-bottom:22px;}
+  .field-row{display:flex;gap:16px;}
+  .field-row .field-group{flex:1;min-width:0;}
+  label{
+    display:block;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:8px;
+  }
+  label .opcional{font-weight:400;color:var(--ink-soft);}
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  select,
+  textarea{
+    width:100%;
+    padding:14px 16px;
+    border:1px solid transparent;
+    border-radius:var(--r-sm);
+    font-size:15px;
+    font-family:inherit;
+    color:var(--ink);
+    background:var(--cream);
+    transition:border-color .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  input::placeholder, textarea::placeholder{color:var(--ink-soft);opacity:.75;}
+  input[type="text"]:hover, input[type="tel"]:hover, textarea:hover{border-color:var(--line);}
+  input:focus, select:focus, textarea:focus{
+    outline:none;
+    background:#fff;
+    border-color:var(--teal);
+    box-shadow:0 0 0 4px rgba(15,110,86,.12);
+  }
+  textarea{resize:vertical;min-height:110px;line-height:1.55;}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:7px;line-height:1.5;}
+  .field-error{font-size:12.5px;color:var(--danger);margin-top:7px;display:none;}
+  .field-group.invalid input,
+  .field-group.invalid select,
+  .field-group.invalid textarea{border-color:var(--danger);background:#fff;}
+  .field-group.invalid .field-error{display:block;}
+
+  /* UPLOAD */
+  .upload-box{
+    border:1.5px dashed var(--line);
+    border-radius:var(--r-md);
+    padding:30px 20px;
+    text-align:center;
+    cursor:pointer;
+    background:var(--cream);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .upload-box:hover{border-color:var(--teal);background:#fff;}
+  .upload-box.has-file{border-style:solid;border-color:var(--teal);background:var(--teal-pale);}
+  .field-group.invalid .upload-box{border-color:var(--danger);}
+  .upload-icon{
+    width:44px;height:44px;margin:0 auto 10px;
+    border-radius:50%;
+    background:#fff;
+    color:var(--teal);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--float);
+  }
+  .upload-text{font-size:14px;color:var(--ink-soft);}
+  .upload-text strong{color:var(--teal-deep);}
+  .upload-filename{font-size:13px;color:var(--teal-deep);font-weight:600;margin-top:6px;}
+
+  .orcamento-row{
+    display:flex;align-items:center;gap:10px;
+    font-weight:400;font-size:14px;color:var(--ink);
+    cursor:pointer;margin:0;
+  }
+
+  /* CHECKBOXES */
+  input[type="checkbox"]{accent-color:var(--teal-deep);cursor:pointer;flex-shrink:0;width:18px;height:18px;}
+
+  .toggle-row{
+    display:flex;align-items:center;gap:12px;
+    background:var(--teal-pale);
+    border-radius:var(--r-sm);
+    padding:13px 16px;
+    margin:-6px 0 22px;
+    cursor:pointer;
+  }
+  .toggle-row label{
+    font-size:14px;font-weight:500;
+    color:var(--teal-deep);
+    margin:0;cursor:pointer;line-height:1.4;
+  }
+
+  .consent-box{
+    display:flex;gap:14px;align-items:flex-start;
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:var(--r-md);
+    padding:20px 22px;
+    margin:30px 0 26px;
+  }
+  .consent-box input[type="checkbox"]{margin-top:2px;}
+  .consent-box label{
+    font-size:13.5px;font-weight:400;
+    color:var(--ink-soft);
+    line-height:1.65;margin:0;cursor:pointer;
+  }
+  .consent-box label strong{color:var(--ink);font-weight:600;}
+
+  /* BOTÕES */
+  .btn-submit{
+    width:100%;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:17px;
+    background:var(--teal-deep);
+    color:#fff;
+    border:none;
+    border-radius:var(--r-sm);
+    font-size:15.5px;
+    font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .btn-submit:hover{background:var(--teal);}
+  .btn-submit:disabled{background:var(--ink-soft);cursor:not-allowed;}
+  .submit-note{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:14px;
+    line-height:1.6;
+  }
+
+  /* TELA DE PRÉVIA */
+  .preview-screen{display:none;}
+  .preview-screen.show{display:block;animation:panelIn .4s ease both;}
+  .preview-label{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:26px;font-weight:600;
+    letter-spacing:-0.02em;
+    color:var(--ink);
+    text-align:center;
+    margin:0 0 22px;
+  }
+  .preview-card{
+    max-width:340px;
+    margin:0 auto 14px;
+    background:var(--card);
+    border-radius:24px;
+    padding:8px;
+    box-shadow:var(--float);
+  }
+  .preview-media-wrap{position:relative;}
+  .preview-media{
+    width:100%;
+    aspect-ratio:6/7;
+    background:var(--teal-pale);
+    border-radius:18px;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .preview-media img{width:100%;height:100%;object-fit:cover;object-position:center 15%;}
+  .preview-avatar-fallback{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:64px;font-weight:500;
+    letter-spacing:-0.03em;
+    color:var(--teal);
+  }
+  .preview-chip{
+    position:absolute;top:12px;left:12px;
+    font-size:12px;font-weight:600;
+    color:var(--teal-deep);
+    background:rgba(255,255,255,.9);
+    -webkit-backdrop-filter:blur(8px);
+    backdrop-filter:blur(8px);
+    padding:6px 12px;border-radius:100px;
+  }
+  .preview-body{padding:16px 10px 10px;}
+  .preview-name{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:21px;font-weight:600;
+    line-height:1.15;letter-spacing:-0.01em;
+    color:var(--ink);
+    margin-bottom:6px;
+  }
+  .preview-category{
+    display:flex;align-items:center;gap:6px;
+    font-size:13px;color:var(--ink-soft);
+  }
+  .preview-category .icon{width:14px;height:14px;color:var(--teal);}
+  .preview-desc{font-size:14px;color:var(--ink-soft);line-height:1.55;margin:12px 0 14px;}
+  .preview-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+  .preview-tag-pill{
+    font-size:12px;font-weight:500;
+    color:var(--teal-deep);
+    background:var(--teal-pale);
+    padding:4px 10px;border-radius:100px;
+  }
+  .preview-whats-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--teal-deep);
+    color:#fff;
+    font-size:13.5px;font-weight:600;
+    padding:13px 14px;
+    border-radius:var(--r-sm);
+  }
+  .preview-whats-btn .icon{width:17px;height:17px;}
+  .preview-note{
+    font-size:12.5px;color:var(--ink-soft);
+    text-align:center;max-width:340px;
+    margin:0 auto 28px;
+  }
+  .preview-actions{display:flex;gap:10px;}
+  .btn-voltar-preview{
+    flex:0 0 auto;
+    display:flex;align-items:center;gap:6px;
+    padding:15px 20px 15px 16px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--r-sm);
+    font-size:14.5px;font-weight:600;
+    color:var(--ink-soft);
+    font-family:inherit;
+    cursor:pointer;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .btn-voltar-preview .icon{width:16px;height:16px;}
+  .btn-voltar-preview:hover{border-color:var(--teal);color:var(--teal-deep);}
+  .preview-actions .btn-submit{flex:1;}
+
+  /* MODAL (igual ao perfil aberto no site) */
+  .preview-card-click{cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;}
+  .preview-card-click:hover{transform:translateY(-2px);}
+  .modal-overlay{
+    position:fixed;inset:0;
+    background:rgba(20,26,23,0.55);
+    display:none;
+    align-items:flex-start;justify-content:center;
+    padding:32px 16px;
+    overflow-y:auto;
+    z-index:100;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--card);
+    border-radius:var(--r-lg);
+    max-width:520px;width:100%;
+    overflow:hidden;
+    animation:modalIn .22s ease both;
+  }
+  @keyframes modalIn{
+    from{opacity:0;transform:translateY(10px) scale(.98);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+  }
+  .modal-media{
+    position:relative;
+    width:100%;aspect-ratio:16/9;
+    background:var(--teal-pale);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .modal-media img{width:100%;height:100%;object-fit:cover;object-position:center 15%;}
+  .modal-media .preview-avatar-fallback{font-size:56px;}
+  .modal-close{
+    position:absolute;top:14px;right:14px;
+    width:34px;height:34px;border-radius:50%;
+    background:rgba(27,36,32,0.55);color:#fff;border:none;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+  }
+  .modal-close .icon{width:16px;height:16px;}
+  .modal-body{padding:24px 26px 26px;}
+  .modal-category{
+    font-size:11px;text-transform:uppercase;letter-spacing:1px;
+    color:var(--teal);font-weight:600;margin-bottom:6px;
+  }
+  .modal-name{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:26px;font-weight:600;letter-spacing:-0.01em;line-height:1.15;
+    color:var(--ink);margin-bottom:14px;
+  }
+  .modal-desc{font-size:14.5px;line-height:1.65;color:var(--ink);margin-bottom:18px;}
+  .modal-body .preview-tags{margin-bottom:18px;}
+  .modal-meta{
+    display:flex;flex-direction:column;gap:10px;
+    padding:16px 0;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    margin-bottom:20px;
+  }
+  .meta-row{display:flex;gap:10px;font-size:13.5px;color:var(--ink-soft);}
+  .meta-row strong{color:var(--ink);font-weight:600;min-width:74px;}
+
+  /* SUCESSO */
+  .success-box{
+    display:none;
+    text-align:center;
+    background:var(--card);
+    border-radius:var(--r-lg);
+    box-shadow:var(--float);
+    padding:64px 28px;
+  }
+  .success-box.show{display:block;animation:panelIn .4s ease both;}
+  .success-icon{
+    width:64px;height:64px;
+    background:var(--teal-pale);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 22px;
+    color:var(--teal-deep);
+  }
+  .success-icon .icon{width:28px;height:28px;stroke-width:2.2;}
+  .success-box h2{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-weight:600;
+    font-size:32px;
+    letter-spacing:-0.02em;
+    margin-bottom:12px;
+  }
+  .success-box p{
+    font-size:15px;
+    color:var(--ink-soft);
+    line-height:1.65;
+    max-width:420px;
+    margin:0 auto;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0 40px;
+    text-align:center;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width:860px){
+    .hero-panel{grid-template-columns:1fr;gap:32px;padding:56px 28px 28px;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 14px;}
+    .header-row{height:62px;gap:10px;}
+    .logo-mark{font-size:18px;}
+    .voltar{font-size:12.5px;padding:8px 13px 8px 10px;}
+    .hero-panel{padding:44px 20px 20px;border-radius:24px;}
+    .hero p{font-size:15.5px;margin-top:16px;}
+    .plano-card{padding:22px 20px 20px;}
+    .form-col{margin-top:28px;}
+    .form-card{padding:26px 20px 24px;border-radius:24px;}
+    .field-row{flex-direction:column;gap:0;}
+    .preview-actions{flex-direction:column-reverse;}
+    .btn-voltar-preview{justify-content:center;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <div class="header-row">
+      <a href="index.html" class="logo-mark">sua saúde<span>.</span>digital</a>
+      <a href="index.html" class="voltar"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Voltar ao site</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero-panel">
+  <section class="hero">
+    <h1>Cadastre seu <strong>atendimento</strong></h1>
+    <p>Preencha seus dados abaixo. Após o envio, entraremos em contato pelo WhatsApp para confirmar as informações e liberar sua assinatura.</p>
+  </section>
+
+  <div class="plano-card">
+    <div class="plano-info">
+      <div class="plano-tag">Plano único</div>
+      <div class="plano-nome">Presença no Sua Saúde Digital</div>
+      <div class="plano-desc">Seu perfil visível para todo o público, com renovação automática mensal.</div>
+    </div>
+    <div class="plano-preco">
+      <div class="valor-consulta">Valor sob consulta</div>
+      <div class="periodo">informamos por WhatsApp</div>
+    </div>
+  </div>
+  </div>
+
+  <div class="form-col">
+  <div class="aviso-midia">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8.5 6 10 3.5h4L15.5 6"/></svg>
+    <span><strong>Não tem uma foto pronta?</strong> Sem problema. Podemos produzir esse material pra você — é só marcar a opção abaixo no formulário que entramos em contato com um orçamento.</span>
+  </div>
+
+  <form id="cadastroForm" class="form-card" novalidate>
+
+    <div class="field-group" id="grp-nome">
+      <label for="nome">Nome completo</label>
+      <input type="text" id="nome" name="nome" placeholder="Ex: Dra. Camila Torres">
+      <div class="field-error">Digite seu nome completo.</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-group" id="grp-categoria">
+        <label for="categoria">Especialidade</label>
+        <input type="text" id="categoria" name="categoria" placeholder="Ex: Cardiologia, Nutrição esportiva, Psicologia infantil...">
+        <div class="field-error">Informe sua especialidade.</div>
+      </div>
+
+      <div class="field-group" id="grp-cidade">
+        <label for="cidade">Cidade de atendimento</label>
+        <input type="text" id="cidade" name="cidade" placeholder="Ex: Bebedouro">
+        <div class="field-error">Informe a cidade de atendimento.</div>
+      </div>
+    </div>
+
+    <div class="field-group" id="grp-crm">
+      <label for="crm">Registro profissional <span class="opcional">(CRM, CRN, CRP, etc.)</span></label>
+      <input type="text" id="crm" name="crm" placeholder="Ex: CRM-SP 123456">
+      <div class="hint">Obrigatório — usado para reforçar a confiança de quem for te procurar.</div>
+      <div class="field-error">Informe seu número de registro profissional.</div>
+    </div>
+
+    <div class="field-group" id="grp-endereco">
+      <label for="endereco">Endereço de atendimento</label>
+      <input type="text" id="endereco" name="endereco" placeholder="Ex: Rua Nove, 850 — Centro, Bebedouro/SP">
+      <div class="field-error">Informe o endereço de atendimento.</div>
+    </div>
+
+    <div class="field-group" id="grp-whats">
+      <label for="whats">WhatsApp para contato</label>
+      <input type="tel" id="whats" name="whats" placeholder="Ex: (17) 99999-0000">
+      <div class="hint">Esse número aparece no seu perfil público, para o paciente chamar você.</div>
+      <div class="field-error">Informe um WhatsApp válido para contato.</div>
+    </div>
+
+    <div class="field-group" id="grp-whats-confirmacao">
+      <label for="whatsConfirmacao">WhatsApp para confirmação</label>
+      <input type="tel" id="whatsConfirmacao" name="whatsConfirmacao" placeholder="Ex: (17) 98888-0000">
+      <div class="hint">Esse número não aparece no site — usamos só para confirmar seus dados e falar com você.</div>
+      <div class="field-error">Informe um WhatsApp válido para a confirmação.</div>
+    </div>
+
+    <div class="toggle-row" id="toggleMesmoNumero">
+      <input type="checkbox" id="mesmoNumero">
+      <label for="mesmoNumero">Usar o mesmo número para os dois contatos</label>
+    </div>
+
+    <div class="field-group" id="grp-resumo">
+      <label for="resumo">Frase de apresentação <span class="opcional">(aparece embaixo do seu nome, na busca)</span></label>
+      <input type="text" id="resumo" name="resumo" maxlength="60" placeholder="Ex: Cardiologista clínica e preventiva">
+      <div class="hint" id="resumoContador">Só uma linha curta — até 60 caracteres. É a primeira coisa que a pessoa vê antes de clicar no seu perfil.</div>
+      <div class="field-error">Escreva uma frase curta de apresentação (até 60 caracteres).</div>
+    </div>
+
+    <div class="field-group" id="grp-desc">
+      <label for="descricao">Sobre sua atuação <span class="opcional">(aparece ao abrir seu perfil completo)</span></label>
+      <textarea id="descricao" name="descricao" maxlength="280" placeholder="Conte sua experiência, especialização e forma de atendimento."></textarea>
+      <div class="hint" id="descContador">Até 280 caracteres — dá umas 3 a 4 linhas. Esse é o texto completo, que só aparece quando clicam no seu perfil.</div>
+      <div class="field-error">Escreva uma descrição sobre sua atuação (até 280 caracteres).</div>
+    </div>
+
+    <div class="field-group" id="grp-tags">
+      <label for="tags">Serviços e procedimentos que você oferece</label>
+      <input type="text" id="tags" name="tags" placeholder="Ex: teste ergométrico, liberação miofascial, clareamento dental, nutrição esportiva">
+      <div class="hint" id="tagsContador">Separe por vírgula. Escolha até 4 — isso ajuda quem busca por um serviço específico a te encontrar.</div>
+      <div class="field-error">Informe pelo menos um serviço ou procedimento (no máximo 4).</div>
+    </div>
+
+    <div class="field-group" id="grp-midia">
+      <label>Foto de apresentação</label>
+      <div class="upload-box" id="uploadBox">
+        <div class="upload-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></div>
+        <div class="upload-text"><strong>Clique para enviar</strong> uma foto sua</div>
+        <div class="upload-filename" id="uploadFilename"></div>
+      </div>
+      <input type="file" id="midiaInput" accept="image/*" style="display:none">
+      <div class="field-error">Envie uma foto, ou marque a opção de orçamento abaixo.</div>
+    </div>
+
+    <div class="field-group" style="margin-top:-6px;">
+      <label class="orcamento-row">
+        <input type="checkbox" id="pedirOrcamento">
+        Não tenho material pronto — quero um orçamento para produção
+      </label>
+    </div>
+
+    <div class="consent-box" id="grp-consent">
+      <input type="checkbox" id="consentimento">
+      <label for="consentimento">
+        <strong>Autorizo a publicação dos meus dados</strong> (nome, especialidade, cidade, registro profissional, endereço, WhatsApp e foto) no site Sua Saúde Digital, de forma pública, para fins de divulgação profissional. Estou ciente de que posso solicitar a remoção desses dados a qualquer momento.
+      </label>
+    </div>
+
+    <button type="button" class="btn-submit" id="btnVerPrevia">Ver como vai ficar</button>
+    <div class="submit-note">Você poderá revisar e voltar antes de enviar de verdade.</div>
+  </form>
+
+  <div class="preview-screen" id="previewScreen">
+    <div class="preview-label">É assim que seu perfil vai aparecer no site</div>
+    <div class="preview-card preview-card-click" id="previewCardClicavel" role="button" tabindex="0" aria-label="Abrir perfil completo">
+      <div class="preview-media-wrap">
+        <div class="preview-media" id="previewMedia">
+          <span class="preview-avatar-fallback" id="previewAvatar">?</span>
+        </div>
+        <span class="preview-chip" id="previewChip">Especialidade</span>
+      </div>
+      <div class="preview-body">
+        <div class="preview-name" id="previewName">Seu nome</div>
+        <div class="preview-category" id="previewCategory"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span id="previewCity">Cidade</span></div>
+        <div class="preview-desc" id="previewDesc">Sua frase de apresentação aparecerá aqui.</div>
+        <div class="preview-tags" id="previewTags"></div>
+        <div class="preview-whats-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5 6 15.6A8 8 0 1 1 9 18.7z"/></svg>Chamar no WhatsApp</div>
+      </div>
+    </div>
+    <div class="preview-note"><strong>Clique no card</strong> para ver como seu perfil abre. Prévia baseada no que você preencheu — o card final pode receber pequenos ajustes de formatação.</div>
+
+    <div class="preview-actions">
+      <button type="button" class="btn-voltar-preview" id="btnVoltarPreview"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Voltar e editar</button>
+      <button type="button" class="btn-submit" id="btnSubmit">Confirmar e enviar cadastro</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modalContent"></div>
+  </div>
+
+  <div class="success-box" id="successBox">
+    <div class="success-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+    <h2>Cadastro enviado!</h2>
+    <p>Recebemos suas informações. Em breve entraremos em contato pelo WhatsApp para confirmar os dados e enviar o link de pagamento da assinatura.</p>
+  </div>
+  </div>
+</div>
+
+<footer>sua saúde.digital — um jeito mais simples de encontrar quem cuida de você.</footer>
+
+<script>
+const form = document.getElementById('cadastroForm');
+const uploadBox = document.getElementById('uploadBox');
+const midiaInput = document.getElementById('midiaInput');
+const uploadFilename = document.getElementById('uploadFilename');
+const pedirOrcamento = document.getElementById('pedirOrcamento');
+const mesmoNumero = document.getElementById('mesmoNumero');
+const toggleMesmoNumero = document.getElementById('toggleMesmoNumero');
+const grpWhatsConfirmacao = document.getElementById('grp-whats-confirmacao');
+
+function atualizarCampoConfirmacao(){
+  grpWhatsConfirmacao.style.display = mesmoNumero.checked ? 'none' : 'block';
+  if(mesmoNumero.checked) clearError('grp-whats-confirmacao');
+}
+
+toggleMesmoNumero.addEventListener('click', (e) => {
+  // o <label> já marca a caixa sozinho; só alternamos quando o clique é no fundo da faixa
+  if(e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL'){
+    mesmoNumero.checked = !mesmoNumero.checked;
+  }
+  atualizarCampoConfirmacao();
+});
+mesmoNumero.addEventListener('change', atualizarCampoConfirmacao);
+atualizarCampoConfirmacao();
+
+uploadBox.addEventListener('click', () => midiaInput.click());
+
+midiaInput.addEventListener('change', () => {
+  if(midiaInput.files.length){
+    uploadBox.classList.add('has-file');
+    uploadFilename.textContent = midiaInput.files[0].name;
+    clearError('grp-midia');
+  }
+});
+
+function showError(groupId){
+  document.getElementById(groupId).classList.add('invalid');
+}
+function clearError(groupId){
+  document.getElementById(groupId).classList.remove('invalid');
+}
+
+function validarWhats(v){
+  const digits = v.replace(/\D/g,'');
+  return digits.length >= 10;
+}
+
+const tagsInput = document.getElementById('tags');
+const tagsContador = document.getElementById('tagsContador');
+tagsInput.addEventListener('input', () => {
+  const lista = tagsInput.value.split(',').map(t => t.trim()).filter(Boolean);
+  if(lista.length > 4){
+    tagsContador.textContent = `${lista.length}/4 — remova ${lista.length - 4} para continuar.`;
+    tagsContador.style.color = 'var(--danger)';
+  } else {
+    tagsContador.textContent = `${lista.length}/4 serviços escolhidos.`;
+    tagsContador.style.color = 'var(--ink-soft)';
+  }
+});
+
+const resumoInput = document.getElementById('resumo');
+const resumoContador = document.getElementById('resumoContador');
+resumoInput.addEventListener('input', () => {
+  const restantes = 60 - resumoInput.value.length;
+  resumoContador.textContent = `${restantes} caracteres restantes. Uma linha curta que aparece na busca.`;
+  resumoContador.style.color = restantes < 0 ? 'var(--danger)' : 'var(--ink-soft)';
+});
+
+const descInput = document.getElementById('descricao');
+const descContador = document.getElementById('descContador');
+descInput.addEventListener('input', () => {
+  const restantes = 280 - descInput.value.length;
+  descContador.textContent = `${restantes} caracteres restantes (cerca de 3 a 4 linhas).`;
+  descContador.style.color = restantes < 0 ? 'var(--danger)' : 'var(--ink-soft)';
+});
+
+function iniciais(nome){
+  return nome.replace(/^(Dra?\.\s?)/,'').split(' ').slice(0,2).map(p=>p[0]).join('').toUpperCase();
+}
+
+let fotoDataUrl = null;
+midiaInput.addEventListener('change', () => {
+  if(midiaInput.files.length){
+    const reader = new FileReader();
+    reader.onload = (e) => { fotoDataUrl = e.target.result; };
+    reader.readAsDataURL(midiaInput.files[0]);
+  }
+});
+
+let dadosValidados = null;
+
+function validarFormulario(){
+  let valido = true;
+
+  const nome = document.getElementById('nome').value.trim();
+  if(!nome){ showError('grp-nome'); valido = false; } else clearError('grp-nome');
+
+  const categoria = document.getElementById('categoria').value.trim();
+  if(!categoria){ showError('grp-categoria'); valido = false; } else clearError('grp-categoria');
+
+  const cidade = document.getElementById('cidade').value.trim();
+  if(!cidade){ showError('grp-cidade'); valido = false; } else clearError('grp-cidade');
+
+  const crm = document.getElementById('crm').value.trim();
+  if(!crm){ showError('grp-crm'); valido = false; } else clearError('grp-crm');
+
+  const endereco = document.getElementById('endereco').value.trim();
+  if(!endereco){ showError('grp-endereco'); valido = false; } else clearError('grp-endereco');
+
+  const whats = document.getElementById('whats').value.trim();
+  if(!validarWhats(whats)){ showError('grp-whats'); valido = false; } else clearError('grp-whats');
+
+  let whatsConfirmacao = whats;
+  if(!mesmoNumero.checked){
+    whatsConfirmacao = document.getElementById('whatsConfirmacao').value.trim();
+    if(!validarWhats(whatsConfirmacao)){ showError('grp-whats-confirmacao'); valido = false; } else clearError('grp-whats-confirmacao');
+  }
+
+  const resumo = document.getElementById('resumo').value.trim();
+  if(!resumo || resumo.length > 60){ showError('grp-resumo'); valido = false; } else clearError('grp-resumo');
+
+  const descricao = document.getElementById('descricao').value.trim();
+  if(!descricao || descricao.length > 280){ showError('grp-desc'); valido = false; } else clearError('grp-desc');
+
+  const tags = document.getElementById('tags').value.trim();
+  const listaTags = tags.split(',').map(t => t.trim()).filter(Boolean);
+  if(!tags || listaTags.length === 0){
+    showError('grp-tags'); valido = false;
+  } else if(listaTags.length > 4){
+    showError('grp-tags'); valido = false;
+  } else {
+    clearError('grp-tags');
+  }
+
+  const temMidia = midiaInput.files.length > 0;
+  if(!temMidia && !pedirOrcamento.checked){ showError('grp-midia'); valido = false; } else clearError('grp-midia');
+
+  const consentBox = document.getElementById('grp-consent');
+  const consentimento = document.getElementById('consentimento').checked;
+  if(!consentimento){
+    consentBox.style.borderColor = 'var(--danger)';
+    valido = false;
+  } else {
+    consentBox.style.borderColor = 'var(--line)';
+  }
+
+  if(!valido){
+    const primeiroErro = form.querySelector('.invalid, [style*="danger"]');
+    if(primeiroErro) primeiroErro.scrollIntoView({behavior:'smooth', block:'center'});
+    return null;
+  }
+
+  return { nome, categoria, cidade, crm, endereco, whats, whatsConfirmacao, resumo, descricao, tags, temMidia };
+}
+
+function montarPreview(dados){
+  document.getElementById('previewName').textContent = dados.nome;
+  document.getElementById('previewChip').textContent = dados.categoria;
+  document.getElementById('previewCity').textContent = dados.cidade;
+  document.getElementById('previewDesc').textContent = dados.resumo;
+
+  const tagsEl = document.getElementById('previewTags');
+  tagsEl.innerHTML = dados.tags.split(',').map(t => t.trim()).filter(Boolean).map(t => `<span class="preview-tag-pill">#${t}</span>`).join('');
+
+  const mediaEl = document.getElementById('previewMedia');
+  if(fotoDataUrl){
+    mediaEl.innerHTML = `<img src="${fotoDataUrl}" alt="Foto de ${dados.nome}">`;
+  } else {
+    mediaEl.innerHTML = `<span class="preview-avatar-fallback">${iniciais(dados.nome)}</span>`;
+  }
+}
+
+const modalOverlay = document.getElementById('modalOverlay');
+const modalContent = document.getElementById('modalContent');
+
+function esc(t){
+  return String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function abrirModal(dados){
+  const tagsHtml = dados.tags.split(',').map(t => t.trim()).filter(Boolean).map(t => `<span class="preview-tag-pill">#${esc(t)}</span>`).join('');
+  const fotoHtml = fotoDataUrl
+    ? `<img src="${fotoDataUrl}" alt="Foto de ${esc(dados.nome)}">`
+    : `<span class="preview-avatar-fallback">${esc(iniciais(dados.nome))}</span>`;
+  const whatsDigits = dados.whats.replace(/\D/g,'');
+
+  modalContent.innerHTML = `
+    <div class="modal-media">
+      ${fotoHtml}
+      <button type="button" class="modal-close" id="modalClose" aria-label="Fechar"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-category">${esc(dados.categoria)}</div>
+      <div class="modal-name">${esc(dados.nome)}</div>
+      <div class="modal-desc">${esc(dados.descricao)}</div>
+      <div class="preview-tags">${tagsHtml}</div>
+      <div class="modal-meta">
+        <div class="meta-row"><strong>Registro</strong>${esc(dados.crm)}</div>
+        <div class="meta-row"><strong>Endereço</strong>${esc(dados.endereco)}</div>
+        <div class="meta-row"><strong>Cidade</strong>${esc(dados.cidade)}</div>
+      </div>
+      <div class="preview-whats-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5 6 15.6A8 8 0 1 1 9 18.7z"/></svg>Chamar no WhatsApp</div>
+    </div>`;
+  modalOverlay.classList.add('open');
+  document.getElementById('modalClose').addEventListener('click', fecharModal);
+}
+function fecharModal(){ modalOverlay.classList.remove('open'); }
+modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) fecharModal(); });
+document.addEventListener('keydown', (e) => { if(e.key === 'Escape') fecharModal(); });
+
+const cardClicavel = document.getElementById('previewCardClicavel');
+cardClicavel.addEventListener('click', () => { if(dadosValidados) abrirModal(dadosValidados); });
+cardClicavel.addEventListener('keydown', (e) => {
+  if((e.key === 'Enter' || e.key === ' ') && dadosValidados){ e.preventDefault(); abrirModal(dadosValidados); }
+});
+
+document.getElementById('btnVerPrevia').addEventListener('click', () => {
+  const dados = validarFormulario();
+  if(!dados) return;
+  dadosValidados = dados;
+  montarPreview(dados);
+  form.style.display = 'none';
+  document.getElementById('previewScreen').classList.add('show');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+});
+
+document.getElementById('btnVoltarPreview').addEventListener('click', () => {
+  document.getElementById('previewScreen').classList.remove('show');
+  form.style.display = 'block';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+});
+
+document.getElementById('btnSubmit').addEventListener('click', async () => {
+  if(!dadosValidados) return;
+  const dados = dadosValidados;
+
+  const btnSubmit = document.getElementById('btnSubmit');
+  btnSubmit.disabled = true;
+  btnSubmit.textContent = 'Enviando...';
+
+  function montarFormData(comFoto){
+    const fd = new FormData();
+    fd.append("access_key", "bbe4ce52-467a-4d5d-8672-c51f58646d26");
+    fd.append("subject", `Novo cadastro — ${dados.nome}`);
+    fd.append("from_name", "Sua Saúde Digital — Cadastro");
+    fd.append("nome", dados.nome);
+    fd.append("especialidade", dados.categoria);
+    fd.append("cidade", dados.cidade);
+    fd.append("registro_profissional", dados.crm);
+    fd.append("endereco", dados.endereco);
+    fd.append("whatsapp_publico", dados.whats);
+    fd.append("whatsapp_confirmacao", dados.whatsConfirmacao);
+    fd.append("desc_resumo_card", dados.resumo);
+    fd.append("desc_completa_modal", dados.descricao);
+    fd.append("servicos_tags", dados.tags);
+    fd.append("pediu_orcamento_midia", pedirOrcamento.checked ? "Sim" : "Não");
+    fd.append("foto_anexada", comFoto ? "Sim" : (dados.temMidia ? "NÃO — pedir a foto por WhatsApp" : "Não enviou foto"));
+    if(comFoto) fd.append("attachment", midiaInput.files[0]);
+    return fd;
+  }
+
+  async function enviar(comFoto){
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: montarFormData(comFoto),
+    });
+    let data = {};
+    try { data = await res.json(); } catch(e) {}
+    if(!res.ok || !data.success){
+      throw new Error(data.message || ('Erro ' + res.status));
+    }
+    return data;
+  }
+
+  let fotoFoi = dados.temMidia;
+  try {
+    try {
+      await enviar(dados.temMidia);
+    } catch(err1) {
+      if(!dados.temMidia) throw err1;
+      // O envio com foto anexada falhou (comum no plano grátis do Web3Forms):
+      // tenta de novo sem a foto, para o cadastro não se perder.
+      console.warn('Falha com foto anexada, tentando sem foto:', err1);
+      await enviar(false);
+      fotoFoi = false;
+    }
+    document.getElementById('previewScreen').classList.remove('show');
+    const box = document.getElementById('successBox');
+    if(dados.temMidia && !fotoFoi){
+      const p = box.querySelector('p');
+      p.textContent += ' Sua foto não seguiu junto com o formulário — quando falarmos com você pelo WhatsApp, é só nos enviar a foto por lá.';
+    }
+    box.classList.add('show');
+    box.scrollIntoView({behavior:'smooth', block:'center'});
+  } catch(err) {
+    console.error('Falha no envio:', err);
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = 'Confirmar e enviar cadastro';
+    alert('Não foi possível enviar o cadastro agora.\n\nMotivo: ' + (err && err.message ? err.message : 'sem conexão') + '\n\nTente novamente, ou chame no WhatsApp.');
+  }
+});
+
+// Cabeçalho ganha a linha inferior quando a página rola
+const siteHeader = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => siteHeader.classList.toggle('scrolled', window.scrollY > 8), {passive:true});
+</script>
+
+</body>
+</html>
