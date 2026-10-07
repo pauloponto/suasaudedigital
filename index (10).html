@@ -1,0 +1,3144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sua Saúde Digital — Encontre profissionais de saúde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Urbanist:wght@300..800&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7F5F0;
+    --ink:#1B2420;
+    --ink-soft:#5B6560;
+    --teal:#0F6E56;
+    --teal-deep:#0A4A3A;
+    --teal-pale:#E1F0EA;
+    --line:#DCD8CE;
+    --card:#FFFFFF;
+    --coral:#D85A30;
+    --r-lg:28px;
+    --r-md:20px;
+    --r-sm:14px;
+    --float:0 1px 2px rgba(10,74,58,.05), 0 14px 34px -18px rgba(10,74,58,.28);
+    --float-hover:0 2px 4px rgba(10,74,58,.06), 0 24px 44px -20px rgba(10,74,58,.38);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px;}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  .icon{width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .icon-spin{animation:spin .9s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* HEADER */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,245,240,.84);
+    -webkit-backdrop-filter:saturate(1.4) blur(14px);
+    backdrop-filter:saturate(1.4) blur(14px);
+    border-bottom:1px solid transparent;
+    transition:border-color .2s ease;
+  }
+  header.scrolled{border-bottom-color:var(--line);}
+  .header-row{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px;}
+  .logo{display:flex;align-items:baseline;gap:8px;text-decoration:none;}
+  .logo-mark{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:23px;
+    font-variation-settings:"opsz" 24;
+    letter-spacing:-0.5px;
+    color:var(--teal-deep);
+    white-space:nowrap;
+  }
+  .logo-mark span{color:var(--coral);}
+  .cta-cadastro{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13.5px;
+    font-weight:600;
+    color:#fff;
+    background:var(--teal-deep);
+    text-decoration:none;
+    padding:11px 18px 11px 14px;
+    border-radius:100px;
+    transition:background .15s ease;
+    white-space:nowrap;
+  }
+  .cta-cadastro .icon{width:16px;height:16px;}
+  .cta-cadastro:hover{background:var(--teal);}
+
+  /* HERO + BUSCA (painel) */
+  .hero-panel{
+    position:relative;
+    z-index:5; /* mantém as listas da busca por cima dos cards */
+    background:var(--teal-deep);
+    color:var(--cream);
+    border-radius:var(--r-lg);
+    padding:80px 56px 36px;
+    margin-top:8px;
+    animation:panelIn .6s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes panelIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+  .hero{max-width:860px;}
+  .hero h1{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-weight:400;
+    font-size:clamp(38px,6.4vw,78px);
+    line-height:1.02;
+    letter-spacing:-0.03em;
+    color:var(--cream);
+    text-wrap:balance;
+  }
+  .hero h1::after{content:".";color:var(--coral);}
+  .hero h1 em{font-style:normal;font-weight:700;}
+  .hero p{
+    font-size:17px;
+    line-height:1.6;
+    color:rgba(247,245,240,.74);
+    max-width:470px;
+    margin-top:22px;
+  }
+
+  .tabs-section{margin-top:48px;}
+
+  /* Barra de busca segmentada */
+  .search-console{
+    display:flex;
+    align-items:stretch;
+    background:var(--card);
+    color:var(--ink);
+    border-radius:var(--r-md);
+    padding:7px;
+    box-shadow:0 28px 50px -28px rgba(0,0,0,.45);
+  }
+  .tag-search-wrap{
+    position:relative;
+    flex:1.5;
+    min-width:0;
+    padding:11px 18px;
+    border-radius:var(--r-sm);
+    transition:background .15s ease;
+    cursor:text;
+  }
+  .tag-search-wrap:hover,.tag-search-wrap:focus-within{background:var(--cream);}
+  .tag-search-label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:3px;
+    cursor:text;
+  }
+  .tag-search-inner{display:flex;align-items:center;gap:10px;}
+  .tag-search-icon{display:flex;color:var(--teal);}
+  .tag-search-input{
+    flex:1;min-width:0;
+    border:none;outline:none;background:transparent;
+    font-size:15px;
+    font-family:inherit;
+    color:var(--ink);
+    padding:1px 0;
+  }
+  .tag-search-input::placeholder{color:var(--ink-soft);opacity:.85;}
+  .tag-search-clear{
+    display:flex;align-items:center;justify-content:center;
+    width:24px;height:24px;border-radius:50%;
+    background:var(--line);color:var(--ink);
+    cursor:pointer;flex-shrink:0;
+  }
+  .tag-search-clear .icon{width:12px;height:12px;stroke-width:2.4;}
+  .tag-search-clear:hover{background:var(--teal-deep);color:#fff;}
+
+  /* Sugestões da busca (especialidades + serviços) */
+  .sugestoes{
+    position:absolute;
+    top:calc(100% + 14px);
+    left:0;
+    width:100%;
+    min-width:320px;
+    max-height:min(420px, 60vh);
+    overflow-y:auto;
+    background:var(--card);
+    border-radius:18px;
+    box-shadow:0 0 0 1px rgba(27,36,32,.06), 0 24px 48px -16px rgba(27,36,32,.28);
+    padding:6px;
+    z-index:30;
+    display:none;
+    cursor:default;
+  }
+  .sugestoes.open{display:block;animation:popIn .16s ease both;}
+  .sug-grupo{
+    font-size:12px;font-weight:600;
+    color:var(--ink-soft);
+    padding:10px 12px 6px;
+  }
+  .sug-item{
+    display:flex;align-items:center;gap:12px;
+    padding:9px 12px;
+    border-radius:12px;
+    cursor:pointer;
+  }
+  .sug-item:hover,.sug-item.ativo{background:var(--cream);}
+  .sug-icon{
+    width:32px;height:32px;flex-shrink:0;
+    border-radius:10px;
+    background:var(--teal-pale);color:var(--teal-deep);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .sug-icon .icon{width:16px;height:16px;}
+  .sug-text{flex:1;min-width:0;}
+  .sug-titulo{display:block;font-size:14.5px;font-weight:400;color:var(--ink);line-height:1.35;}
+  .sug-titulo strong{font-weight:600;}
+  .sug-sub{display:block;font-size:12.5px;color:var(--ink-soft);}
+  .sug-count{font-size:12px;color:var(--ink-soft);white-space:nowrap;}
+  .sug-vazio{padding:14px 12px;font-size:13.5px;color:var(--ink-soft);}
+
+  .filters-row{flex:1.3;display:flex;min-width:0;}
+  .selector-wrap{position:relative;flex:1;min-width:0;}
+  .selector-wrap::before{
+    content:"";position:absolute;left:0;top:14px;bottom:14px;
+    width:1px;background:var(--line);
+  }
+  .selector-btn{
+    width:100%;height:100%;
+    display:flex;align-items:center;gap:10px;
+    padding:11px 16px 11px 18px;
+    border-radius:var(--r-sm);
+    cursor:pointer;
+    user-select:none;
+    transition:background .15s ease;
+  }
+  .selector-btn:hover,.selector-wrap.open .selector-btn{background:var(--cream);}
+  .selector-icon{display:flex;color:var(--teal);}
+  .selector-label{
+    flex:1;min-width:0;text-align:left;
+    font-size:15px;color:var(--ink);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .selector-label::before{
+    display:block;
+    font-size:12px;font-weight:600;color:var(--ink);
+    margin-bottom:3px;
+  }
+  #selectorCidadeLabel::before{content:"Cidade";}
+  #selectorLabel::before{content:"Especialidade";}
+  .selector-label.placeholder{color:var(--ink-soft);}
+  .selector-chevron{display:flex;color:var(--ink-soft);transition:transform .2s ease;}
+  .selector-chevron .icon{width:16px;height:16px;}
+  .selector-wrap.open .selector-chevron{transform:rotate(180deg);}
+  .selector-dropdown{
+    position:absolute;
+    top:calc(100% + 14px);
+    left:0;
+    min-width:100%;
+    width:max-content;
+    max-width:300px;
+    background:var(--card);
+    border-radius:18px;
+    box-shadow:0 0 0 1px rgba(27,36,32,.06), 0 24px 48px -16px rgba(27,36,32,.28);
+    padding:6px;
+    z-index:20;
+    display:none;
+  }
+  .selector-wrap:last-child .selector-dropdown{left:auto;right:0;}
+  .selector-wrap.open .selector-dropdown{display:block;animation:popIn .16s ease both;}
+  @keyframes popIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+  .selector-option{
+    padding:11px 14px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:14.5px;
+    color:var(--ink);
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  .selector-option:hover{background:var(--cream);}
+  .selector-option.active{background:var(--teal-pale);color:var(--teal-deep);font-weight:600;}
+  .selector-option.active::after{
+    content:"";width:14px;height:8px;
+    border-left:2px solid currentColor;border-bottom:2px solid currentColor;
+    transform:translateY(-2px) rotate(-45deg);
+  }
+  .selector-option-count{font-size:12px;color:var(--ink-soft);}
+
+  /* GEOLOCALIZAÇÃO */
+  .btn-geoloc{
+    display:inline-flex;align-items:center;gap:8px;
+    margin-top:18px;
+    background:rgba(247,245,240,.08);
+    border:1px solid rgba(247,245,240,.22);
+    color:var(--cream);
+    font-size:13px;font-weight:600;font-family:inherit;
+    padding:9px 16px 9px 12px;
+    border-radius:100px;
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .btn-geoloc .icon{width:16px;height:16px;}
+  #geolocIcon{display:flex;}
+  .btn-geoloc:hover{background:rgba(247,245,240,.16);border-color:rgba(247,245,240,.4);}
+  .btn-geoloc:disabled{opacity:.75;cursor:default;}
+
+  /* CONTAGEM */
+  .result-count{
+    display:flex;align-items:baseline;gap:8px;
+    font-size:14px;
+    color:var(--ink-soft);
+    padding:44px 4px 22px;
+  }
+  .result-count strong{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:30px;font-weight:600;
+    letter-spacing:-0.02em;
+    color:var(--teal-deep);
+    line-height:1;
+  }
+
+  /* ORIENTAÇÃO POR QUEIXA */
+  .orientacao{
+    display:flex;gap:16px;align-items:flex-start;
+    background:var(--card);
+    border-radius:var(--r-md);
+    box-shadow:var(--float);
+    padding:20px 22px;
+    margin:0 0 28px;
+  }
+  .orientacao[hidden]{display:none;}
+  .orientacao-icone{
+    width:40px;height:40px;flex-shrink:0;
+    border-radius:12px;
+    background:var(--teal-pale);color:var(--teal-deep);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .orientacao-corpo{flex:1;min-width:0;}
+  .orientacao-titulo{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:19px;font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--teal-deep);
+    line-height:1.3;
+    margin-bottom:10px;
+  }
+  .orientacao-corpo > p:not(.orientacao-nota){font-size:14.5px;color:var(--ink);max-width:62ch;}
+  .orientacao-nota{font-size:13px;color:var(--ink-soft);margin-top:12px;}
+  .esp-pills{display:flex;flex-wrap:wrap;gap:8px;}
+  .esp-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    font:inherit;font-size:14px;font-weight:600;
+    color:var(--teal-deep);
+    background:var(--teal-pale);
+    border:1px solid transparent;
+    border-radius:100px;
+    padding:7px 8px 7px 14px;
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .esp-pill span{
+    font-size:12px;font-weight:600;
+    background:var(--card);
+    border-radius:100px;
+    padding:2px 8px;
+  }
+  button.esp-pill:hover{border-color:var(--teal);}
+  .esp-pill-vazia{
+    background:transparent;border-color:var(--line);
+    color:var(--ink-soft);font-weight:500;cursor:default;
+  }
+  .esp-pill-vazia span{background:var(--cream);font-weight:500;}
+  .orientacao-acoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+  .orientacao-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--teal-deep);color:#fff;
+    text-decoration:none;
+    font-size:14px;font-weight:600;
+    padding:11px 18px;
+    border-radius:100px;
+  }
+  .orientacao-btn .icon{width:16px;height:16px;}
+  .orientacao-btn-sec{background:transparent;color:var(--teal-deep);box-shadow:inset 0 0 0 1px var(--teal);}
+  .orientacao-urgente{box-shadow:0 0 0 1.5px var(--coral), var(--float);}
+  .orientacao-urgente .orientacao-icone{background:#FBE7DF;color:var(--coral);}
+  .orientacao-urgente .orientacao-titulo{color:#A63E1C;}
+  .orientacao-urgente .orientacao-btn{background:#B9461F;}
+  .orientacao{margin-top:44px;scroll-margin-top:96px;}
+  .orientacao:not([hidden]) + .result-count{padding-top:4px;}
+  .orientacao-caminho{display:block;background:none;box-shadow:none;padding:0;}
+  .caminho-contou{font-size:14px;color:var(--ink-soft);margin:0 4px 12px;}
+  .caminho-contou span{color:var(--ink);font-weight:500;}
+  .caminho-trocar{
+    font:inherit;font-size:14px;font-weight:600;color:var(--teal);
+    background:none;border:0;padding:0 0 0 6px;cursor:pointer;
+    text-decoration:underline;text-underline-offset:3px;
+  }
+  .caminho-bloco{background:var(--card);border-radius:var(--r-md);box-shadow:var(--float);padding:20px 22px;max-width:640px;}
+  .etapas{display:flex;flex-direction:column;}
+  .etapa{
+    display:flex;align-items:center;gap:14px;
+    width:100%;text-align:left;font:inherit;color:inherit;
+    background:none;border:0;border-top:1px solid #EEEBE4;
+    padding:12px 8px;margin:0 -8px;width:calc(100% + 16px);
+    border-radius:12px;
+  }
+  .etapa:first-child{border-top-color:transparent;}
+  button.etapa{cursor:pointer;}
+  button.etapa:hover{background:var(--cream);}
+  .etapa-num{
+    width:26px;height:26px;flex-shrink:0;border-radius:50%;
+    background:var(--teal-deep);color:#fff;
+    font-family:'Urbanist',system-ui,sans-serif;font-size:13px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .etapa-texto{flex:1;min-width:0;display:flex;flex-direction:column;}
+  .etapa-nome{font-size:15px;font-weight:600;color:var(--ink);}
+  .etapa-dica{font-size:13px;color:var(--ink-soft);}
+  .etapa-qtd{
+    font-size:12.5px;font-weight:600;color:var(--teal-deep);
+    background:var(--teal-pale);border-radius:100px;padding:4px 10px;white-space:nowrap;
+  }
+  .etapa-vazia .etapa-num{background:var(--line);color:var(--ink-soft);}
+  .etapa-vazia .etapa-nome{color:var(--ink-soft);}
+  .etapa-qtd-vazia{background:transparent;color:var(--ink-soft);font-weight:500;box-shadow:inset 0 0 0 1px var(--line);}
+  .secao-titulo{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:22px;font-weight:600;letter-spacing:-0.01em;color:var(--teal-deep);
+  }
+  .secao-qtd{font-size:14px;color:var(--ink-soft);}
+  .result-count .secao-perto{
+    margin-left:auto;align-self:center;
+    display:inline-flex;align-items:center;gap:6px;
+    font:inherit;font-size:13.5px;font-weight:600;color:var(--teal);
+    background:none;border:0;cursor:pointer;padding:4px 0;
+  }
+  .secao-perto .icon{width:16px;height:16px;}
+  .aviso-cidade{flex-basis:100%;margin-top:4px;font-size:13.5px;color:var(--ink-soft);}
+  .result-count:has(.aviso-cidade){flex-wrap:wrap;}
+  @media (max-width:560px){
+    .caminho-bloco{padding:16px;}
+    .result-count{flex-wrap:wrap;}
+    .result-count .secao-perto{margin-left:0;width:100%;}
+  }
+  /* CONVERSA */
+  /* Como funciona */
+  .como-funciona{
+    margin-top:22px;
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(247,245,240,.08);border:1px solid rgba(247,245,240,.22);
+    color:var(--cream);font:inherit;font-size:13.5px;font-weight:600;
+    padding:8px 12px 8px 14px;border-radius:100px;cursor:pointer;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .como-funciona:hover{background:rgba(247,245,240,.16);border-color:rgba(247,245,240,.4);}
+  .como-funciona .icon{width:16px;height:16px;transition:transform .2s ease;}
+  .como-funciona[aria-expanded="true"] .icon{transform:rotate(180deg);}
+  .como-funciona-lista{
+    list-style:none;margin-top:18px;max-width:860px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px 28px;
+  }
+  .como-funciona-lista[hidden]{display:none;}
+  .como-funciona-lista li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.5;color:rgba(247,245,240,.82);}
+  .como-funciona-lista span{
+    width:26px;height:26px;flex-shrink:0;border-radius:50%;
+    background:rgba(247,245,240,.14);color:var(--cream);
+    font-family:'Urbanist',system-ui,sans-serif;font-size:13px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .como-funciona-lista:not([hidden]){animation:popIn .18s ease both;}
+
+  /* Botões abaixo da busca: mesma largura, lado a lado */
+  .hero-acoes{display:inline-grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
+  .hero-acoes .btn-geoloc{margin-top:0;justify-content:center;}
+  .btn-chat-hero{background:var(--cream);border-color:var(--cream);color:var(--teal-deep);}
+  .btn-chat-hero:hover{background:#fff;border-color:#fff;}
+  .chat-hero-icone{position:relative;display:inline-flex;}
+  .chat-hero-icone::after{
+    content:"";position:absolute;top:-2px;right:-3px;
+    width:8px;height:8px;border-radius:50%;
+    background:var(--coral);box-shadow:0 0 0 2px var(--cream);
+  }
+  .chat-hero-icone::before{
+    content:"";position:absolute;top:-2px;right:-3px;
+    width:8px;height:8px;border-radius:50%;background:var(--coral);
+    animation:chatAviso 2.4s ease-out infinite;
+  }
+  @keyframes chatAviso{0%{transform:scale(1);opacity:.6;}70%,100%{transform:scale(2.6);opacity:0;}}
+  .chat-fab{
+    position:fixed;right:20px;bottom:20px;z-index:80;
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--teal-deep);color:#fff;border:0;
+    font:inherit;font-size:14px;font-weight:600;
+    padding:13px 18px 13px 15px;border-radius:100px;
+    box-shadow:var(--float-hover);cursor:pointer;
+    opacity:0;pointer-events:none;transform:translateY(8px);
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .chat-fab.visivel{opacity:1;pointer-events:auto;transform:none;}
+  .chat-fab.escondido{opacity:0;pointer-events:none;}
+  .chat{
+    position:fixed;right:24px;bottom:24px;z-index:90;
+    width:min(400px, calc(100vw - 48px));height:min(640px, calc(100vh - 48px));
+    display:flex;flex-direction:column;
+    background:var(--cream);border-radius:24px;overflow:hidden;
+    box-shadow:0 0 0 1px rgba(27,36,32,.06), 0 30px 60px -20px rgba(10,74,58,.45);
+    opacity:0;visibility:hidden;transform:translateY(14px);
+    transition:opacity .2s ease, transform .2s ease, visibility 0s linear .2s;
+  }
+  .chat.open{opacity:1;visibility:visible;transform:none;transition:opacity .2s ease, transform .2s ease;}
+  .chat-topo{
+    display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+    background:var(--teal-deep);color:var(--cream);padding:18px 18px 16px 20px;
+  }
+  .chat-titulo{font-family:'Urbanist',system-ui,sans-serif;font-size:18px;font-weight:600;letter-spacing:-0.01em;}
+  .chat-sub{font-size:12.5px;color:rgba(247,245,240,.75);margin-top:2px;}
+  .chat-fechar{
+    width:34px;height:34px;flex-shrink:0;border-radius:50%;border:0;cursor:pointer;
+    background:rgba(247,245,240,.12);color:var(--cream);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .chat-fechar .icon{width:16px;height:16px;}
+  .chat-topo-acoes{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .chat-encerrar{
+    height:34px;padding:0 14px;border-radius:100px;border:1px solid rgba(247,245,240,.28);cursor:pointer;
+    background:none;color:var(--cream);font:inherit;font-size:13px;font-weight:600;
+  }
+  .chat-encerrar:hover{background:rgba(247,245,240,.12);}
+  .chat-mic{
+    width:44px;height:44px;flex-shrink:0;border-radius:50%;cursor:pointer;
+    background:var(--cream);border:1px solid var(--line);color:var(--teal-deep);
+    display:flex;align-items:center;justify-content:center;position:relative;
+  }
+  .chat-mic .icon{width:20px;height:20px;}
+  .chat-mic.gravando{background:var(--coral);border-color:var(--coral);color:#fff;}
+  .chat-mic.gravando::after{
+    content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--coral);
+    animation:micPulso 1.2s ease-out infinite;
+  }
+  @keyframes micPulso{from{opacity:.7;transform:scale(.9);}to{opacity:0;transform:scale(1.25);}}
+  @media (prefers-reduced-motion: reduce){.chat-mic.gravando::after{animation:none;}}
+  .chat-msgs{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:10px;}
+  .chat-msg{max-width:88%;font-size:14.5px;line-height:1.5;padding:11px 14px;border-radius:18px;animation:popIn .16s ease both;}
+  .chat-msg-bot{align-self:flex-start;background:var(--card);color:var(--ink);border-bottom-left-radius:6px;box-shadow:0 1px 2px rgba(10,74,58,.06);}
+  .chat-msg-eu{align-self:flex-end;background:var(--teal-deep);color:#fff;border-bottom-right-radius:6px;}
+  .chat-msg-urgente{box-shadow:0 0 0 1.5px var(--coral);}
+  .chat-msg-urgente strong{color:#A63E1C;}
+  .chat-msg .ponto{color:var(--coral);}
+  .chat-digitando{display:inline-flex;gap:4px;padding:4px 2px;}
+  .chat-digitando i{width:6px;height:6px;border-radius:50%;background:var(--ink-soft);opacity:.4;animation:chatPisca 1s infinite ease-in-out;}
+  .chat-digitando i:nth-child(2){animation-delay:.15s;}
+  .chat-digitando i:nth-child(3){animation-delay:.3s;}
+  @keyframes chatPisca{50%{opacity:1;transform:translateY(-2px);}}
+  .chat-atalhos{display:flex;flex-wrap:wrap;gap:6px;max-width:92%;}
+  .chat-atalho{
+    font:inherit;font-size:13.5px;font-weight:600;color:var(--teal-deep);
+    background:var(--teal-pale);border:1px solid transparent;border-radius:100px;
+    padding:7px 13px;cursor:pointer;
+  }
+  .chat-atalho:hover{border-color:var(--teal);}
+  .chat-caminho{list-style:none;margin:10px 0 6px;}
+  .chat-caminho li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;}
+  .chat-caminho strong{display:block;font-size:14px;}
+  .chat-caminho small{display:block;font-size:12.5px;color:var(--ink-soft);}
+  .chat-num{
+    width:22px;height:22px;flex-shrink:0;margin-top:1px;border-radius:50%;
+    background:var(--teal-deep);color:#fff;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .chat-caminho li.vazia .chat-num{background:var(--line);color:var(--ink-soft);}
+  .chat-caminho li.vazia strong{color:var(--ink-soft);}
+  .chat-nota{display:block;font-size:12px;color:var(--ink-soft);}
+  .chat-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .chat-msg > .chat-btn{margin-top:10px;}
+  .chat-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    font:inherit;font-size:13.5px;font-weight:600;
+    background:var(--teal-deep);color:#fff;border:0;text-decoration:none;
+    padding:9px 14px;border-radius:100px;cursor:pointer;
+  }
+  .chat-btn .icon{width:15px;height:15px;}
+  .chat-btn-urgente{background:#B9461F;}
+  .chat-btn-sec{background:transparent;color:var(--teal-deep);box-shadow:inset 0 0 0 1px var(--teal);}
+  .chat-cards{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+  .chat-card{display:flex;align-items:center;gap:10px;background:var(--cream);border-radius:14px;padding:8px;cursor:pointer;}
+  .chat-card:hover{background:var(--teal-pale);}
+  .chat-card-foto{
+    width:42px;height:42px;flex-shrink:0;border-radius:50%;overflow:hidden;
+    background:var(--teal-pale);color:var(--teal-deep);
+    font-family:'Urbanist',system-ui,sans-serif;font-size:14px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .chat-card-foto img{width:100%;height:100%;object-fit:cover;}
+  .chat-card-info{flex:1;min-width:0;}
+  .chat-card-info strong{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .chat-card-info small{display:block;font-size:12.5px;color:var(--ink-soft);}
+  .chat-card-whats{
+    width:36px;height:36px;flex-shrink:0;border-radius:50%;
+    background:var(--teal-deep);color:#fff;display:flex;align-items:center;justify-content:center;
+  }
+  .chat-card-whats .icon{width:16px;height:16px;}
+  .chat-form{display:flex;gap:8px;padding:12px;background:var(--card);border-top:1px solid var(--line);}
+  .chat-form input{
+    flex:1;min-width:0;font:inherit;font-size:15px;color:var(--ink);
+    background:var(--cream);border:1px solid var(--line);border-radius:100px;padding:11px 16px;
+  }
+  .chat-form input:focus{outline:none;border-color:var(--teal);}
+  .chat-enviar{
+    width:44px;height:44px;flex-shrink:0;border-radius:50%;border:0;cursor:pointer;
+    background:var(--teal-deep);color:#fff;display:flex;align-items:center;justify-content:center;
+  }
+  @media (max-width:560px){
+    .hero-acoes{display:grid;width:100%;}
+    .hero-acoes .btn-geoloc{white-space:normal;text-align:center;line-height:1.3;min-height:50px;padding:9px 12px;font-size:13px;}
+    .como-funciona-lista{grid-template-columns:1fr;gap:12px;}
+    .chat{right:0;bottom:0;width:100%;height:100%;height:100dvh;border-radius:0;}
+    .chat-form input{font-size:16px;}
+    .chat-fab{right:16px;bottom:16px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .chat,.chat-fab,.chat-msg{transition:none;animation:none;}
+    .chat-hero-icone::before{animation:none;opacity:0;}
+    .chat-digitando i{animation:none;}
+  }
+  .orientacao-convite{background:var(--teal-pale);box-shadow:none;}
+  .orientacao-convite .orientacao-icone{background:var(--card);}
+  .orientacao-convite .orientacao-corpo > p:not(.orientacao-nota){color:var(--ink);}
+  /* ===== Buscador compacto no cabeçalho (aparece ao rolar) ===== */
+  .chat-fab{display:none !important;}
+  header.com-busca{
+    background:rgba(247,245,240,.8);border-bottom-color:var(--line);
+    -webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);
+  }
+  .busca-mini-faixa{
+    flex:1;display:flex;justify-content:center;min-width:0;margin:0 20px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.97);
+    transition:opacity .25s ease, transform .3s cubic-bezier(.32,1.3,.55,1), visibility 0s linear .25s;
+  }
+  header.com-busca .busca-mini-faixa{
+    opacity:1;visibility:visible;transform:none;
+    transition:opacity .25s ease, transform .3s cubic-bezier(.32,1.3,.55,1);
+  }
+  .busca-mini{
+    display:flex;align-items:center;gap:10px;width:100%;max-width:480px;height:44px;
+    background:#fff;border:1px solid var(--line);border-radius:100px;padding:0 5px 0 16px;
+    box-shadow:0 6px 18px -12px rgba(10,74,58,.35);cursor:text;
+  }
+  .busca-mini:focus-within{border-color:var(--teal);}
+  .busca-mini > .icon{width:18px;height:18px;color:var(--teal);flex-shrink:0;}
+  .busca-mini input{flex:1;min-width:0;border:0;outline:0;background:none;font:inherit;font-size:15px;color:var(--ink);}
+  .busca-mini input::placeholder{color:#8A928D;}
+  .busca-mini-chat{
+    width:34px;height:34px;flex-shrink:0;border:0;border-radius:50%;cursor:pointer;
+    background:var(--teal-pale);color:var(--teal-deep);
+    display:flex;align-items:center;justify-content:center;position:relative;
+  }
+  .busca-mini-chat .icon{width:16px;height:16px;}
+  .busca-mini-chat::after{
+    content:"";position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;
+    background:var(--coral);box-shadow:0 0 0 2px var(--teal-pale);
+  }
+  /* com poucos resultados, a página não "pula" de volta para o balão enquanto a pessoa digita no cabeçalho */
+  body.busca-fixa-ativa #grid{min-height:calc(100vh - 160px);}
+  @media (max-width:560px){
+    .busca-mini-faixa{
+      position:absolute;left:0;right:0;top:100%;margin:0;
+      padding:8px 14px 10px;
+      background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:0;
+      transform:translateY(-12px);
+    }
+    /* No celular a faixa fica abaixo do cabeçalho. Um desfoque dentro do outro não funciona,
+       então um único fundo desfocado cobre cabeçalho + faixa, e os dois ficam iguais. */
+    header.com-busca{background:transparent !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;border-bottom-color:transparent;}
+    header.com-busca::before{
+      content:"";position:absolute;left:0;right:0;top:0;height:calc(100% + 63px);z-index:-1;pointer-events:none;
+      background:rgba(247,245,240,.8);
+      -webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+    .busca-mini{max-width:none;}
+    .busca-mini input{font-size:16px;}
+  }
+  .sug-icon-urgente{background:#FBE7DF !important;color:#B9461F !important;}
+  @media (max-width:560px){
+    .orientacao{padding:18px;gap:12px;}
+    .orientacao-icone{width:34px;height:34px;}
+    .orientacao-titulo{font-size:17px;}
+  }
+
+  /* GRID */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(290px,1fr));
+    gap:28px 22px;
+    padding-bottom:88px;
+  }
+  .card{
+    background:var(--card);
+    border-radius:24px;
+    padding:8px;
+    cursor:pointer;
+    box-shadow:var(--float);
+    transition:transform .22s ease, box-shadow .22s ease;
+    animation:fadeIn .4s ease both;
+    display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:var(--float-hover);}
+  .card:focus-visible{outline-offset:4px;border-radius:24px;}
+  @keyframes fadeIn{
+    from{opacity:0;transform:translateY(8px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .card-media{
+    width:100%;
+    aspect-ratio:6/7;
+    background:var(--teal-pale);
+    border-radius:18px;
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .card-media img{
+    width:100%;height:100%;object-fit:cover;object-position:center 15%;
+    transition:transform .5s cubic-bezier(.2,.7,.2,1);
+  }
+  .card:hover .card-media img{transform:scale(1.035);}
+  .avatar-fallback{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:64px;
+    font-weight:500;
+    letter-spacing:-0.03em;
+    color:var(--teal);
+  }
+  .card-chip{
+    position:absolute;top:12px;left:12px;
+    font-size:12px;font-weight:600;
+    color:var(--teal-deep);
+    background:rgba(255,255,255,.9);
+    -webkit-backdrop-filter:blur(8px);
+    backdrop-filter:blur(8px);
+    padding:6px 12px;
+    border-radius:100px;
+  }
+  .card-body{padding:16px 10px 10px;display:flex;flex-direction:column;flex:1;}
+  .card-name{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:21px;
+    font-weight:600;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin-bottom:6px;
+  }
+  .card-category{
+    display:flex;align-items:center;flex-wrap:wrap;gap:4px 6px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .card-category .icon{width:14px;height:14px;color:var(--teal);}
+  .card-distance{color:var(--teal);font-weight:600;}
+  .card-distance::before{content:"";display:inline-block;width:3px;height:3px;border-radius:50%;background:var(--line);vertical-align:middle;margin:0 6px 2px 0;}
+  .card-info{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px;}
+  .card-conv,.card-online{
+    display:inline-flex;align-items:center;gap:5px;
+    font-size:12.5px;font-weight:500;line-height:1.2;
+    padding:5px 10px 5px 8px;border-radius:100px;
+  }
+  .card-conv{color:var(--teal-deep);background:var(--cream);border:1px solid var(--line);}
+  .card-conv-part{color:var(--ink-soft);}
+  .card-online{color:var(--teal-deep);background:var(--teal-pale);}
+  .card-conv .icon,.card-online .icon{width:14px;height:14px;flex:none;color:var(--teal);}
+  .card-desc{
+    font-size:14px;
+    color:var(--ink-soft);
+    line-height:1.55;
+    margin:12px 0 14px;
+  }
+  .card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+  .tag-pill{
+    font-size:12px;
+    font-weight:500;
+    color:var(--teal-deep);
+    background:var(--teal-pale);
+    padding:4px 10px;
+    border-radius:100px;
+    white-space:nowrap;
+  }
+  .empty-state{
+    grid-column:1/-1;
+    text-align:center;
+    padding:72px 20px;
+    color:var(--ink-soft);
+    font-size:15px;
+    background:var(--card);
+    border-radius:24px;
+    box-shadow:var(--float);
+  }
+  .card-actions{display:flex;gap:8px;margin-top:auto;}
+  .btn-whats{
+    flex:1;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--teal-deep);
+    color:#fff;
+    text-decoration:none;
+    font-size:13.5px;
+    font-weight:600;
+    padding:13px 14px;
+    border-radius:var(--r-sm);
+    white-space:nowrap;
+    transition:background .15s ease;
+  }
+  .btn-whats .icon{width:17px;height:17px;}
+  .btn-whats:hover{background:var(--teal);}
+  .btn-link{
+    display:flex;align-items:center;justify-content:center;
+    width:46px;flex-shrink:0;
+    border:1px solid var(--line);
+    border-radius:var(--r-sm);
+    color:var(--ink-soft);
+    text-decoration:none;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .btn-link:hover{border-color:var(--teal);color:var(--teal);}
+  button.btn-link{background:transparent;cursor:pointer;font:inherit;}
+
+  /* JANELA DE OPÇÕES (Google, Instagram, compartilhar) */
+  .sheet-overlay{
+    position:fixed;inset:0;
+    background:rgba(10,30,24,.45);
+    -webkit-backdrop-filter:blur(4px);
+    backdrop-filter:blur(4px);
+    display:none;
+    align-items:center;justify-content:center;
+    padding:24px 20px;
+    z-index:120;
+  }
+  .sheet-overlay.open{display:flex;animation:fadeOverlay .18s ease both;}
+  .sheet{
+    background:var(--card);
+    border-radius:24px;
+    width:100%;max-width:400px;
+    padding:22px 14px 14px;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.45);
+    animation:modalIn .24s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:0 8px 16px;}
+  .sheet-title{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:20px;font-weight:600;letter-spacing:-0.01em;line-height:1.2;
+    color:var(--ink);
+  }
+  .sheet-sub{font-size:13px;color:var(--ink-soft);margin-top:2px;}
+  .sheet-close{
+    width:34px;height:34px;flex-shrink:0;
+    border-radius:50%;border:none;
+    background:var(--cream);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .sheet-close .icon{width:15px;height:15px;stroke-width:2.2;}
+  .sheet-close:hover{background:var(--line);}
+  .sheet-option{
+    width:100%;
+    display:flex;align-items:center;gap:14px;
+    padding:12px 10px;
+    border:none;background:none;
+    border-radius:16px;
+    text-align:left;text-decoration:none;
+    font:inherit;color:var(--ink);
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .sheet-option + .sheet-option{margin-top:2px;}
+  .sheet-option:hover{background:var(--cream);}
+  .sheet-option-icon{
+    width:44px;height:44px;flex-shrink:0;
+    border-radius:14px;
+    background:var(--teal-pale);color:var(--teal-deep);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .sheet-option-icon .icon{width:20px;height:20px;}
+  .sheet-option-text{flex:1;min-width:0;}
+  .sheet-option-title{display:block;font-size:15px;font-weight:600;}
+  .sheet-option-desc{display:block;font-size:13px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .sheet-option-arrow{color:var(--ink-soft);display:flex;}
+  .sheet-option-arrow .icon{width:16px;height:16px;}
+  .sheet-option.done .sheet-option-icon{background:var(--teal-deep);color:#fff;}
+  .sheet-option.done .sheet-option-desc{color:var(--teal);font-weight:600;}
+  .sheet-option[aria-disabled="true"]{cursor:default;opacity:.5;}
+  .sheet-option[aria-disabled="true"]:hover{background:none;}
+
+  /* MODAL */
+  .modal-overlay{
+    position:fixed;inset:0;
+    background:rgba(10,30,24,.5);
+    -webkit-backdrop-filter:blur(6px);
+    backdrop-filter:blur(6px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:32px 20px;
+    overflow-y:auto;
+    z-index:100;
+  }
+  .modal-overlay.open{display:flex;animation:fadeOverlay .2s ease both;}
+  @keyframes fadeOverlay{from{opacity:0;}to{opacity:1;}}
+  .modal{
+    background:var(--card);
+    border-radius:var(--r-lg);
+    max-width:560px;
+    width:100%;
+    margin:auto;
+    overflow:hidden;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.45);
+    animation:modalIn .28s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes modalIn{
+    from{opacity:0;transform:translateY(14px) scale(.98);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+  }
+  .modal-media{
+    width:100%;
+    aspect-ratio:16/10;
+    background:var(--teal-pale);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .modal-media img{width:100%;height:100%;object-fit:cover;object-position:center 15%;}
+  .modal-media .avatar-fallback{font-size:84px;}
+  .modal-close{
+    position:absolute;top:14px;right:14px;
+    width:38px;height:38px;
+    border-radius:50%;
+    background:rgba(255,255,255,.9);
+    -webkit-backdrop-filter:blur(8px);
+    backdrop-filter:blur(8px);
+    color:var(--ink);
+    border:none;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s ease;
+  }
+  .modal-close .icon{width:16px;height:16px;stroke-width:2.2;}
+  .modal-close:hover{background:#fff;}
+  .modal-body{padding:28px 32px 32px;}
+  .modal-category{
+    display:inline-block;
+    font-size:12px;font-weight:600;
+    color:var(--teal-deep);
+    background:var(--teal-pale);
+    padding:5px 12px;border-radius:100px;
+  }
+  .modal-name{
+    font-family:'Urbanist',system-ui,sans-serif;
+    font-size:34px;font-weight:600;
+    line-height:1.08;
+    letter-spacing:-0.02em;
+    color:var(--ink);
+    margin:14px 0 14px;
+  }
+  .modal-desc{
+    font-size:15.5px;line-height:1.7;
+    color:var(--ink);
+    margin-bottom:18px;
+  }
+  .modal-body .card-tags{margin-bottom:22px;}
+  .modal-meta{
+    display:flex;flex-direction:column;gap:12px;
+    padding:18px 20px;
+    background:var(--cream);
+    border-radius:var(--r-sm);
+    margin-bottom:22px;
+  }
+  .meta-row{
+    display:grid;grid-template-columns:96px 1fr;gap:12px;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .meta-row strong{color:var(--ink-soft);font-weight:500;}
+  .modal-actions{display:flex;gap:10px;}
+  .meta-enderecos{display:flex;flex-direction:column;gap:12px;}
+  .meta-endereco{display:flex;flex-direction:column;gap:2px;}
+  /* Endereço escrito abre o Google Maps */
+  .link-maps{
+    color:inherit;text-decoration:underline;text-decoration-color:var(--line);
+    text-decoration-thickness:1.5px;text-underline-offset:3px;transition:color .15s,text-decoration-color .15s;
+  }
+  .link-maps:hover,.link-maps:active{color:var(--teal);text-decoration-color:var(--teal);}
+  .meta-endereco b{font-weight:600;color:var(--ink);}
+  .modal-actions .btn-whats{padding:15px 14px;font-size:14.5px;}
+  .modal-actions .btn-link{width:52px;}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0 40px;
+    text-align:center;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width:820px){
+    .hero-panel{padding:56px 28px 28px;}
+    .search-console{flex-direction:column;padding:6px;}
+    .tag-search-wrap{padding:13px 16px;}
+    .filters-row{border-top:1px solid var(--line);margin-top:4px;padding-top:4px;}
+    .selector-wrap:first-child::before{display:none;}
+    .selector-btn{padding:12px 14px 12px 16px;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 14px;}
+    .header-row{height:62px;gap:10px;}
+    .logo-mark{font-size:18px;}
+    .cta-cadastro{font-size:12.5px;padding:9px 14px 9px 11px;}
+    .cta-cadastro .icon{display:none;}
+    .hero-panel{padding:44px 20px 20px;border-radius:24px;}
+    .hero p{font-size:15.5px;margin-top:16px;}
+    .tabs-section{margin-top:32px;}
+    .selector-label{font-size:14px;}
+    .selector-btn .selector-icon{display:none;}
+    .sugestoes{min-width:0;}
+    .sug-count{display:none;}
+    .selector-btn{padding:12px 12px 12px 16px;}
+    .card-media{aspect-ratio:5/4;}
+    .result-count{padding:32px 4px 16px;}
+    .grid{gap:18px;}
+    .modal-overlay{align-items:flex-end;padding:0;}
+    .modal{border-radius:24px 24px 0 0;max-height:94vh;overflow-y:auto;margin:0;animation:sheetIn .3s cubic-bezier(.2,.7,.2,1) both;}
+    @keyframes sheetIn{from{transform:translateY(100%);}to{transform:none;}}
+    .modal-body{padding:24px 20px 28px;}
+    .modal-name{font-size:28px;}
+    .sheet-overlay{align-items:flex-end;padding:0;}
+    .sheet{max-width:none;border-radius:24px 24px 0 0;padding:20px 12px calc(16px + env(safe-area-inset-bottom));animation:sheetIn .28s cubic-bezier(.2,.7,.2,1) both;}
+  }
+  /* ===== TOPO NOVO: título fora, balão de busca que abre ao pesquisar ===== */
+  body{background:linear-gradient(180deg,var(--teal-pale) 0,var(--teal-pale) 150px,var(--cream) 480px) no-repeat,var(--cream);}
+  header{background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;transition:border-color .2s ease, background .2s ease;}
+  header.scrolled{background:rgba(247,245,240,.8);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);}
+  .header-nav{display:flex;align-items:center;gap:10px;}
+  .nav-como{
+    display:inline-flex;align-items:center;height:42px;padding:0 18px;
+    border-radius:100px;border:1px solid rgba(10,74,58,.28);
+    color:var(--teal-deep);font-size:13.5px;font-weight:600;text-decoration:none;white-space:nowrap;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .nav-como:hover{background:rgba(255,255,255,.55);border-color:rgba(10,74,58,.45);}
+  .cta-cadastro{height:42px;padding:0 18px 0 14px;}
+  .cta-curto{display:none;}
+
+  .hero-titulo{max-width:none;padding:44px 0 34px;}
+  .hero-titulo h1{color:var(--teal-deep);font-size:clamp(38px,5.2vw,58px);max-width:720px;}
+
+  .hero-panel.busca-balao{
+    background:linear-gradient(160deg,#13785F 0%,var(--teal-deep) 55%,#083B2E 100%);
+    border-radius:28px;padding:34px 40px 40px;margin-top:0;
+    box-shadow:0 30px 50px -30px rgba(10,74,58,.55);
+    transform-origin:50% 0;
+  }
+  .busca-balao.respira{animation:balaoRespira .62s cubic-bezier(.32,1.42,.55,1);}
+  @keyframes balaoRespira{35%{transform:scale(1.015,1.01);}}
+  .busca-balao .tag-search-wrap{padding:0;background:none;cursor:default;border-radius:0;}
+  .busca-balao .tag-search-wrap:hover,.busca-balao .tag-search-wrap:focus-within{background:none;}
+  .busca-balao .tag-search-label{
+    font-family:'Urbanist',system-ui,sans-serif;font-size:24px;font-weight:500;letter-spacing:-0.01em;
+    color:var(--cream);margin-bottom:16px;cursor:default;line-height:1.2;
+  }
+  .busca-balao .tag-search-inner{
+    background:#fff;border-radius:18px;height:70px;padding:0 10px 0 22px;gap:14px;
+    box-shadow:0 28px 50px -28px rgba(0,0,0,.45);cursor:text;
+  }
+  .busca-balao .tag-search-icon .icon{width:22px;height:22px;}
+  .busca-balao .tag-search-input{font-size:18px;}
+  .busca-balao .tag-search-clear{width:30px;height:30px;background:#EEEBE4;color:var(--ink-soft);}
+  .btn-conversar{
+    display:inline-flex;align-items:center;gap:8px;flex-shrink:0;
+    height:50px;padding:0 18px;border:0;border-radius:13px;
+    background:var(--teal-pale);color:var(--teal-deep);
+    font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;white-space:nowrap;
+    transition:background .15s ease;
+  }
+  .btn-conversar:hover{background:#D2EADF;}
+  .btn-conversar .chat-hero-icone::after{box-shadow:0 0 0 2px var(--teal-pale);}
+  .chip-esp{
+    display:inline-flex;align-items:center;gap:6px;flex-shrink:0;
+    background:var(--teal-pale);color:var(--teal-deep);
+    font-size:15px;font-weight:600;padding:6px 6px 6px 14px;border-radius:100px;white-space:nowrap;
+  }
+  .chip-esp[hidden]{display:none;}
+  .chip-esp button{
+    width:22px;height:22px;border-radius:50%;border:0;cursor:pointer;
+    background:#fff;color:var(--teal-deep);display:flex;align-items:center;justify-content:center;
+  }
+  .chip-esp .icon{width:12px;height:12px;}
+
+  /* Gaveta com Cidade e Especialidade: fechada ao abrir o site, abre na primeira busca */
+  /* Filtros (cidade / especialidade) fora do balão, logo acima dos resultados */
+  .busca-gaveta.filtros-barra{display:block;margin:28px 0 0;}
+  .filtros-barra ~ .result-count{padding-top:22px;}
+  .busca-gaveta.filtros-barra > div{overflow:visible;min-height:auto;}
+  .filtros-barra .filters-row{display:flex;gap:10px;flex-wrap:wrap;border:0;margin:0;padding:0;background:none;box-shadow:none;}
+  .filtros-barra .selector-wrap{flex:none;width:auto;min-width:0;}
+  .filtros-barra .selector-wrap::before{display:none;}
+  .filtros-barra .selector-btn{
+    height:42px;padding:0 12px 0 14px;gap:8px;border-radius:100px;
+    background:var(--card);border:1px solid var(--line);
+  }
+  .filtros-barra .selector-btn:hover,.filtros-barra .selector-wrap.open .selector-btn{border-color:var(--teal);}
+  .filtros-barra .selector-label{font-size:14px;font-weight:500;color:var(--ink);}
+  .filtros-barra .selector-label::before{display:none;}
+  .filtros-barra .selector-label.placeholder{font-size:0;}
+  .filtros-barra .selector-label.placeholder::before{display:inline;font-size:14px;font-weight:500;color:var(--ink);margin:0;}
+  .filtros-barra .selector-btn{width:auto;}
+  .filtros-barra .selector-wrap.perto .selector-btn,.filtros-barra .selector-wrap.ativo .selector-btn{background:var(--teal-pale);border-color:var(--teal);}
+  .filtros-barra .selector-wrap.perto .selector-label,.filtros-barra .selector-wrap.ativo .selector-label{color:var(--teal-deep);font-weight:600;}
+  .filtros-barra .selector-wrap.apagado{opacity:.5;}
+  .filtros-barra .selector-dropdown,.filtros-barra .selector-wrap:last-child .selector-dropdown{top:calc(100% + 8px);left:0;right:auto;min-width:240px;}
+  .busca-gaveta{display:grid;grid-template-rows:0fr;transition:grid-template-rows .62s cubic-bezier(.32,1.25,.55,1);}
+  .busca-gaveta > div{min-height:0;overflow:hidden;}
+  .busca-gaveta.pronta > div{overflow:visible;}
+  .busca-balao.aberta .busca-gaveta{grid-template-rows:1fr;}
+  .busca-balao .filters-row{
+    display:flex;gap:10px;flex:none;border:0;margin:0;padding-top:14px;
+    opacity:0;transform:translateY(-6px) scale(.97);transform-origin:0 0;
+    transition:opacity .38s ease-out .16s, transform .38s ease-out .16s;
+  }
+  .busca-balao.aberta .filters-row{opacity:1;transform:none;}
+  .busca-balao .selector-wrap{flex:none;width:230px;transition:opacity .2s ease;}
+  .busca-balao .selector-wrap::before{display:none;}
+  .busca-balao .selector-btn{
+    background:rgba(247,245,240,.07);border:1px solid rgba(247,245,240,.2);
+    border-radius:16px;padding:10px 14px 10px 16px;height:auto;
+  }
+  .busca-balao .selector-btn:hover,.busca-balao .selector-wrap.open .selector-btn{background:rgba(247,245,240,.13);}
+  .busca-balao .selector-icon{color:rgba(247,245,240,.8);}
+  .busca-balao .selector-label,.busca-balao .selector-label.placeholder{color:var(--cream);}
+  .busca-balao .selector-label::before{color:rgba(247,245,240,.65);font-weight:500;}
+  .busca-balao .selector-chevron{color:rgba(247,245,240,.7);}
+  .busca-balao .selector-wrap.perto .selector-btn,.busca-balao .selector-wrap.ativo .selector-btn{
+    background:rgba(247,245,240,.16);border-color:rgba(247,245,240,.7);
+  }
+  .busca-balao .selector-wrap.perto .selector-label,.busca-balao .selector-wrap.ativo .selector-label{color:#fff;font-weight:600;}
+  .busca-balao .selector-wrap.apagado{opacity:.42;}
+  .busca-balao .selector-dropdown{top:calc(100% + 10px);}
+  .selector-option-local{justify-content:flex-start !important;gap:10px !important;background:var(--teal-pale);color:var(--teal-deep);font-weight:600;}
+  .selector-option-local .icon{width:18px;height:18px;flex-shrink:0;}
+  .selector-option-local small{display:block;font-size:12.5px;font-weight:400;color:var(--ink-soft);}
+  .selector-option-local:hover{background:#D2EADF !important;}
+  .selector-sep{height:1px;background:#EEEBE4;margin:6px 4px;}
+
+  /* Aviso de localização acima dos resultados */
+  .aviso-local{
+    margin-top:22px;display:flex;align-items:center;gap:14px;
+    background:var(--card);border-radius:16px;padding:14px 12px 14px 16px;box-shadow:var(--float);
+  }
+  .aviso-local[hidden]{display:none;}
+  .aviso-local-icone{
+    width:38px;height:38px;flex-shrink:0;border-radius:11px;
+    background:var(--teal-pale);color:var(--teal-deep);display:flex;align-items:center;justify-content:center;
+  }
+  .aviso-local p{flex:1;font-size:14.5px;color:var(--ink);line-height:1.4;}
+  .aviso-local p small{display:block;font-size:13px;color:var(--ink-soft);}
+  .aviso-local-btn{
+    font:inherit;font-size:14px;font-weight:600;color:#fff;background:var(--teal-deep);
+    border:0;border-radius:100px;padding:10px 16px;cursor:pointer;white-space:nowrap;
+  }
+  .aviso-local-btn:hover{background:var(--teal);}
+  .aviso-local-fechar{
+    width:32px;height:32px;flex-shrink:0;border:0;border-radius:50%;background:none;
+    color:var(--ink-soft);display:flex;align-items:center;justify-content:center;cursor:pointer;
+  }
+  .aviso-local-fechar .icon{width:16px;height:16px;}
+  .aviso-local-fechar:hover{background:var(--cream);}
+
+  @media (max-width:560px){
+    body{background:linear-gradient(180deg,var(--teal-pale) 0,var(--teal-pale) 110px,var(--cream) 400px) no-repeat,var(--cream);}
+    .header-nav{gap:6px;}
+    .nav-como,.cta-cadastro{height:34px;padding:0 12px;font-size:12.5px;}
+    .cta-longo{display:none;}
+    .cta-curto{display:inline;}
+    .hero-titulo{padding:22px 2px 24px;}
+    .hero-titulo h1{font-size:36px;line-height:1.06;}
+    .hero-panel.busca-balao{padding:22px 16px 18px;border-radius:24px;}
+    .busca-balao .tag-search-label{font-size:20px;margin-bottom:12px;}
+    .busca-balao .tag-search-inner{height:58px;padding:0 7px 0 14px;gap:10px;border-radius:16px;}
+    .busca-balao .tag-search-icon .icon{width:20px;height:20px;}
+    .busca-balao .tag-search-input{font-size:16px;}
+    .btn-conversar{width:44px;height:44px;padding:0;justify-content:center;border-radius:12px;}
+    .conv-txt{display:none;}
+    .chip-esp{font-size:14px;padding:5px 5px 5px 11px;}
+    .busca-balao .filters-row{gap:8px;padding-top:10px;}
+    .busca-balao .selector-wrap{flex:1;width:auto;min-width:0;}
+    .busca-balao .selector-btn{height:46px;padding:0 10px 0 14px;border-radius:14px;}
+    .busca-balao .selector-label{font-size:14px;font-weight:600;}
+    .busca-balao .selector-label::before{display:none;}
+    .busca-balao .selector-label.placeholder{font-size:0;}
+    .busca-balao .selector-label.placeholder::before{display:inline;content:"Cidade";font-size:14px;font-weight:600;color:var(--cream);margin:0;}
+    .busca-balao #selectorLabel.placeholder::before{content:"Especialidade";}
+    .aviso-local{flex-wrap:wrap;position:relative;padding:14px;}
+    .aviso-local p{flex:1 1 calc(100% - 90px);}
+    .aviso-local-btn{width:100%;order:3;}
+    .aviso-local-fechar{position:absolute;top:8px;right:8px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms !important;animation-delay:0ms !important;transition-duration:.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <div class="header-row">
+      <div class="logo">
+        <div class="logo-mark">sua saúde<span>.</span>digital</div>
+      </div>
+      <div class="busca-mini-faixa" id="buscaMiniFaixa">
+        <div class="busca-mini" onclick="if(!event.target.closest('button')) document.getElementById('buscaMiniInput').focus()">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>
+          <input type="text" id="buscaMiniInput" placeholder="Qual profissional você procura?" autocomplete="off" aria-label="Qual profissional você procura?" enterkeyhint="search" tabindex="-1">
+          <button type="button" class="busca-mini-chat" id="buscaMiniChat" aria-label="Contar o que estou sentindo no chat" tabindex="-1"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5 6 15.6A8 8 0 1 1 9 18.7z"/></svg></button>
+        </div>
+      </div>
+      <nav class="header-nav" aria-label="Principal">
+        <a href="como-funciona.html" class="nav-como">Como funciona</a>
+        <a href="cadastro.html" class="cta-cadastro"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span class="cta-longo">Cadastrar meu atendimento</span><span class="cta-curto">Cadastrar</span></a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero hero-titulo">
+    <h1>Encontre o profissional de saúde <em>certo</em>, perto de você</h1>
+  </section>
+
+  <div class="hero-panel busca-balao" id="buscaBalao">
+    <div class="tag-search-wrap">
+      <label class="tag-search-label" for="tagSearchInput">Qual profissional você procura?</label>
+      <div class="tag-search-inner" onclick="if(!event.target.closest('button')) document.getElementById('tagSearchInput').focus()">
+        <span class="tag-search-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></span>
+        <span class="chip-esp" id="chipEsp" hidden><span id="chipEspNome"></span><button type="button" id="chipEspLimpar" aria-label="Tirar o filtro de especialidade"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></span>
+        <input type="text" id="tagSearchInput" class="tag-search-input" placeholder="Ex: dentista, nutricionista, psicólogo..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugestoesBusca">
+        <span class="tag-search-clear" id="tagSearchClear" style="display:none;" role="button" aria-label="Limpar busca"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></span>
+        <button type="button" class="btn-conversar" id="btnConversar" aria-label="Contar o que estou sentindo no chat"><span class="chat-hero-icone"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5 6 15.6A8 8 0 1 1 9 18.7z"/></svg></span><span class="conv-txt">Contar o que sinto</span></button>
+      </div>
+      <div class="sugestoes" id="sugestoesBusca" role="listbox" aria-label="Sugestões de busca"></div>
+    </div>
+  </div>
+
+  <div class="aviso-local" id="avisoLocal" hidden aria-live="polite"></div>
+
+  <div class="orientacao" id="orientacao" hidden aria-live="polite"></div>
+
+  <div class="busca-gaveta filtros-barra pronta" id="buscaGaveta">
+    <div>
+      <div class="filters-row">
+        <div class="selector-wrap" id="selectorCidadeWrap">
+          <div class="selector-btn" id="selectorCidadeBtn" role="button" tabindex="0" aria-haspopup="listbox">
+            <span class="selector-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+            <span class="selector-label placeholder" id="selectorCidadeLabel">Todas</span>
+            <span class="selector-chevron"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+          </div>
+          <div class="selector-dropdown" id="selectorCidadeDropdown"></div>
+        </div>
+        <div class="selector-wrap" id="selectorWrap">
+          <div class="selector-btn" id="selectorBtn" role="button" tabindex="0" aria-haspopup="listbox">
+            <span class="selector-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v6a4 4 0 0 0 8 0V3"/><path d="M10 13v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="11" r="2"/></svg></span>
+            <span class="selector-label placeholder" id="selectorLabel">Todas</span>
+            <span class="selector-chevron"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+          </div>
+          <div class="selector-dropdown" id="selectorDropdown"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-count" id="resultCount"></div>
+
+  <section class="grid" id="grid"></section>
+</div>
+
+<footer>sua saúde.digital — um jeito mais simples de encontrar quem cuida de você.</footer>
+
+<button type="button" class="chat-fab" id="chatFab" aria-label="Conversar sobre o que você está sentindo"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5 6 15.6A8 8 0 1 1 9 18.7z"/></svg><span>Contar o que sinto</span></button>
+
+<section class="chat" id="chat" role="dialog" aria-label="Conversa sobre o que você está sentindo" aria-hidden="true">
+  <div class="chat-topo">
+    <div>
+      <div class="chat-titulo">Conte o que está sentindo</div>
+      <div class="chat-sub">Mostramos quem costuma atender. Não é diagnóstico.</div>
+    </div>
+    <div class="chat-topo-acoes">
+    <button type="button" class="chat-encerrar" id="chatEncerrar" hidden>Encerrar</button>
+    <button type="button" class="chat-fechar" id="chatFechar" aria-label="Fechar conversa"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="chat-msgs" id="chatMsgs" aria-live="polite"></div>
+  <div class="chat-form" id="chatForm">
+    <input type="text" id="chatInput" placeholder="Escreva aqui…" aria-label="Escreva o que está sentindo" maxlength="300" autocomplete="off" enterkeyhint="send">
+    <button type="button" class="chat-mic" id="chatMic" aria-label="Falar em vez de escrever" hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></button>
+    <button type="button" class="chat-enviar" id="chatEnviar" aria-label="Enviar"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12.5 6.5 18 12l-5.5 5.5"/></svg></button>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent" role="dialog" aria-modal="true"></div>
+</div>
+
+<div class="sheet-overlay" id="sheetOverlay">
+  <div class="sheet" id="sheetContent" role="dialog" aria-modal="true"></div>
+</div>
+
+<script>
+const profissionais = [
+  {nome:"Isabela Padovan Castilho", categoria:"Nutrição", cidade:"Bebedouro", lat:-20.9500, lon:-48.4800, foto: "fotos/camila-torres.jpg", tags:["nutrição comportamental","emagrecimento","hipertrofia"], desc:"Nutrição comportamental, sem dietas restritivas.", descCompleta:"Sou nutricionista com atuação em nutrição comportamental. Ajudo pessoas a reconstruírem a relação com a comida de forma leve, sem culpa e sem restrições extremas. Meu atendimento é voltado para quem já tentou várias dietas e busca um caminho mais equilibrado e sustentável. Trabalho com questões como compulsão alimentar, medo de engordar e ansiedade alimentar, sempre com escuta ativa e sem julgamentos.", crm:"CRN 82416", endereco:"R. Ascânio de Carvalho, 1325 — Centro, Bebedouro/SP, 14701-385", whats:"5517992341103"},
+  {nome:"Dr. Ricardo Alves", categoria:"Cardiologia", cidade:"Bebedouro", lat:-20.9500, lon:-48.4770, tags:["arritmia","hipertensão"], desc:"Atendimento humanizado, especialista em hipertensão e arritmias.", descCompleta:"Cardiologista dedicado ao diagnóstico e tratamento de arritmias e hipertensão arterial. Atendimento próximo e explicações claras sobre exames e condutas.", crm:"CRM-SP 234567", endereco:"Rua Nove, 850 — Centro, Bebedouro/SP", enderecos:[{cidade:"Bebedouro", endereco:"Rua Nove, 850 — Centro, Bebedouro/SP", lat:-20.9500, lon:-48.4770}, {cidade:"Ribeirão Preto", endereco:"Av. Independência, 1500 — Alto da Boa Vista, Ribeirão Preto/SP", lat:-21.1960, lon:-47.8090}], whats:"5511999990002", convenios:["Unimed","Bradesco Saúde","Cabesp"], atendimento:"presencial"},
+  {nome:"Dra. Fernanda Lima", categoria:"Nutrição", cidade:"Ribeirão Preto", lat:-21.1650, lon:-47.8350, tags:["nutrição esportiva","emagrecimento"], desc:"Nutrição clínica e esportiva, planos personalizados.", descCompleta:"Nutricionista especializada em nutrição esportiva e emagrecimento saudável. Planos alimentares individualizados, sem dietas restritivas ou modismos.", crm:"CRN-3 45678", endereco:"Av. Nove de Julho, 300 — Jardim Sumaré, Ribeirão Preto/SP", whats:"5511999990003", convenios:["Unimed"], atendimento:"ambos"},
+  {nome:"Dr. Bruno Castro", categoria:"Nutrição", cidade:"Bebedouro", lat:-20.9480, lon:-48.4800, tags:["reeducação alimentar"], desc:"Reeducação alimentar sem dietas restritivas.", descCompleta:"Foco em reeducação alimentar de longo prazo, trabalhando a relação da pessoa com a comida em vez de dietas temporárias.", crm:"CRN-3 56789", endereco:"Av. Presidente Vargas, 1500 — Centro, Bebedouro/SP", whats:"5511999990004", convenios:[], atendimento:"presencial"},
+  {nome:"Dra. Juliana Prado", categoria:"Psicologia", cidade:"Ribeirão Preto", lat:-21.1900, lon:-47.7950, tags:["ansiedade","terapia cognitivo-comportamental"], desc:"Terapia cognitivo-comportamental para ansiedade e estresse.", descCompleta:"Psicóloga clínica com abordagem cognitivo-comportamental, atendendo casos de ansiedade, estresse e questões do dia a dia. Sessões online ou presenciais.", crm:"CRP 06/78901", endereco:"Rua Alagoas, 400 — Higienópolis, Ribeirão Preto/SP", whats:"5511999990005", convenios:[], atendimento:"ambos"},
+  {nome:"Dr. Marcelo Ide", categoria:"Psicologia", cidade:"Bebedouro", lat:-20.9510, lon:-48.4810, tags:["terapia de casal","desenvolvimento pessoal"], desc:"Psicoterapia de casal e desenvolvimento pessoal.", descCompleta:"Atende casais e indivíduos em processos de autoconhecimento e desenvolvimento pessoal, com escuta ativa e sem julgamentos.", crm:"CRP 06/89012", endereco:"Rua Amazonas, 700 — Centro, Bebedouro/SP", whats:"5511999990006", convenios:["Unimed","SulAmérica"], atendimento:"presencial"},
+  {nome:"Dra. Patrícia Nunes", categoria:"Dermatologia", cidade:"Ribeirão Preto", lat:-21.1780, lon:-47.8090, tags:["botox","pele","prevenção câncer de pele"], desc:"Dermatologia clínica e estética, pele saudável em todas as idades.", descCompleta:"Dermatologista clínica e estética, com foco em saúde da pele, prevenção de câncer de pele e tratamentos estéticos seguros.", crm:"CRM-SP 345678", endereco:"Av. Presidente Vargas, 2000 — Centro, Ribeirão Preto/SP", whats:"5511999990007", convenios:["Unimed","Bradesco Saúde","SulAmérica","Amil"], atendimento:"presencial"},
+  {nome:"Dr. André Farias", categoria:"Ortopedia", cidade:"Ribeirão Preto", lat:-21.2050, lon:-47.8500, tags:["lesão esportiva","coluna"], desc:"Especialista em lesões esportivas e coluna.", descCompleta:"Ortopedista especializado em medicina esportiva e coluna vertebral, com experiência em reabilitação de atletas amadores e profissionais.", crm:"CRM-SP 456789", endereco:"Av. Braz Olaia Acosta, 2500 — Jardim América, Ribeirão Preto/SP", whats:"5511999990008", convenios:["Unimed","Cabesp","São Francisco Saúde"], atendimento:"presencial"},
+  {nome:"Dra. Beatriz Rocha", categoria:"Pediatria", cidade:"Bebedouro", lat:-20.9495, lon:-48.4785, tags:["primeira infância","acompanhamento infantil"], desc:"Acompanhamento infantil do nascimento à adolescência.", descCompleta:"Pediatra dedicada ao acompanhamento do desenvolvimento infantil desde o nascimento até a adolescência, com atenção especial à primeira infância.", crm:"CRM-SP 567890", endereco:"Rua Sete, 600 — Centro, Bebedouro/SP", whats:"5511999990009", convenios:["Unimed"], atendimento:"presencial"},
+  {nome:"Dra. Renata Souza", categoria:"Odontologia", cidade:"Ribeirão Preto", lat:-21.1770, lon:-47.8095, tags:["limpeza","alinhador invisível","clareamento dental"], desc:"Dentista com atendimento clínico e estético completo.", descCompleta:"Dentista com mais de 10 anos de experiência, oferecendo desde limpeza e prevenção até procedimentos estéticos como clareamento e alinhadores invisíveis.", crm:"CRO-SP 78901", endereco:"Av. Presidente Vargas, 900 — Centro, Ribeirão Preto/SP", whats:"5511999990010", convenios:["OdontoPrev","Amil Dental"], atendimento:"presencial"},
+];
+
+// Ícones (SVG em linha, herdam a cor do texto)
+const ICON = {
+  pin:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+  locate:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="7.5"/></svg>',
+  loading:'<svg class="icon icon-spin" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.2-8.6"/></svg>',
+  check:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+  chat:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5 6 15.6A8 8 0 1 1 9 18.7z"/></svg>',
+  external:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 16 16 8M9 8h7v7"/></svg>',
+  more:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3.5M7.5 8 12 3.5 16.5 8"/><path d="M8 11H6.5A2.5 2.5 0 0 0 4 13.5v5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5v-5a2.5 2.5 0 0 0-2.5-2.5H16"/></svg>',
+  map:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6z"/><path d="M9 4v14M15 6v14"/></svg>',
+  instagram:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg>',
+  share:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1"/></svg>',
+  link:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg>',
+  chevron:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>',
+  steth:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v6a4 4 0 0 0 8 0V3"/><path d="M10 13v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="11" r="2"/></svg>',
+  tag:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12.6V4.5a1 1 0 0 1 1-1h8.1a1 1 0 0 1 .7.3l7.4 7.4a1 1 0 0 1 0 1.4l-8.1 8.1a1 1 0 0 1-1.4 0l-7.4-7.4a1 1 0 0 1-.3-.7z"/><circle cx="8.5" cy="8.5" r="1.4"/></svg>',
+  escudo:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg>',
+  consultorio:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20.5V9.5L12 4l8 5.5v11"/><path d="M12 10.5v6M9 13.5h6"/></svg>',
+  video:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6.5" width="12.5" height="11" rx="2.5"/><path d="m15.5 10.5 5-3v9l-5-3"/></svg>',
+  close:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  pulse:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2.5-6 4 12 2.5-6H21"/></svg>',
+  alerta:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 2.8 19.5h18.4z"/><path d="M12 10v4.2M12 17.2v.1"/></svg>',
+  phone:'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h3.5l1.8 4.5-2.3 1.4a11 11 0 0 0 6.1 6.1l1.4-2.3L20 15.5V19a1.5 1.5 0 0 1-1.6 1.5A16.5 16.5 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4z"/></svg>',
+};
+
+// ---------- Convênios e formato de atendimento ----------
+// convenios: lista de planos aceitos; lista vazia = só particular; campo ausente = não informado
+// atendimento: "presencial" | "online" | "ambos"
+function textoConvenios(p, max){
+  if(!Array.isArray(p.convenios)) return '';
+  if(!p.convenios.length) return 'Particular';
+  const lista = p.convenios.slice(0, max);
+  const resto = p.convenios.length - lista.length;
+  return lista.join(', ') + (resto > 0 ? ` +${resto}` : '');
+}
+function textoAtendimento(p){
+  return {presencial:'Presencial', online:'Online', ambos:'Presencial e online'}[p.atendimento] || '';
+}
+function infoCard(p){
+  const conv = textoConvenios(p, 2);
+  const modo = textoAtendimento(p);
+  if(!conv && !modo) return '';
+  return `<div class="card-info">
+    ${conv ? `<span class="card-conv${p.convenios.length ? '' : ' card-conv-part'}">${ICON.escudo}<span>${conv}</span></span>` : ''}
+    ${modo ? `<span class="card-online">${p.atendimento === 'presencial' ? ICON.consultorio : ICON.video}${modo}</span>` : ''}
+  </div>`;
+}
+
+const categorias = [...new Set(profissionais.map(p => p.categoria))];
+// ---------- Mais de um endereço ----------
+// Quem atende em várias cidades usa: enderecos:[{cidade, endereco, lat, lon}, ...]
+// Quem atende em um lugar só continua com cidade/endereco/lat/lon soltos. Aqui os dois viram p.locais.
+profissionais.forEach(p => {
+  p.locais = Array.isArray(p.enderecos) && p.enderecos.length
+    ? p.enderecos
+    : [{ cidade: p.cidade, endereco: p.endereco, lat: p.lat, lon: p.lon }];
+  p.cidade = p.locais[0].cidade;
+  p.endereco = p.locais[0].endereco;
+});
+let localMaisPerto = {}; // índice do profissional → endereço mais perto de quem está buscando
+// Endereço que aparece primeiro: o da cidade filtrada, senão o mais perto, senão o principal
+function localPrincipal(p, idx = profissionais.indexOf(p)){
+  if(cidadeAtiva){ const l = p.locais.find(l => l.cidade === cidadeAtiva); if(l) return l; }
+  return localMaisPerto[idx] || p.locais[0];
+}
+function locaisOrdenados(p){
+  const prim = localPrincipal(p);
+  return [prim, ...p.locais.filter(l => l !== prim)];
+}
+function textoCidades(p, idx){
+  const extras = new Set(p.locais.map(l => l.cidade)).size - 1;
+  return localPrincipal(p, idx).cidade + (extras > 0 ? ` +${extras} ${extras > 1 ? 'cidades' : 'cidade'}` : '');
+}
+function listaCidades(p){
+  const c = [...new Set(p.locais.map(l => l.cidade))];
+  return c.length > 1 ? c.slice(0, -1).join(', ') + ' e ' + c[c.length - 1] : c[0];
+}
+function linkMaps(endereco){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(endereco); }
+
+const cidades = [...new Set(profissionais.flatMap(p => p.locais.map(l => l.cidade)))];
+
+// Coordenadas das cidades cadastradas, usadas para calcular distância até o visitante
+const coordenadasCidades = {
+  'Ribeirão Preto': { lat: -21.1767, lon: -47.8208 },
+  'Bebedouro': { lat: -20.9496, lon: -48.4789 },
+};
+
+// Fórmula de Haversine: calcula distância em km entre duas coordenadas
+function calcularDistanciaKm(lat1, lon1, lat2, lon2){
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat/2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+let localizacaoUsuario = null; // {lat, lon} quando detectado
+let cidadeUsuario = null; // nome da cidade onde a pessoa está (ex: "Olímpia"), descoberto pela localização
+let distanciasPorProfissional = {}; // {indice: km}
+let categoriaAtiva = null; // null = todas
+let categoriaDaBusca = null; // especialidade que a busca por texto encontrou (ex: "dentista" → Odontologia); só mostra no botão
+let cidadeAtiva = null; // null = todas
+let cidadePerto = false; // o botão de cidade mostra "Perto de você" (localização ativa)
+
+const gridEl = document.getElementById('grid');
+const countEl = document.getElementById('resultCount');
+
+function iniciais(nome){
+  return nome.replace(/^(Dra?\.\s?)/,'').split(' ').slice(0,2).map(p=>p[0]).join('').toUpperCase();
+}
+
+// Configura um seletor genérico: retorna funções pra renderizar e ligar eventos
+function setupSelector({wrapId, btnId, labelId, dropdownId, placeholder, todasLabel, opcoesFn, getValor, setValor, topoHtml, onTopo, aoEscolher}){
+  const wrap = document.getElementById(wrapId);
+  const btn = document.getElementById(btnId);
+  const label = document.getElementById(labelId);
+  const dropdown = document.getElementById(dropdownId);
+  let aberto = false;
+
+  function renderOptions(){
+    const valorAtual = getValor();
+    const opcoes = [{nome:todasLabel, valor:null}, ...opcoesFn().map(v => ({nome:v, valor:v}))];
+    dropdown.innerHTML = (topoHtml ? topoHtml() : '') + opcoes.map(o => `
+      <div class="selector-option ${valorAtual===o.valor ? 'active' : ''}" data-valor="${o.valor ?? ''}">
+        <span>${o.nome}</span>
+      </div>
+    `).join('');
+
+    dropdown.querySelectorAll('.selector-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        setValor(opt.dataset.valor || null);
+        aberto = false;
+        wrap.classList.remove('open');
+        const novoValor = getValor();
+        label.textContent = novoValor || placeholder;
+        label.classList.toggle('placeholder', !novoValor);
+        if(aoEscolher) aoEscolher(novoValor);
+        renderOptions();
+        render();
+      });
+    });
+    const topo = dropdown.querySelector('[data-topo]');
+    if(topo && onTopo) topo.addEventListener('click', () => {
+      aberto = false;
+      wrap.classList.remove('open');
+      onTopo();
+    });
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    aberto = !aberto;
+    wrap.classList.toggle('open', aberto);
+    btn.setAttribute('aria-expanded', aberto);
+  });
+  btn.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); btn.click(); }
+  });
+
+  document.addEventListener('click', (e) => {
+    if(!wrap.contains(e.target)){
+      aberto = false;
+      wrap.classList.remove('open');
+    }
+  });
+
+  renderOptions();
+  return { renderOptions };
+}
+
+const seletorCidade = setupSelector({
+  wrapId:'selectorCidadeWrap', btnId:'selectorCidadeBtn', labelId:'selectorCidadeLabel', dropdownId:'selectorCidadeDropdown',
+  placeholder:'Todas', todasLabel:'Todas as cidades',
+  opcoesFn:() => cidades,
+  // Com "Perto de você" ativo, nenhuma cidade fica marcada (nem "Todas as cidades")
+  getValor:() => cidadeAtiva || (cidadePerto && localizacaoUsuario ? '__perto__' : null),
+  setValor:(v) => cidadeAtiva = v,
+  // A localização fica escondida aqui dentro, como primeira opção do menu de cidade
+  topoHtml:() => `<div class="selector-option selector-option-local${cidadePerto && localizacaoUsuario && !cidadeAtiva ? ' active' : ''}" data-topo="1">${ICON.locate}<span>${localizacaoUsuario ? 'Perto de você' : 'Usar minha localização'}<small>${localizacaoUsuario ? 'Ordenado por distância' : 'Mostra quem está mais perto'}</small></span></div><div class="selector-sep"></div>`,
+  onTopo:() => { if(localizacaoUsuario){ cidadePerto = true; cidadeAtiva = null; atualizarRotuloCidade(); seletorCidade.renderOptions(); render(); } else pedirLocalizacao(); },
+  aoEscolher:() => { cidadePerto = false; },
+});
+
+const seletorEspecialidade = setupSelector({
+  wrapId:'selectorWrap', btnId:'selectorBtn', labelId:'selectorLabel', dropdownId:'selectorDropdown',
+  placeholder:'Todas', todasLabel:'Todas as especialidades',
+  opcoesFn:() => categorias,
+  getValor:() => categoriaAtiva || categoriaDaBusca,
+  setValor:(v) => { categoriaAtiva = v; categoriaDaBusca = null; },
+  // O botão mostra a especialidade da busca; escolher outra (ou "Todas") troca o filtro e limpa o texto
+  aoEscolher:(v) => {
+    if(v || buscaTag){
+      buscaTag = ''; filtroSugestao = null;
+      tagSearchInput.value = '';
+      tagSearchClear.style.display = 'none';
+      fecharSugestoes();
+    }
+  },
+});
+
+let buscaTag = '';
+
+// Remove acentos para comparação (ex: "hipertensão" e "hipertensao" ficam iguais na busca)
+function removerAcentos(texto){
+  return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+// Mede quantas edições (trocar/adicionar/remover letra) separam duas palavras —
+// usado para tolerar pequenos erros de digitação na busca (distância de Levenshtein)
+function distanciaEdicao(a, b){
+  const m = a.length, n = b.length;
+  const dp = Array.from({length: m + 1}, () => new Array(n + 1).fill(0));
+  for(let i = 0; i <= m; i++) dp[i][0] = i;
+  for(let j = 0; j <= n; j++) dp[0][j] = j;
+  for(let i = 1; i <= m; i++){
+    for(let j = 1; j <= n; j++){
+      if(a[i-1] === b[j-1]){
+        dp[i][j] = dp[i-1][j-1];
+      } else {
+        dp[i][j] = 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+      }
+    }
+  }
+  return dp[m][n];
+}
+
+// Verifica se o termo buscado "combina" com uma tag, tolerando acento e pequenos erros de digitação.
+// A tolerância de erro cresce com o tamanho da palavra (não faz sentido tolerar 2 erros numa palavra de 3 letras).
+function combinaComTolerancia(textoTag, termoBusca){
+  const tagNormalizada = removerAcentos(textoTag.toLowerCase());
+  const buscaNorm = removerAcentos(termoBusca.toLowerCase());
+
+  // Match direto (substring) — caso mais comum, cobre buscas parciais como "cardio"
+  if(tagNormalizada.includes(buscaNorm)) return true;
+
+  // Para termos de busca muito curtos (1-2 letras), não vale a pena tolerar erro —
+  // geraria falsos positivos demais
+  if(buscaNorm.length < 3) return false;
+
+  // Compara o termo buscado com cada palavra da tag, tolerando pequenos erros de digitação
+  const tolerancia = buscaNorm.length <= 5 ? 1 : 2;
+  const palavrasDaTag = tagNormalizada.split(/\s+/);
+  return palavrasDaTag.some(palavra => distanciaEdicao(palavra, buscaNorm) <= tolerancia);
+}
+
+// ---------- Busca também por especialidade e profissão ----------
+// Nome da profissão de cada especialidade (o que a pessoa costuma digitar).
+// Especialidades novas terminadas em "logia" já funcionam sozinhas (cardiologia → cardiologista);
+// as demais podem ser acrescentadas aqui.
+const PROFISSOES = {
+  'cardiologia':    { nome:'Cardiologista', extras:['cardio','coracao'] },
+  'dermatologia':   { nome:'Dermatologista', extras:['dermato','pele'] },
+  'nutricao':       { nome:'Nutricionista', extras:['nutri','dieta','alimentacao'] },
+  'odontologia':    { nome:'Dentista', extras:['odontologista','odonto','dente'] },
+  'ortopedia':      { nome:'Ortopedista', extras:['orto','ossos'] },
+  'pediatria':      { nome:'Pediatra', extras:['crianca','infantil'] },
+  'psicologia':     { nome:'Psicólogo(a)', extras:['psicologo','psicologa','psico','terapeuta'] },
+  'psiquiatria':    { nome:'Psiquiatra', extras:[] },
+  'fisioterapia':   { nome:'Fisioterapeuta', extras:['fisio'] },
+  'fonoaudiologia': { nome:'Fonoaudiólogo(a)', extras:['fonoaudiologo','fonoaudiologa','fono'] },
+  'ginecologia':    { nome:'Ginecologista', extras:['gineco'] },
+  'endocrinologia': { nome:'Endocrinologista', extras:['endocrino'] },
+  'oftalmologia':   { nome:'Oftalmologista', extras:['oculista'] },
+  'educacao fisica':{ nome:'Personal trainer', extras:['personal','educador fisico'] },
+  'clinica geral':  { nome:'Clínico geral', extras:['clinico','clinico geral','medico','medica'] },
+  'otorrinolaringologia':{ nome:'Otorrino', extras:['otorrino','otorrinolaringologista'] },
+  'geriatria':      { nome:'Geriatra', extras:['idoso'] },
+  'coloproctologia':{ nome:'Coloproctologista', extras:['proctologista','procto'] },
+  'angiologia':     { nome:'Angiologista', extras:['vascular'] },
+};
+
+function chaveEspecialidade(categoria){
+  return removerAcentos(categoria.toLowerCase()).trim();
+}
+function nomeProfissao(categoria){
+  const chave = chaveEspecialidade(categoria);
+  if(PROFISSOES[chave]) return PROFISSOES[chave].nome;
+  if(chave.endsWith('logia')) return categoria.slice(0, -1) + 'sta'; // Neurologia → Neurologista
+  return categoria;
+}
+// Todas as palavras que levam a uma especialidade
+function termosDaEspecialidade(categoria){
+  const chave = chaveEspecialidade(categoria);
+  const termos = [chave, removerAcentos(nomeProfissao(categoria).toLowerCase()).replace(/\(a\)/, '')];
+  if(chave.endsWith('logia')){
+    const raiz = chave.slice(0, -2);              // cardiolo
+    termos.push(raiz + 'gista', raiz + 'go', raiz + 'ga');
+  }
+  if(PROFISSOES[chave]) termos.push(...PROFISSOES[chave].extras);
+  return [...new Set(termos)];
+}
+function combinaComProfissional(p, termo){
+  const combinaPalavra = (w) =>
+    p.tags.some(t => combinaComTolerancia(t, w)) ||
+    termosDaEspecialidade(p.categoria).some(t => combinaComTolerancia(t, w));
+  if(combinaPalavra(termo)) return true;
+  // Frases como "nutricionista esportiva": cada palavra precisa combinar com a especialidade ou um serviço
+  const palavras = palavrasDaBusca(termo);
+  return palavras.length > 1 && palavras.every(combinaPalavra);
+}
+
+// Separa a busca em palavras, ignorando ligações curtas como "de", "do", "em"
+function palavrasDaBusca(termo){
+  return termo.toLowerCase().split(/[\s·,]+/).filter(w => w.length >= 3);
+}
+
+// ---------- Busca por queixa ("tô com dor de cabeça") ----------
+// Cada grupo junta as palavras que a pessoa usa no dia a dia e as especialidades que costumam atender.
+// A ordem das especialidades importa: a primeira é a porta de entrada mais comum.
+// Para acrescentar uma queixa, copie um grupo e troque as palavras. Acentos e maiúsculas não importam.
+const SINTOMAS = [
+  { rotulo:'dor de cabeça', palavras:['dor de cabeça','dor na cabeça','cabeça doendo','cabeça dói','cabeça latejando','enxaqueca','cefaleia'],
+    especialidades:['Clínica geral','Neurologia'] },
+  { rotulo:'tontura', palavras:['tontura','tonto','tonta','labirintite','vertigem','zonzo','zonza','mundo girando'],
+    especialidades:['Clínica geral','Otorrinolaringologia','Neurologia'] },
+  { rotulo:'formigamento', palavras:['formigamento','formigando','dormência','mão dormente','pé dormente'],
+    especialidades:['Clínica geral','Neurologia'] },
+  { rotulo:'esquecimento', palavras:['esquecimento','esquecendo','perda de memória','memória ruim','memória fraca'],
+    especialidades:['Neurologia','Geriatria','Psicologia'] },
+  { rotulo:'dor de barriga e estômago', palavras:['dor de barriga','barriga doendo','dor no estômago','estômago','azia','queimação','gastrite','refluxo','má digestão','estufado','estufada','gases','enjoo','enjoada','enjoado','náusea','vômito','vomitando','vomitei','vômitos','vomitar','ânsia de vômito','ânsia'],
+    especialidades:['Clínica geral','Gastroenterologia','Nutrição'] },
+  { rotulo:'intestino', palavras:['intestino preso','prisão de ventre','constipação','diarreia','intestino solto','cólica intestinal','intestino','caganeira','soltura','barriga solta'],
+    especialidades:['Clínica geral','Gastroenterologia','Nutrição'] },
+  { rotulo:'hemorroida', palavras:['hemorroida','hemorroidas','fissura anal','dor ao evacuar','sangue nas fezes'],
+    especialidades:['Coloproctologia','Gastroenterologia'] },
+  { rotulo:'emagrecimento', palavras:['emagrecer','emagrecimento','perder peso','obesidade','sobrepeso','acima do peso','reeducação alimentar','dieta'],
+    especialidades:['Nutrição','Endocrinologia','Educação física'] },
+  { rotulo:'ganho de massa', palavras:['ganhar massa','hipertrofia','ganhar peso','massa muscular','definição muscular'],
+    especialidades:['Nutrição','Educação física'] },
+  { rotulo:'alimentação', palavras:['alimentação','comer melhor','comer saudável','alimentação saudável','intolerância à lactose','lactose','glúten','vegetariano','vegetariana','compulsão alimentar'],
+    especialidades:['Nutrição','Psicologia'] },
+  { rotulo:'diabetes', palavras:['diabetes','diabético','diabética','glicose alta','açúcar no sangue','glicemia','pré-diabetes','resistência à insulina'],
+    especialidades:['Endocrinologia','Clínica geral','Nutrição'] },
+  { rotulo:'tireoide e hormônios', palavras:['tireoide','hipotireoidismo','hipertireoidismo','hormônio','hormônios','hormonal'],
+    especialidades:['Endocrinologia'] },
+  { rotulo:'colesterol', palavras:['colesterol','triglicerídeos','gordura no sangue','gordura no fígado','esteatose'],
+    especialidades:['Clínica geral','Cardiologia','Nutrição'] },
+  { rotulo:'pressão', palavras:['pressão alta','hipertensão','pressão subindo','pressão baixa','pressão desregulada'],
+    especialidades:['Cardiologia','Clínica geral'] },
+  { rotulo:'coração acelerado', palavras:['palpitação','palpitações','coração acelerado','coração disparado','arritmia','batedeira'],
+    especialidades:['Cardiologia','Clínica geral'] },
+  { rotulo:'varizes e circulação', palavras:['varizes','vasinhos','perna inchada','pernas inchadas','inchaço nas pernas','pé inchado','má circulação','circulação'],
+    especialidades:['Angiologia','Cardiologia'] },
+  { rotulo:'ansiedade', palavras:['ansiedade','ansioso','ansiosa','crise de ansiedade','pânico','síndrome do pânico','nervoso','nervosa','estresse','estressado','estressada','burnout','esgotamento'],
+    especialidades:['Psicologia','Psiquiatria'] },
+  { rotulo:'tristeza', palavras:['tristeza','triste','depressão','deprimido','deprimida','desânimo','desanimado','desanimada','sem vontade','choro','chorando muito','solidão','sozinho','sozinha'],
+    especialidades:['Psicologia','Psiquiatria'] },
+  { rotulo:'sono', palavras:['insônia','não consigo dormir','dormir mal','durmo mal','sono ruim','acordo cansado','acordo cansada','sono'],
+    especialidades:['Psicologia','Psiquiatria','Clínica geral'] },
+  { rotulo:'ronco', palavras:['ronco','ronca','roncar','apneia','apneia do sono'],
+    especialidades:['Otorrinolaringologia','Pneumologia'] },
+  { rotulo:'relacionamentos e luto', palavras:['relacionamento','casamento','terapia de casal','separação','divórcio','luto','perdi alguém','briga em casa','autoestima'],
+    especialidades:['Psicologia'] },
+  { rotulo:'atenção e foco', palavras:['falta de atenção','falta de foco','concentração','tdah','hiperatividade','desatento','desatenta'],
+    especialidades:['Psiquiatria','Psicologia','Neurologia'] },
+  { rotulo:'dependência', palavras:['vício','viciado','viciada','dependência','dependente químico','parar de beber','alcoolismo','parar de fumar','tabagismo','drogas'],
+    especialidades:['Psiquiatria','Psicologia'] },
+  { rotulo:'dor nas costas', palavras:['dor nas costas','costas doendo','dor na coluna','coluna','lombar','lombalgia','hérnia de disco','hérnia','ciático','ciática','torcicolo','dor no pescoço','pescoço travado','travei as costas','travou as costas','costas travada','costas travadas','dor na lombar'],
+    especialidades:['Fisioterapia','Ortopedia'] },
+  { rotulo:'dor nas articulações', palavras:['dor no joelho','joelho','dor no ombro','ombro','tornozelo','punho','quadril','cotovelo','tendinite','bursite','articulação','menisco','ligamento','dor no pé','sola do pé','pé doendo','pé inchado','calcanhar','fascite','esporão','dor na mão','mão doendo','dor no braço','dor na perna','perna doendo','dor no dedo','joanete'],
+    especialidades:['Ortopedia','Fisioterapia','Reumatologia'] },
+  { rotulo:'lesão ou torção', palavras:['torci','torção','entorse','lesão','fratura','quebrei','distensão','contusão','lesão esportiva','machuquei','me machuquei','caí','levei uma queda','queda','pancada','batida','bati a cabeça','câimbra','cãibra','dor muscular','músculo','estiramento','luxação','desloquei','joguei bola','jogando bola','futebol'],
+    especialidades:['Ortopedia','Fisioterapia'] },
+  { rotulo:'reumatismo e dor no corpo', palavras:['artrite','artrose','reumatismo','dor nas juntas','juntas inchadas','fibromialgia','gota','ácido úrico','dor no corpo todo','dor no corpo'],
+    especialidades:['Reumatologia','Ortopedia','Fisioterapia'] },
+  { rotulo:'postura e reabilitação', palavras:['postura','má postura','rpg','pilates','reabilitação','recuperação de cirurgia','pós-operatório'],
+    especialidades:['Fisioterapia','Educação física'] },
+  { rotulo:'atividade física', palavras:['sedentário','sedentária','começar a treinar','treinar','academia','condicionamento','exercício','exercícios','correr','corrida'],
+    especialidades:['Educação física','Fisioterapia'] },
+  { rotulo:'acne', palavras:['espinha','espinhas','acne','cravo','cravos','pele oleosa'],
+    especialidades:['Dermatologia'] },
+  { rotulo:'pele', palavras:['pele','problema de pele','problema na pele','mancha na pele','manchas na pele','pinta','pintas','sinal na pele','coceira','coçando','dermatite','psoríase','micose','pele seca','vermelhidão','melasma','verruga'],
+    especialidades:['Dermatologia'] },
+  { rotulo:'cabelo e unhas', palavras:['queda de cabelo','cabelo caindo','calvície','careca','caspa','unha','unhas','micose de unha','unha encravada'],
+    especialidades:['Dermatologia'] },
+  { rotulo:'estética', palavras:['botox','rugas','ruga','preenchimento','estética','rejuvenescimento','flacidez'],
+    especialidades:['Dermatologia'] },
+  { rotulo:'dentes e boca', palavras:['dor de dente','dente doendo','dente','dentes','cárie','gengiva','siso','canal','aparelho nos dentes','aparelho','dente torto','clareamento','mau hálito','prótese dentária','bruxismo','ranger os dentes'],
+    especialidades:['Odontologia'] },
+  { rotulo:'visão', palavras:['visão embaçada','vista embaçada','enxergar mal','enxergo mal','enxergando mal','não enxergo','vista cansada','óculos','olho','olhos','miopia','grau','olho vermelho','conjuntivite','catarata','glaucoma','vista'],
+    especialidades:['Oftalmologia'] },
+  { rotulo:'ouvido', palavras:['dor de ouvido','ouvido','ouvidos','surdez','escutar mal','escuto mal','ouvir mal','ouço mal','zumbido','cera no ouvido'],
+    especialidades:['Otorrinolaringologia','Fonoaudiologia'] },
+  { rotulo:'garganta e nariz', palavras:['dor de garganta','garganta','amigdalite','sinusite','rinite','nariz entupido','nariz escorrendo','desvio de septo','adenoide'],
+    especialidades:['Clínica geral','Otorrinolaringologia'] },
+  { rotulo:'gripe e febre', palavras:['gripe','gripado','gripada','resfriado','resfriada','febre','mal-estar','indisposição','virose','covid','dengue','corpo mole'],
+    especialidades:['Clínica geral'] },
+  { rotulo:'tosse e respiração', palavras:['tosse','tossindo','tosse seca','tosse que não passa','catarro','asma','bronquite','chiado no peito','pneumonia','respiração'],
+    especialidades:['Pneumologia','Clínica geral'] },
+  { rotulo:'alergia', palavras:['alergia','alérgico','alérgica','espirro','espirrando','urticária','alergia alimentar'],
+    especialidades:['Alergologia','Dermatologia','Otorrinolaringologia'] },
+  { rotulo:'cansaço', palavras:['cansaço','cansado','cansada','fraqueza','sem energia','anemia','esgotado','esgotada','sem fome','falta de apetite','sem apetite'],
+    especialidades:['Clínica geral','Nutrição'] },
+  { rotulo:'exames de rotina', palavras:['check-up','checkup','exames de rotina','exame de rotina','exame de sangue','consulta de rotina','atestado'],
+    especialidades:['Clínica geral'] },
+  { rotulo:'fala e voz', palavras:['gagueira','gaguejar','gagueja','rouquidão','voz rouca','perdi a voz','dificuldade para falar','atraso na fala','troca letras','troca de letras','dificuldade para engolir','rouco','rouca','rouquidão','perdi a voz'],
+    especialidades:['Fonoaudiologia','Otorrinolaringologia'] },
+  { rotulo:'menstruação e saúde da mulher', palavras:['menstruação','menstruação atrasada','cólica menstrual','cólica','corrimento','tpm','ovário','ovário policístico','endometriose','mioma','preventivo','papanicolau','anticoncepcional','ginecológico','candidíase','corrimento vaginal','vagina','vaginal'],
+    especialidades:['Ginecologia'] },
+  { rotulo:'gravidez', palavras:['gravidez','grávida','gestante','gestação','pré-natal','engravidar','tentando engravidar','fertilidade','amamentação'],
+    especialidades:['Ginecologia','Nutrição'] },
+  { rotulo:'menopausa', palavras:['menopausa','climatério','calorão','fogacho'],
+    especialidades:['Ginecologia','Endocrinologia'] },
+  { rotulo:'mamas', palavras:['mama','mamas','seio','seios','caroço no seio','nódulo na mama','mamografia'],
+    especialidades:['Mastologia','Ginecologia'] },
+  { rotulo:'urina e rins', palavras:['xixi','urina','ardência ao urinar','ardor ao urinar','dor para urinar','infecção urinária','cistite','pedra no rim','cálculo renal','rim','rins','próstata','bexiga'],
+    especialidades:['Urologia','Clínica geral'] },
+  { rotulo:'saúde do homem', palavras:['impotência','ereção','disfunção erétil','ejaculação precoce','vasectomia','saúde do homem'],
+    especialidades:['Urologia','Psicologia'] },
+  { rotulo:'criança', palavras:['criança','filho','filha','meu filho','minha filha','bebê','bebê com cólica','recém-nascido','vacina','vacinação','puericultura','infantil'],
+    especialidades:['Pediatria'] },
+  { rotulo:'desenvolvimento infantil', palavras:['autismo','autista','tea','atraso no desenvolvimento','dificuldade na escola','dificuldade de aprendizagem','aprendizagem','dislexia'],
+    especialidades:['Pediatria','Psicologia','Fonoaudiologia','Neurologia'] },
+  { rotulo:'idoso', palavras:['idoso','idosa','terceira idade','meu avô','minha avó','meu pai idoso','minha mãe idosa'],
+    especialidades:['Geriatria','Clínica geral'] },
+];
+
+// Sinais de emergência: aqui o site não indica profissional do diretório, orienta a buscar ajuda imediata.
+const EMERGENCIAS = [
+  { tipo:'fisica', palavras:['dor no peito','aperto no peito','peito apertado','pressão no peito','falta de ar','não consigo respirar','sem conseguir respirar','sem ar',
+    'desmaio','desmaiei','desmaiou','desmaiando','convulsão','convulsionando','sangramento forte','muito sangue','sangrando muito','sangrando sem parar',
+    'boca torta','rosto torto','fala enrolada','lado do corpo dormente','metade do corpo dormente','perdeu a consciência','inconsciente',
+    'envenenamento','envenenado','intoxicação','overdose','queimadura grave','pior dor de cabeça da vida','dor no braço esquerdo','braço esquerdo dormente','braço esquerdo formigando','formigamento no braço esquerdo'] },
+  { tipo:'emocional', palavras:['me matar','suicídio','suicidar','tirar minha vida','tirar a própria vida','não quero mais viver','quero morrer','vontade de morrer',
+    'acabar com tudo','acabar com a minha vida','me machucar','me cortar','me ferir','me automutilar','automutilação'] },
+];
+
+// Frase curta de cada etapa do caminho. A primeira especialidade da queixa sempre é "Comece por aqui";
+// as seguintes usam a frase abaixo ou, se não tiver, "Se continuar ou voltar".
+// Um grupo pode ter frases próprias com dicas:{ 'Especialidade':'frase' }.
+const DICAS_ESPECIALIDADE = {
+  'clinica geral':'Avalia o quadro e encaminha, se precisar',
+  'nutricao':'Para ajustar a alimentação',
+  'educacao fisica':'Para começar a se exercitar com orientação',
+  'psicologia':'Para conversar e entender o que está acontecendo',
+  'psiquiatria':'Se estiver intenso ou atrapalhando o dia a dia',
+  'fisioterapia':'Para tratar a dor e recuperar o movimento',
+  'ortopedia':'Se a dor for forte ou não passar',
+  'reumatologia':'Se a dor nas articulações for frequente',
+  'fonoaudiologia':'Para fala, voz, audição e deglutição',
+  'endocrinologia':'Para avaliar hormônios e metabolismo',
+  'dermatologia':'Para avaliar pele, cabelo e unhas',
+  'geriatria':'Cuidado completo para quem tem mais idade',
+};
+function dicaDaEtapa(grupoDicas, esp, posicao){
+  if(grupoDicas && grupoDicas[esp]) return grupoDicas[esp];
+  if(posicao === 0) return 'Comece por aqui';
+  return DICAS_ESPECIALIDADE[chaveQueixa(esp)] || 'Se continuar ou voltar';
+}
+
+// Algumas especialidades aparecem com nomes diferentes no cadastro
+const EQUIVALENTES = {
+  'clinica medica':'clinica geral', 'clinico geral':'clinica geral', 'medicina de familia':'clinica geral', 'medicina da familia':'clinica geral',
+  'ginecologia e obstetricia':'ginecologia', 'obstetricia':'ginecologia', 'alergia e imunologia':'alergologia',
+  'proctologia':'coloproctologia', 'otorrino':'otorrinolaringologia', 'vascular':'angiologia', 'cirurgia vascular':'angiologia',
+};
+function chaveQueixa(categoria){
+  const k = chaveEspecialidade(categoria);
+  return EQUIVALENTES[k] || k;
+}
+
+// Palavras de ligação são ignoradas: "dor de cabeça" e "dor na cabeça" viram a mesma coisa
+const PALAVRAS_LIGACAO = new Set(['de','da','do','das','dos','na','no','nas','nos','em','a','o','as','os','e','um','uma','com','minha','meu','pra','para','to','ta','esta','estou']);
+// Palavras comuns que se parecem com queixas e nunca devem ser lidas como erro de digitação delas
+const NAO_CONFUNDIR = new Set(['gente','agente','casado','casada','pressa','vagina','vaginal','casas','olha','olhar','cortei']);
+function tokensQueixa(texto){
+  return removerAcentos(texto.toLowerCase()).replace(/[^a-z0-9]+/g, ' ').trim().split(/\s+/)
+    .filter(w => w && !PALAVRAS_LIGACAO.has(w));
+}
+// Palavras curtas precisam ser exatas; nas longas aceitamos erro de digitação
+// Devolve 1 para palavra exata, 0.7 para erro de digitação, 0 se não combina
+function palavraParecida(a, b){
+  if(a === b) return 1;
+  if(NAO_CONFUNDIR.has(a)) return 0;
+  const tol = b.length <= 5 ? 0 : b.length <= 8 ? 1 : 2;
+  return tol > 0 && Math.abs(a.length - b.length) <= tol && distanciaEdicao(a, b) <= tol ? 0.7 : 0;
+}
+// Procura a expressão em sequência no texto; devolve a pontuação do melhor trecho (0 se não achou)
+function contemExpressao(tokens, expr){
+  let melhor = 0;
+  if(!expr.length || expr.length > tokens.length) return 0;
+  for(let i = 0; i + expr.length <= tokens.length; i++){
+    let soma = 0;
+    for(let k = 0; k < expr.length; k++){
+      const n = palavraParecida(tokens[i + k], expr[k]);
+      if(!n){ soma = 0; break; }
+      soma += n;
+    }
+    if(soma > melhor) melhor = soma;
+  }
+  return melhor;
+}
+// Pré-processa as listas uma vez só
+const _prep = lista => lista.map(g => ({ ...g, _exprs: g.palavras.map(tokensQueixa).filter(e => e.length) }));
+const SINTOMAS_PREP = _prep(SINTOMAS);
+const EMERGENCIAS_PREP = _prep(EMERGENCIAS);
+
+// Lê o que a pessoa escreveu e devolve: emergência, queixa reconhecida ou nada
+function lerQueixa(texto){
+  const tokens = tokensQueixa(texto || '');
+  if(!tokens.length) return null;
+  for(const e of EMERGENCIAS_PREP){
+    if(e._exprs.some(expr => contemExpressao(tokens, expr))){
+      return e.tipo === 'emocional'
+        ? { emergencia:'emocional', especialidades:['Psicologia','Psiquiatria'] }
+        : { emergencia:'fisica', especialidades:[] };
+    }
+  }
+  const pontuados = SINTOMAS_PREP.map(g => ({
+    g, pontos: g._exprs.reduce((s, expr) => s + contemExpressao(tokens, expr), 0)
+  })).filter(x => x.pontos > 0).sort((a, b) => b.pontos - a.pontos);
+  if(!pontuados.length) return null;
+  // Se duas queixas empatam ("meu filho com dor de dente"), juntamos as duas
+  const grupos = pontuados.filter(x => x.pontos === pontuados[0].pontos).slice(0, 2).map(x => x.g);
+  const especialidades = [...new Set(grupos.flatMap(g => g.especialidades))];
+  const dicas = Object.assign({}, ...grupos.map(g => g.dicas || {}));
+  return { rotulo: grupos.map(g => g.rotulo).join(' e '), especialidades, dicas };
+}
+
+// Posição da especialidade na indicação (para ordenar os cards); quem não está na lista vai depois
+function prioridadeNaQueixa(queixa, categoria){
+  if(!queixa) return 0;
+  const i = queixa.especialidades.map(chaveQueixa).indexOf(chaveQueixa(categoria));
+  return i === -1 ? 99 : i;
+}
+function profissionaisDaEspecialidade(esp){
+  return profissionais.filter(p => chaveQueixa(p.categoria) === chaveQueixa(esp));
+}
+
+// Quando a pessoa escolhe uma sugestão, filtramos exatamente aquele recorte (especialidade + serviço)
+let filtroSugestao = null;
+
+function render(){
+  atualizarEstadoBusca();
+  const buscaNormalizada = buscaTag.trim().toLowerCase();
+  // Lê a busca como queixa ("dor nas costas") só quando a pessoa não escolheu uma sugestão exata
+  // Contar o que sente é coisa do chat: aqui a busca só reage a sinais de emergência (por segurança)
+  // e, se a pessoa descrever um sintoma, convida para o chat
+  const queixaLida = filtroSugestao ? null : lerQueixa(buscaTag);
+  const queixa = queixaLida && queixaLida.emergencia ? queixaLida : null;
+  const sintomaParaChat = queixaLida && !queixaLida.emergencia ? queixaLida : null;
+  const especialidadesQueixa = queixa ? queixa.especialidades.map(chaveQueixa) : [];
+  // Quando a localização está ativa, o filtro de cidade não restringe a lista —
+  // mostramos todos os profissionais ordenados por proximidade, mesmo os de outras cidades,
+  // para nunca deixar a busca vazia por causa de um filtro de cidade rígido.
+  let filtrados = profissionais.filter(p =>
+    (!categoriaAtiva || p.categoria === categoriaAtiva) &&
+    (!cidadeAtiva || p.locais.some(l => l.cidade === cidadeAtiva)) &&
+    (filtroSugestao
+      ? p.categoria === filtroSugestao.categoria && (!filtroSugestao.tag || p.tags.some(t => t.toLowerCase() === filtroSugestao.tag))
+      : (!buscaNormalizada || combinaComProfissional(p, buscaNormalizada) || especialidadesQueixa.includes(chaveQueixa(p.categoria))))
+  );
+  // O botão de especialidade acompanha a busca: se tudo que apareceu é de uma especialidade só, ela aparece lá
+  if(categoriaAtiva || !buscaNormalizada) categoriaDaBusca = null;
+  else if(filtroSugestao) categoriaDaBusca = filtroSugestao.categoria;
+  else {
+    const cats = [...new Set(filtrados.map(p => p.categoria))];
+    categoriaDaBusca = cats.length === 1 ? cats[0] : null;
+  }
+  atualizarRotuloEspecialidade();
+
+  // Em sinal de emergência física, não mostramos profissionais: a orientação é buscar atendimento já
+  if(queixa && queixa.emergencia === 'fisica') filtrados = [];
+
+  // Se a localização foi usada, ordena por proximidade (mais perto primeiro)
+  // Com queixa reconhecida, a especialidade mais indicada vem primeiro (e, dentro dela, quem está mais perto)
+  if(localizacaoUsuario || queixa){
+    filtrados = filtrados.slice().sort((a, b) => {
+      const prio = prioridadeNaQueixa(queixa, a.categoria) - prioridadeNaQueixa(queixa, b.categoria);
+      if(prio) return prio;
+      if(!localizacaoUsuario) return 0;
+      const distA = distanciasPorProfissional[profissionais.indexOf(a)] ?? Infinity;
+      const distB = distanciasPorProfissional[profissionais.indexOf(b)] ?? Infinity;
+      return distA - distB;
+    });
+  }
+
+  renderOrientacao(queixa);
+  if(!queixa && sintomaParaChat) renderConviteChat(sintomaParaChat);
+  // Sintoma sem nenhum profissional correspondente na busca: o convite para o chat já basta
+  if(sintomaParaChat && !filtrados.length){
+    countEl.innerHTML = '';
+    gridEl.innerHTML = '';
+    return;
+  }
+  renderAvisoLocal(!!buscaNormalizada || !!categoriaAtiva);
+  if(queixa && queixa.emergencia === 'fisica'){
+    countEl.innerHTML = '';
+    gridEl.innerHTML = '';
+    return;
+  }
+
+  if(queixa && filtrados.length){
+    const titulo = queixa.emergencia === 'emocional' ? 'Quem pode te acompanhar' : localizacaoUsuario ? 'Quem atende perto de você' : 'Quem pode te atender';
+    countEl.innerHTML = `<span class="secao-titulo">${titulo}</span><span class="secao-qtd">${filtrados.length} ${filtrados.length!==1?'profissionais':'profissional'}</span>`;
+  } else if(queixa){
+    countEl.innerHTML = '';
+  } else {
+    const semCadastroAqui = localizacaoUsuario && cidadePerto && !cidadeAtiva && cidadeUsuario && !cidadeTemCadastro(cidadeUsuario);
+    countEl.innerHTML = `<strong>${filtrados.length}</strong> ${filtrados.length!==1?'profissionais':'profissional'} encontrado${filtrados.length!==1?'s':''}`
+      + (semCadastroAqui && filtrados.length ? `<span class="aviso-cidade">Ainda não temos profissionais em ${cidadeUsuario}. Mostrando os mais próximos.</span>` : '');
+  }
+
+  gridEl.innerHTML = filtrados.length ? filtrados.map((p, i) => {
+    const idx = profissionais.indexOf(p);
+    const distancia = distanciasPorProfissional[idx];
+    return `
+    <div class="card" data-idx="${idx}" tabindex="0" role="button" aria-label="Ver perfil de ${p.nome}" style="animation-delay:${Math.min(i,8)*45}ms">
+      <div class="card-media">
+        ${p.foto ? `<img src="${p.foto}" alt="Foto de ${p.nome}" loading="lazy">` : `<span class="avatar-fallback">${iniciais(p.nome)}</span>`}
+        <span class="card-chip">${p.categoria}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${p.nome}</div>
+        <div class="card-category">${ICON.pin}<span>${textoCidades(p, idx)}</span>${distancia !== undefined ? `<span class="card-distance">${formatarDistancia(distancia)} de você</span>` : ''}</div>
+        ${infoCard(p)}
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-tags">${p.tags.map(t => `<span class="tag-pill">#${t}</span>`).join('')}</div>
+        <div class="card-actions">
+          <a class="btn-whats" href="https://wa.me/${p.whats}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${ICON.chat}Chamar no WhatsApp</a>
+          <button type="button" class="btn-link" data-acoes="${idx}" title="Mais opções" aria-label="Mais opções: Google, Instagram e compartilhar">${ICON.more}</button>
+        </div>
+      </div>
+    </div>
+  `;
+  }).join('') : `<div class="empty-state">${queixa
+      ? 'Ainda não temos essa especialidade cadastrada por aqui. Enquanto isso, um clínico geral ou a UBS do seu bairro podem te atender.'
+      : 'Nenhum profissional encontrado com esses filtros.'}</div>`;
+
+  gridEl.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => abrirModal(profissionais[card.dataset.idx]));
+    card.addEventListener('keydown', (e) => {
+      if(e.target !== card) return; // teclas nos botões internos não abrem o perfil
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); abrirModal(profissionais[card.dataset.idx]); }
+    });
+  });
+  ligarBotoesAcoes(gridEl);
+}
+
+// ---------- Orientação acima dos resultados quando a busca é uma queixa ----------
+const orientacaoEl = document.getElementById('orientacao');
+
+function renderOrientacao(queixa){
+  if(!queixa){ orientacaoEl.hidden = true; orientacaoEl.innerHTML = ''; return; }
+  orientacaoEl.hidden = false;
+
+  if(queixa.emergencia === 'fisica'){
+    orientacaoEl.className = 'orientacao orientacao-urgente';
+    orientacaoEl.innerHTML = `
+      <div class="orientacao-icone">${ICON.alerta}</div>
+      <div class="orientacao-corpo">
+        <h2 class="orientacao-titulo">Isso pode ser uma emergência</h2>
+        <p>Não espere por uma consulta. Ligue para o SAMU ou vá agora ao pronto-socorro mais próximo.</p>
+        <div class="orientacao-acoes">
+          <a class="orientacao-btn" href="tel:192">${ICON.phone}Ligar para o SAMU (192)</a>
+        </div>
+      </div>`;
+    return;
+  }
+
+  if(queixa.emergencia === 'emocional'){
+    orientacaoEl.className = 'orientacao orientacao-acolhe';
+    orientacaoEl.innerHTML = `
+      <div class="orientacao-icone">${ICON.pulse}</div>
+      <div class="orientacao-corpo">
+        <h2 class="orientacao-titulo">Você não precisa passar por isso sozinho</h2>
+        <p>O CVV conversa com você agora, 24 horas por dia, de graça. Se houver risco imediato, ligue para o SAMU (192).</p>
+        <div class="orientacao-acoes">
+          <a class="orientacao-btn" href="tel:188">${ICON.phone}Ligar para o CVV (188)</a>
+          <a class="orientacao-btn orientacao-btn-sec" href="https://cvv.org.br" target="_blank" rel="noopener">Conversar pelo chat</a>
+        </div>
+      </div>`;
+    return;
+  }
+
+  const etapas = queixa.especialidades.map((esp, i) => {
+    const n = profissionaisDaEspecialidade(esp).length;
+    const nome = nomeProfissao(esp).replace('(a)', '');
+    const dica = dicaDaEtapa(queixa.dicas, esp, i);
+    const conteudo = `
+      <span class="etapa-num">${i + 1}</span>
+      <span class="etapa-texto"><span class="etapa-nome">${nome}</span><span class="etapa-dica">${dica}</span></span>
+      <span class="etapa-qtd${n ? '' : ' etapa-qtd-vazia'}">${n ? `${n} ${n === 1 ? 'profissional' : 'profissionais'}` : 'Em breve'}</span>`;
+    return n
+      ? `<button type="button" class="etapa" data-esp="${esp}" aria-label="Ver ${nome}">${conteudo}</button>`
+      : `<div class="etapa etapa-vazia">${conteudo}</div>`;
+  }).join('');
+
+  orientacaoEl.className = 'orientacao orientacao-caminho';
+  orientacaoEl.innerHTML = `
+    <p class="caminho-contou">Você contou: <span>${escaparHtml(buscaTag.trim())}</span> <button type="button" class="caminho-trocar" id="caminhoTrocar">Trocar</button></p>
+    <div class="caminho-bloco">
+      <h2 class="orientacao-titulo">O caminho indicado</h2>
+      <div class="etapas">${etapas}</div>
+      <p class="orientacao-nota">É um ponto de partida, não um diagnóstico. Se piorar ou não passar, procure atendimento.</p>
+    </div>`;
+
+  document.getElementById('caminhoTrocar').addEventListener('click', () => {
+    tagSearchInput.focus();
+    tagSearchInput.select();
+  });
+  orientacaoEl.querySelectorAll('.etapa[data-esp]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = profissionaisDaEspecialidade(btn.dataset.esp)[0].categoria;
+      aplicarBusca(nomeProfissao(cat).replace('(a)', ''), { categoria:cat, tag:null });
+    });
+  });
+}
+
+function renderConviteChat(sintoma){
+  orientacaoEl.hidden = false;
+  orientacaoEl.className = 'orientacao orientacao-convite';
+  orientacaoEl.innerHTML = `
+    <div class="orientacao-icone">${ICON.chat}</div>
+    <div class="orientacao-corpo">
+      <h2 class="orientacao-titulo">Não sabe qual profissional procurar?</h2>
+      <p>Conte no chat o que você está sentindo e a gente mostra quem costuma atender ${escaparHtml(sintoma.rotulo)}.</p>
+      <div class="orientacao-acoes">
+        <button type="button" class="orientacao-btn" id="conviteChatBtn">${ICON.chat}Contar no chat</button>
+      </div>
+    </div>`;
+  document.getElementById('conviteChatBtn').addEventListener('click', () => abrirChatCom(buscaTag.trim()));
+}
+
+function escaparHtml(t){
+  return t.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+const modalOverlay = document.getElementById('modalOverlay');
+const modalContent = document.getElementById('modalContent');
+
+function abrirModal(p){
+  modalContent.innerHTML = `
+    <div class="modal-media">
+      ${p.foto ? `<img src="${p.foto}" alt="Foto de ${p.nome}">` : `<span class="avatar-fallback">${iniciais(p.nome)}</span>`}
+      <button class="modal-close" id="modalClose" aria-label="Fechar">${ICON.close}</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-category">${p.categoria}</div>
+      <div class="modal-name">${p.nome}</div>
+      <div class="modal-desc">${p.descCompleta}</div>
+      <div class="card-tags">${p.tags.map(t => `<span class="tag-pill">#${t}</span>`).join('')}</div>
+      <div class="modal-meta">
+        <div class="meta-row"><strong>Registro</strong>${p.crm}</div>
+        ${p.locais.length > 1
+          ? `<div class="meta-row"><strong>Endereços</strong><span class="meta-enderecos">${locaisOrdenados(p).map(l => `<span class="meta-endereco"><b>${l.cidade}</b><a class="link-maps" href="${linkMaps(l.endereco)}" target="_blank" rel="noopener" title="Abrir no Google Maps">${l.endereco}</a></span>`).join('')}</span></div>`
+          : `<div class="meta-row"><strong>Endereço</strong><a class="link-maps" href="${linkMaps(p.endereco)}" target="_blank" rel="noopener" title="Abrir no Google Maps">${p.endereco}</a></div>`}
+        ${textoAtendimento(p) ? `<div class="meta-row"><strong>Atendimento</strong>${textoAtendimento(p)}</div>` : ''}
+        ${Array.isArray(p.convenios) ? `<div class="meta-row"><strong>Convênios</strong>${p.convenios.length ? p.convenios.join(', ') : 'Particular'}</div>` : ''}
+      </div>
+      <div class="modal-actions">
+        <a class="btn-whats" href="https://wa.me/${p.whats}" target="_blank" rel="noopener">${ICON.chat}Chamar no WhatsApp</a>
+        <button type="button" class="btn-link" data-acoes="${profissionais.indexOf(p)}" title="Mais opções" aria-label="Mais opções: Google, Instagram e compartilhar">${ICON.more}</button>
+      </div>
+    </div>
+  `;
+  modalOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  const btnFechar = document.getElementById('modalClose');
+  btnFechar.addEventListener('click', fecharModal);
+  btnFechar.focus({preventScroll:true});
+  ligarBotoesAcoes(modalContent);
+  // O endereço da página passa a apontar para este profissional (é o link que se compartilha)
+  atualizarEndereco('#' + slugProfissional(p));
+}
+
+function fecharModal(){
+  modalOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+  if(location.hash) atualizarEndereco(location.pathname + location.search);
+}
+
+// ---------- Link próprio de cada profissional ----------
+// Ex: .../saude-digital.html#isabela-padovan-castilho  → abre o perfil direto
+function slugProfissional(p){
+  return removerAcentos(p.nome.toLowerCase()).replace(/^dra?\.\s*/, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+// Endereço público do site, usado quando a página não está rodando nele
+// (ex: pré-visualização do Claude ou arquivo aberto direto do computador)
+const SITE_URL = 'https://pauloponto.github.io/suasaudedigital/';
+
+// O link compartilhado sempre aponta para o site oficial. Antes, se a página fosse aberta
+// por outro endereço (Google Drive, pré-visualização), o link levava para lá.
+function estaNoSite(){
+  return location.hostname === new URL(SITE_URL).hostname;
+}
+function linkProfissional(p){
+  const base = estaNoSite() ? location.origin + location.pathname : SITE_URL;
+  return base + '#' + slugProfissional(p);
+}
+// Troca o endereço na barra sem recarregar; ambientes isolados bloqueiam isso, então só ignoramos
+function atualizarEndereco(url){
+  try{ history.replaceState(null, '', url); }catch(_){}
+}
+function abrirPorLink(){
+  const slug = decodeURIComponent(location.hash.slice(1));
+  if(!slug) return;
+  // link "index.html#conversar" (usado na página Como funciona) abre o chat direto
+  if(slug === 'conversar'){ abrirChat(); return; }
+  const p = profissionais.find(x => slugProfissional(x) === slug);
+  if(p) abrirModal(p);
+}
+window.addEventListener('hashchange', abrirPorLink);
+
+// ---------- Janela de opções: Google, Instagram e compartilhar ----------
+const sheetOverlay = document.getElementById('sheetOverlay');
+const sheetContent = document.getElementById('sheetContent');
+
+function ligarBotoesAcoes(raiz){
+  raiz.querySelectorAll('[data-acoes]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      abrirAcoes(profissionais[btn.dataset.acoes]);
+    });
+  });
+}
+
+function usuarioInstagram(valor){
+  // aceita "usuario", "@usuario" ou o link completo do perfil
+  return (valor || '').trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/^@/, '').replace(/[/?#].*$/, '');
+}
+
+function abrirAcoes(p){
+  const insta = usuarioInstagram(p.instagram);
+  const podeCompartilhar = typeof navigator.share === 'function';
+
+  sheetContent.innerHTML = `
+    <div class="sheet-head">
+      <div>
+        <div class="sheet-title">${p.nome}</div>
+        <div class="sheet-sub">${p.categoria} em ${listaCidades(p)}</div>
+      </div>
+      <button type="button" class="sheet-close" id="sheetClose" aria-label="Fechar">${ICON.close}</button>
+    </div>
+    ${locaisOrdenados(p).map(l => `
+    <a class="sheet-option" href="${linkMaps(l.endereco)}" target="_blank" rel="noopener">
+      <span class="sheet-option-icon">${ICON.map}</span>
+      <span class="sheet-option-text">
+        <span class="sheet-option-title">${p.locais.length > 1 ? `Google Maps · ${l.cidade}` : 'Ver no Google Maps'}</span>
+        <span class="sheet-option-desc">${l.endereco}</span>
+      </span>
+      <span class="sheet-option-arrow">${ICON.chevron}</span>
+    </a>`).join('')}
+    ${insta ? `
+    <a class="sheet-option" href="https://www.instagram.com/${insta}/" target="_blank" rel="noopener">
+      <span class="sheet-option-icon">${ICON.instagram}</span>
+      <span class="sheet-option-text">
+        <span class="sheet-option-title">Abrir o Instagram</span>
+        <span class="sheet-option-desc">@${insta}</span>
+      </span>
+      <span class="sheet-option-arrow">${ICON.chevron}</span>
+    </a>` : `
+    <div class="sheet-option" aria-disabled="true">
+      <span class="sheet-option-icon">${ICON.instagram}</span>
+      <span class="sheet-option-text">
+        <span class="sheet-option-title">Instagram</span>
+        <span class="sheet-option-desc">Este profissional não informou o Instagram</span>
+      </span>
+    </div>`}
+    <button type="button" class="sheet-option" id="sheetShare">
+      <span class="sheet-option-icon">${podeCompartilhar ? ICON.share : ICON.link}</span>
+      <span class="sheet-option-text">
+        <span class="sheet-option-title">${podeCompartilhar ? 'Compartilhar perfil' : 'Copiar link do perfil'}</span>
+        <span class="sheet-option-desc" id="sheetShareDesc">${podeCompartilhar ? 'WhatsApp, Instagram, mensagens...' : 'Cole onde quiser para indicar este profissional'}</span>
+      </span>
+    </button>
+  `;
+
+  document.getElementById('sheetClose').addEventListener('click', fecharAcoes);
+  document.getElementById('sheetShare').addEventListener('click', () => compartilharPerfil(p, podeCompartilhar));
+
+  sheetOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('sheetClose').focus({preventScroll:true});
+}
+
+function fecharAcoes(){
+  sheetOverlay.classList.remove('open');
+  if(!modalOverlay.classList.contains('open')) document.body.style.overflow = '';
+}
+
+async function compartilharPerfil(p, podeCompartilhar){
+  const url = linkProfissional(p);
+  if(podeCompartilhar){
+    try{
+      await navigator.share({
+        title: `${p.nome} — Sua Saúde`,
+        text: `${p.nome}, ${p.categoria} em ${listaCidades(p)}. Encontrei no Sua Saúde:`,
+        url,
+      });
+      return;
+    }catch(err){
+      if(err && err.name === 'AbortError') return; // a pessoa fechou a janela de compartilhar
+      // se o compartilhamento falhar por outro motivo, copia o link
+    }
+  }
+  const copiou = await copiarTexto(url);
+  const btn = document.getElementById('sheetShare');
+  const desc = document.getElementById('sheetShareDesc');
+  if(!btn || !desc) return;
+  btn.classList.toggle('done', copiou);
+  desc.textContent = copiou ? 'Link copiado! Agora é só colar.' : url;
+}
+
+async function copiarTexto(texto){
+  try{
+    await navigator.clipboard.writeText(texto);
+    return true;
+  }catch(_){
+    // alternativa para navegadores sem acesso à área de transferência
+    const campo = document.createElement('textarea');
+    campo.value = texto;
+    campo.style.position = 'fixed'; campo.style.opacity = '0';
+    document.body.appendChild(campo);
+    campo.select();
+    let ok = false;
+    try{ ok = document.execCommand('copy'); }catch(__){}
+    campo.remove();
+    return ok;
+  }
+}
+
+sheetOverlay.addEventListener('click', (e) => {
+  if(e.target === sheetOverlay) fecharAcoes();
+});
+
+// ---------- Celular: arrastar o card para baixo fecha (como nos apps) ----------
+// Só começa quando o card está no topo da rolagem e o dedo desce; senão, a rolagem normal continua.
+(function arrastarParaFechar(){
+  const modal = document.getElementById('modalContent');
+  let inicioY = 0, inicioT = 0, dy = 0, arrastando = false, podeArrastar = false;
+  const ehFolha = () => matchMedia('(max-width: 560px)').matches;
+  modal.addEventListener('touchstart', (e) => {
+    if(!ehFolha() || e.touches.length !== 1) return;
+    podeArrastar = modal.scrollTop <= 0;
+    arrastando = false; dy = 0;
+    inicioY = e.touches[0].clientY; inicioT = Date.now();
+  }, {passive:true});
+  modal.addEventListener('touchmove', (e) => {
+    if(!podeArrastar) return;
+    const d = e.touches[0].clientY - inicioY;
+    if(!arrastando){
+      if(d > 6 && modal.scrollTop <= 0){ arrastando = true; modal.style.animation = 'none'; modal.style.transition = 'none'; }
+      else if(d < -6){ podeArrastar = false; return; }
+      else return;
+    }
+    e.preventDefault();
+    dy = Math.max(0, d);
+    modal.style.transform = `translateY(${dy}px)`;
+    const resta = Math.max(0, 1 - dy / Math.max(240, modal.offsetHeight * 0.8)); // 1 = aberto, 0 = fechado
+    modalOverlay.style.backgroundColor = `rgba(10,30,24,${(.5 * resta).toFixed(3)})`;
+    const desfoque = `blur(${(6 * resta).toFixed(2)}px)`;
+    modalOverlay.style.webkitBackdropFilter = desfoque; modalOverlay.style.backdropFilter = desfoque;
+  }, {passive:false});
+  const soltar = () => {
+    if(!arrastando){ podeArrastar = false; return; }
+    arrastando = false; podeArrastar = false;
+    const velocidade = dy / Math.max(1, Date.now() - inicioT);
+    const fechar = dy > Math.min(140, modal.offsetHeight * 0.25) || velocidade > 0.6;
+    modal.style.transition = 'transform .22s cubic-bezier(.2,.7,.2,1)';
+    modalOverlay.style.transition = 'background-color .22s, backdrop-filter .22s, -webkit-backdrop-filter .22s';
+    if(fechar){
+      modal.style.transform = `translateY(${modal.offsetHeight + 40}px)`;
+      modalOverlay.style.backgroundColor = 'rgba(10,30,24,0)';
+      modalOverlay.style.webkitBackdropFilter = 'blur(0px)'; modalOverlay.style.backdropFilter = 'blur(0px)';
+      setTimeout(() => { fecharModal(); limpar(); }, 220);
+    } else {
+      modal.style.transform = 'translateY(0)';
+      modalOverlay.style.backgroundColor = '';
+      modalOverlay.style.webkitBackdropFilter = ''; modalOverlay.style.backdropFilter = '';
+      setTimeout(limpar, 230);
+    }
+  };
+  const limpar = () => {
+    modal.style.transform = ''; modal.style.transition = ''; modal.style.animation = '';
+    modalOverlay.style.backgroundColor = ''; modalOverlay.style.transition = '';
+    modalOverlay.style.webkitBackdropFilter = ''; modalOverlay.style.backdropFilter = '';
+  };
+  modal.addEventListener('touchend', soltar);
+  modal.addEventListener('touchcancel', soltar);
+})();
+
+modalOverlay.addEventListener('click', (e) => {
+  if(e.target === modalOverlay) fecharModal();
+});
+document.addEventListener('keydown', (e) => {
+  if(e.key !== 'Escape') return;
+  // fecha primeiro a janela de opções; se ela não estiver aberta, fecha o perfil
+  if(sheetOverlay.classList.contains('open')) fecharAcoes();
+  else if(modalOverlay.classList.contains('open')) fecharModal();
+  else if(chatAberto()) fecharChat();
+});
+
+const tagSearchInput = document.getElementById('tagSearchInput');
+const tagSearchClear = document.getElementById('tagSearchClear');
+
+const sugestoesEl = document.getElementById('sugestoesBusca');
+let sugestoesAtuais = [];
+let sugestaoAtiva = -1;
+
+function aplicarBusca(texto, filtro = null){
+  if(texto && texto.trim() && categoriaAtiva) limparEspecialidade();
+  buscaTag = texto;
+  filtroSugestao = filtro;
+  tagSearchInput.value = texto;
+  tagSearchClear.style.display = texto ? 'flex' : 'none';
+  render();
+}
+
+// Nome curto para combinar com o serviço: "nutrição comportamental" → "Nutricionista comportamental"
+function rotuloSugestao(categoria, tag){
+  const prof = nomeProfissao(categoria);
+  if(!tag) return { html:`<strong>${prof}</strong>`, texto:prof.replace('(a)', '') };
+  const palavras = tag.split(/\s+/);
+  const primeira = removerAcentos(palavras[0].toLowerCase());
+  const chave = chaveEspecialidade(categoria);
+  if(palavras.length > 1 && primeira.slice(0, 5) === chave.slice(0, 5)){
+    const resto = palavras.slice(1).join(' ');
+    return { html:`<strong>${prof}</strong> ${resto}`, texto:`${prof.replace('(a)', '')} ${resto}` };
+  }
+  return { html:`<strong>${prof}</strong> · ${tag}`, texto:`${prof.replace('(a)', '')} · ${tag}` };
+}
+
+// Todas as combinações possíveis com os profissionais que existem hoje:
+// a especialidade inteira + especialidade com cada serviço oferecido
+function todasAsCombinacoes(){
+  const lista = [];
+  categorias.forEach(cat => {
+    const daCategoria = profissionais.filter(p => p.categoria === cat);
+    lista.push({ categoria:cat, tag:null, total:daCategoria.length });
+    const contagem = {};
+    daCategoria.forEach(p => p.tags.forEach(t => {
+      const k = t.toLowerCase();
+      contagem[k] = (contagem[k] || 0) + 1;
+    }));
+    Object.entries(contagem).forEach(([tag, n]) => lista.push({ categoria:cat, tag, total:n }));
+  });
+  return lista;
+}
+
+const LIMITE_SUGESTOES = 7;
+
+function montarSugestoes(){
+  const termo = tagSearchInput.value.trim();
+  const palavras = palavrasDaBusca(termo);
+  if(termo.length < 2){ sugestoesAtuais = []; return; }
+
+  // Cada palavra digitada precisa combinar com a especialidade ou com o serviço da sugestão.
+  // A última palavra pode estar pela metade ("nutricionista esp"), então ela vale a partir de 2 letras.
+  const tokens = palavras.length ? palavras : [termo.toLowerCase()];
+  const ultima = termo.toLowerCase().split(/\s+/).pop();
+  if(ultima.length === 2 && !tokens.includes(ultima)) tokens.push(ultima);
+
+  const combinaCategoria = (cat, w) => termosDaEspecialidade(cat).some(t => combinaComTolerancia(t, w));
+  const combinaTag = (tag, w) => !!tag && combinaComTolerancia(tag, w);
+
+  sugestoesAtuais = todasAsCombinacoes()
+    .map(c => ({ ...c, ...rotuloSugestao(c.categoria, c.tag) }))
+    .map(c => {
+      let pelaCategoria = 0, peloServico = 0;
+      const ok = tokens.every(w => {
+        if(combinaCategoria(c.categoria, w)){ pelaCategoria++; return true; }
+        if(combinaTag(c.tag, w)){ peloServico++; return true; }
+        return false;
+      });
+      return ok ? { ...c, pelaCategoria, peloServico } : null;
+    })
+    .filter(Boolean)
+    // quem digitou a profissão vê primeiro a especialidade inteira; quem digitou o serviço vê o serviço
+    .sort((a, b) =>
+      (b.peloServico - a.peloServico) ||
+      ((a.tag ? 1 : 0) - (b.tag ? 1 : 0)) ||
+      ((a.texto.includes('·') ? 1 : 0) - (b.texto.includes('·') ? 1 : 0)) || // "Nutricionista esportiva" antes de "Nutricionista · hipertrofia"
+      (b.total - a.total) ||
+      (a.tag || '').localeCompare(b.tag || ''))
+    .slice(0, LIMITE_SUGESTOES);
+
+  // Se a busca é uma queixa, a primeira sugestão leva direto para quem atende
+  const queixa = lerQueixa(termo);
+  if(queixa){
+    const total = profissionais.filter(p => queixa.especialidades.map(chaveQueixa).includes(chaveQueixa(p.categoria))).length;
+    const item = queixa.emergencia === 'fisica'
+      ? { queixa:true, urgente:true, html:'<strong>Pode ser uma emergência</strong>', sub:'Veja o que fazer agora', total:null }
+      : queixa.emergencia === 'emocional'
+      ? { queixa:true, html:'<strong>Precisa de apoio agora?</strong>', sub:'Veja onde conversar com alguém', total:null }
+      : { queixa:true, chat:true, html:`<strong>Contar no chat: ${escaparHtml(termo)}</strong>`,
+          sub:'O chat mostra quem costuma atender', total:null };
+    sugestoesAtuais = [item, ...sugestoesAtuais].slice(0, LIMITE_SUGESTOES);
+  }
+
+
+  sugestaoAtiva = -1;
+  const plural = n => `${n} ${n === 1 ? 'profissional' : 'profissionais'}`;
+  sugestoesEl.innerHTML = sugestoesAtuais.map((sg, i) => `
+    <div class="sug-item" role="option" id="sug-${i}" data-i="${i}">
+      <span class="sug-icon${sg.urgente ? ' sug-icon-urgente' : ''}">${sg.urgente ? ICON.alerta : sg.chat ? ICON.chat : sg.queixa ? ICON.pulse : sg.tag ? ICON.tag : ICON.steth}</span>
+      <span class="sug-text"><span class="sug-titulo">${sg.html}</span>${sg.sub ? `<span class="sug-sub">${sg.sub}</span>` : ''}</span>
+      ${sg.total === null ? '' : `<span class="sug-count">${plural(sg.total)}</span>`}
+    </div>`).join('');
+
+  sugestoesEl.querySelectorAll('.sug-item').forEach(el => {
+    el.addEventListener('mousedown', (e) => e.preventDefault()); // mantém o foco no campo
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      escolherSugestao(Number(el.dataset.i));
+    });
+  });
+}
+
+function abrirSugestoes(){
+  montarSugestoes();
+  const temSugestoes = sugestoesAtuais.length > 0;
+  sugestoesEl.classList.toggle('open', temSugestoes);
+  tagSearchInput.setAttribute('aria-expanded', String(temSugestoes));
+}
+function fecharSugestoes(){
+  sugestoesEl.classList.remove('open');
+  tagSearchInput.setAttribute('aria-expanded', 'false');
+  tagSearchInput.removeAttribute('aria-activedescendant');
+  sugestaoAtiva = -1;
+}
+function escolherSugestao(i){
+  const sg = sugestoesAtuais[i];
+  if(!sg) return;
+  if(sg.chat){ fecharSugestoes(); abrirChatCom(tagSearchInput.value.trim()); return; }
+  if(sg.queixa){
+    // Emergência: fecha a lista e leva até o aviso
+    fecharSugestoes();
+    orientacaoEl.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start' });
+    return;
+  }
+  aplicarBusca(sg.texto, { categoria:sg.categoria, tag:sg.tag });
+  fecharSugestoes();
+}
+function destacarSugestao(i){
+  const itens = sugestoesEl.querySelectorAll('.sug-item');
+  if(!itens.length) return;
+  sugestaoAtiva = (i + itens.length) % itens.length;
+  itens.forEach((el, k) => el.classList.toggle('ativo', k === sugestaoAtiva));
+  itens[sugestaoAtiva].scrollIntoView({ block:'nearest' });
+  tagSearchInput.setAttribute('aria-activedescendant', itens[sugestaoAtiva].id);
+}
+
+// As sugestões só aparecem enquanto a pessoa digita (nada abre só de clicar no campo)
+// ---------- Celular: sugestões visíveis mesmo com o teclado aberto ----------
+// Ao tocar no campo, ele sobe para logo abaixo do cabeçalho; a lista ocupa só o espaço
+// entre o campo e o teclado (usa visualViewport, que desconta o teclado)
+const ehCelular = () => matchMedia('(max-width: 760px)').matches;
+function subirCampoBusca(){
+  if(!ehCelular()) return;
+  const topoCampo = tagSearchInput.closest('.tag-search-inner').getBoundingClientRect().top + scrollY;
+  const alvo = topoCampo - siteHeaderEl.offsetHeight - 10;
+  window.scrollTo({top: Math.max(alvo, 0), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+}
+function ajustarAlturaSugestoes(){
+  if(!ehCelular()){ sugestoesEl.style.maxHeight = ''; return; }
+  const vv = window.visualViewport;
+  const alturaVisivel = vv ? vv.height + vv.offsetTop : innerHeight;
+  const base = tagSearchInput.closest('.tag-search-inner').getBoundingClientRect().bottom + 14;
+  sugestoesEl.style.maxHeight = Math.max(alturaVisivel - base - 12, 160) + 'px';
+}
+tagSearchInput.addEventListener('focus', () => { subirCampoBusca(); setTimeout(ajustarAlturaSugestoes, 350); });
+tagSearchInput.addEventListener('input', ajustarAlturaSugestoes);
+if(window.visualViewport){
+  visualViewport.addEventListener('resize', ajustarAlturaSugestoes);
+  visualViewport.addEventListener('scroll', ajustarAlturaSugestoes);
+}
+window.addEventListener('scroll', () => { if(sugestoesEl.classList.contains('open')) ajustarAlturaSugestoes(); }, {passive:true});
+
+tagSearchInput.addEventListener('focus', () => { if(!filtroSugestao && tagSearchInput.value.trim().length >= 2) abrirSugestoes(); });
+tagSearchInput.addEventListener('input', () => {
+  aplicarBusca(tagSearchInput.value);   // digitar de novo desfaz o filtro exato da sugestão
+  abrirSugestoes();
+});
+tagSearchInput.addEventListener('keydown', (e) => {
+  const aberto = sugestoesEl.classList.contains('open');
+  if(e.key === 'ArrowDown'){ e.preventDefault(); if(!aberto) abrirSugestoes(); if(sugestoesEl.classList.contains('open')) destacarSugestao(sugestaoAtiva + 1); }
+  else if(e.key === 'ArrowUp' && aberto){ e.preventDefault(); destacarSugestao(sugestaoAtiva - 1); }
+  else if(e.key === 'Enter' && aberto){
+    e.preventDefault();
+    if(sugestaoAtiva >= 0) escolherSugestao(sugestaoAtiva); else fecharSugestoes();
+  }
+  else if(e.key === 'Escape' && aberto){ e.stopPropagation(); fecharSugestoes(); }
+  else if(e.key === 'Tab'){ fecharSugestoes(); }
+});
+document.addEventListener('click', (e) => {
+  if(!e.target.closest('.tag-search-wrap')) fecharSugestoes();
+});
+
+tagSearchClear.addEventListener('click', (e) => {
+  e.stopPropagation();
+  aplicarBusca('');
+  fecharSugestoes();
+  tagSearchInput.focus();
+});
+
+function formatarDistancia(km){
+  if(km < 1) return 'menos de 1 km';
+  return `${Math.round(km)} km`;
+}
+
+// ---------- Localização ----------
+// Ao abrir o site já pedimos a localização. Se a pessoa negar, o navegador não deixa pedir de novo:
+// nesse caso só explicamos como liberar (cadeado ao lado do endereço do site).
+let estadoLocal = navigator.geolocation ? 'desconhecido' : 'indisponivel'; // desconhecido | pedindo | ativo | negado | erro | indisponivel
+let avisoLocalDispensado = false; // a pessoa tocou em "Agora não"
+const avisoLocalEl = document.getElementById('avisoLocal');
+const ICON_CADEADO = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+
+function atualizarRotuloCidade(){
+  const label = document.getElementById('selectorCidadeLabel');
+  const wrap = document.getElementById('selectorCidadeWrap');
+  const perto = !!localizacaoUsuario && cidadePerto && !cidadeAtiva;
+  if(estadoLocal === 'pedindo' && !cidadeAtiva){ label.textContent = 'Localizando…'; label.classList.remove('placeholder'); }
+  else if(perto){ label.textContent = cidadeUsuario || 'Perto de você'; label.classList.remove('placeholder'); }
+  else { label.textContent = cidadeAtiva || 'Todas'; label.classList.toggle('placeholder', !cidadeAtiva); }
+  wrap.classList.toggle('perto', perto);
+}
+
+// Descobre o nome da cidade a partir das coordenadas (serviço gratuito, sem chave).
+// Se falhar, o botão continua mostrando "Perto de você".
+function descobrirCidade({lat, lon}){
+  fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=pt`)
+    .then(r => r.ok ? r.json() : null)
+    .then(d => {
+      const nome = d && (d.city || d.locality);
+      if(!nome) return;
+      cidadeUsuario = nome;
+      atualizarRotuloCidade();
+      render();
+    })
+    .catch(() => {});
+}
+function cidadeTemCadastro(nome){
+  const n = removerAcentos(String(nome).toLowerCase());
+  return cidades.some(c => removerAcentos(c.toLowerCase()) === n);
+}
+
+function pedirLocalizacao(){
+  return new Promise(resolve => {
+    if(!navigator.geolocation){ estadoLocal = 'indisponivel'; render(); resolve(false); return; }
+    estadoLocal = 'pedindo';
+    atualizarRotuloCidade();
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        localizacaoUsuario = { lat: position.coords.latitude, lon: position.coords.longitude };
+        // Distância exata até cada profissional (pelo endereço dele, não só pela cidade)
+        // Quem atende em várias cidades conta pelo endereço mais perto
+        distanciasPorProfissional = {};
+        localMaisPerto = {};
+        profissionais.forEach((p, idx) => {
+          p.locais.forEach(l => {
+            if(l.lat === undefined || l.lon === undefined) return;
+            const d = calcularDistanciaKm(localizacaoUsuario.lat, localizacaoUsuario.lon, l.lat, l.lon);
+            if(distanciasPorProfissional[idx] === undefined || d < distanciasPorProfissional[idx]){
+              distanciasPorProfissional[idx] = d;
+              localMaisPerto[idx] = l;
+            }
+          });
+        });
+        estadoLocal = 'ativo';
+        descobrirCidade(localizacaoUsuario);
+        cidadePerto = true;
+        cidadeAtiva = null;   // com localização, mostramos todas as cidades ordenadas por distância
+        seletorCidade.renderOptions();
+        atualizarRotuloCidade();
+        render();
+        resolve(true);
+      },
+      (erro) => {
+        estadoLocal = erro && erro.code === 1 ? 'negado' : 'erro';
+        atualizarRotuloCidade();
+        render();
+        resolve(false);
+      },
+      { enableHighAccuracy:false, timeout:15000, maximumAge:600000 }
+    );
+  });
+}
+
+// Aviso acima dos resultados: aparece quando a pessoa já está buscando e ainda não tem localização
+function renderAvisoLocal(buscando){
+  const mostrar = buscando && !localizacaoUsuario && !avisoLocalDispensado && ['desconhecido','negado','erro'].includes(estadoLocal);
+  avisoLocalEl.hidden = !mostrar;
+  if(!mostrar){ avisoLocalEl.innerHTML = ''; return; }
+  const negado = estadoLocal === 'negado';
+  avisoLocalEl.innerHTML = `
+    <span class="aviso-local-icone">${negado ? ICON_CADEADO : ICON.locate}</span>
+    <p>${negado ? 'Sua localização está bloqueada' : 'Quer ver quem está mais perto de você?'}
+      <small>${negado ? 'Para liberar, toque no cadeado ao lado do endereço do site e permita a localização.' : 'Ative a localização e a lista fica ordenada por distância.'}</small></p>
+    <button type="button" class="aviso-local-btn" id="avisoLocalBtn">${negado ? 'Já liberei' : 'Ativar localização'}</button>
+    <button type="button" class="aviso-local-fechar" id="avisoLocalFechar" aria-label="Agora não">${ICON.close}</button>`;
+  document.getElementById('avisoLocalBtn').addEventListener('click', () => pedirLocalizacao());
+  document.getElementById('avisoLocalFechar').addEventListener('click', () => { avisoLocalDispensado = true; renderAvisoLocal(false); });
+}
+
+// ---------- Estado do balão de busca ----------
+const buscaBalao = document.getElementById('buscaBalao');
+const buscaGaveta = document.getElementById('buscaGaveta');
+const chipEsp = document.getElementById('chipEsp');
+const PLACEHOLDER_BUSCA = 'Ex: dentista, nutricionista, psicólogo...';
+let gavetaAberta = false;
+
+function limparEspecialidade(){
+  categoriaAtiva = null;
+  const l = document.getElementById('selectorLabel');
+  l.textContent = 'Todas';
+  l.classList.add('placeholder');
+  seletorEspecialidade.renderOptions();
+}
+
+function atualizarRotuloEspecialidade(){
+  const valor = categoriaAtiva || categoriaDaBusca;
+  const l = document.getElementById('selectorLabel');
+  l.textContent = valor || 'Todas';
+  l.classList.toggle('placeholder', !valor);
+  document.getElementById('selectorWrap').classList.toggle('ativo', !!valor);
+  seletorEspecialidade.renderOptions();
+}
+
+function atualizarEstadoBusca(){
+  const temTexto = !!buscaTag.trim();
+  const mini = document.getElementById('buscaMiniInput');
+  if(mini && document.activeElement !== mini) mini.value = buscaTag;
+  if(mini) mini.placeholder = categoriaAtiva ? nomeProfissao(categoriaAtiva).replace('(a)', '') + ' · escreva para trocar' : 'Qual profissional você procura?';
+  if(categoriaAtiva){
+    chipEsp.hidden = false;
+    document.getElementById('chipEspNome').textContent = nomeProfissao(categoriaAtiva).replace('(a)', '');
+    tagSearchInput.placeholder = 'ou escreva outra coisa';
+  } else {
+    chipEsp.hidden = true;
+    tagSearchInput.placeholder = PLACEHOLDER_BUSCA;
+  }
+  document.getElementById('selectorWrap').classList.toggle('ativo', !!(categoriaAtiva || categoriaDaBusca));
+  document.getElementById('selectorCidadeWrap').classList.toggle('ativo', !!cidadeAtiva);
+  // O balão abre (efeito "ilha") na primeira busca e continua aberto depois
+  // filtros agora ficam numa barra própria, sempre visível (sem abrir/pular o balão)
+}
+
+function abrirGaveta(){
+  gavetaAberta = true;
+  const parado = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  buscaBalao.classList.add('aberta');
+  if(!parado){
+    buscaBalao.classList.add('respira');
+    setTimeout(() => buscaBalao.classList.remove('respira'), 700);
+  }
+  // Depois de aberta, a gaveta deixa os menus de cidade/especialidade saírem para fora dela
+  setTimeout(() => buscaGaveta.classList.add('pronta'), parado ? 0 : 650);
+}
+
+document.getElementById('chipEspLimpar').addEventListener('click', (e) => {
+  e.stopPropagation();
+  limparEspecialidade();
+  render();
+  tagSearchInput.focus();
+});
+
+// Ao abrir: se a localização já foi permitida antes, vem sem perguntar; se nunca foi, o navegador pergunta;
+// se foi negada, não insistimos (o aviso explica como liberar)
+(function iniciarLocalizacao(){
+  if(!navigator.geolocation) return;
+  if(navigator.permissions && navigator.permissions.query){
+    navigator.permissions.query({ name:'geolocation' }).then(st => {
+      if(st.state === 'denied'){ estadoLocal = 'negado'; render(); }
+      else pedirLocalizacao();
+      st.onchange = () => {
+        if(st.state === 'granted' && !localizacaoUsuario) pedirLocalizacao();
+        if(st.state === 'denied'){ estadoLocal = 'negado'; render(); }
+      };
+    }).catch(() => pedirLocalizacao());
+  } else {
+    pedirLocalizacao();
+  }
+})();
+
+// Cabeçalho ganha a linha inferior quando a página rola
+const siteHeader = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => siteHeader.classList.toggle('scrolled', window.scrollY > 8), {passive:true});
+
+// ---------- Conversa: a pessoa conta o que sente e o chat indica quem atende ----------
+// Usa a mesma tabela de queixas da busca. Nada da conversa é guardado: fechou a página, sumiu.
+const ATALHOS_CHAT = ['Dor de cabeça','Dor de barriga','Dor nas costas','Ansiedade','Dor de dente','Problema de pele','Não consigo dormir'];
+// Queixas em que perguntar "há quanto tempo" não faz sentido
+const SEM_PERGUNTA_TEMPO = new Set(['emagrecimento','ganho de massa','alimentação','diabetes','tireoide e hormônios','colesterol',
+  'relacionamentos e luto','atenção e foco','dependência','postura e reabilitação','atividade física','estética','exames de rotina',
+  'gravidez','menopausa','saúde do homem','criança','desenvolvimento infantil','idoso']);
+
+const chatEl = document.getElementById('chat');
+const chatMsgs = document.getElementById('chatMsgs');
+const chatInput = document.getElementById('chatInput');
+const chatFab = document.getElementById('chatFab');
+let chatIniciado = false;
+let chatEsperando = null; // queixa aguardando a resposta de "há quanto tempo"
+let chatPara = 'eu';          // 'eu' | 'crianca' | 'outro'
+let chatUltimoTexto = '';
+
+const semMovimento = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function abrirChat(){
+  chatEl.classList.add('open');
+  chatEl.setAttribute('aria-hidden', 'false');
+  chatFab.classList.add('escondido');
+  if(!chatIniciado){
+    chatIniciado = true;
+    saudar();
+  }
+  setTimeout(() => chatInput.focus(), 60);
+}
+// Abre o chat já com o texto que a pessoa escreveu na busca, sem a saudação inicial
+function abrirChatCom(texto){
+  const pularSaudacao = !chatIniciado;
+  chatIniciado = true;
+  abrirChat();
+  if(texto) receberMensagem(texto);
+  else if(pularSaudacao) saudar();
+}
+function saudar(){
+  document.getElementById('chatEncerrar').hidden = true;
+  falar('Oi! Aqui é a Sua Saúde. Me conta o que você está sentindo, do seu jeito. Eu mostro quem costuma atender esse caso.', { atalhos: ATALHOS_CHAT });
+}
+
+// Encerrar: apaga a conversa e fecha. Na próxima vez, começa do zero.
+function encerrarChat(despedida){
+  pararMic();
+  const fim = () => {
+    chatMsgs.innerHTML = '';
+    chatIniciado = false; chatEsperando = null; chatPara = 'eu'; chatUltimoTexto = '';
+    chatInput.value = '';
+    document.getElementById('chatEncerrar').hidden = true;
+    fecharChat();
+  };
+  if(despedida) falar('Até mais. Cuide-se!').then(() => setTimeout(fim, semMovimento() ? 0 : 1100));
+  else fim();
+}
+
+// Depois de cada indicação: seguir conversando ou encerrar
+function oferecerContinuar(){
+  return falar('Quer me contar mais alguma coisa?', {
+    atalhos: ['Contar outra coisa', 'Encerrar conversa'],
+    aoEscolher: (t) => {
+      adicionarBalao(escaparHtml(t), 'eu');
+      if(t === 'Encerrar conversa') encerrarChat(true);
+      else falar('Pode contar. O que você está sentindo?');
+    }
+  });
+}
+
+function fecharChat(){
+  chatEl.classList.remove('open');
+  chatEl.setAttribute('aria-hidden', 'true');
+  chatFab.classList.remove('escondido');
+}
+function chatAberto(){ return chatEl.classList.contains('open'); }
+
+function rolarChat(){
+  chatMsgs.scrollTo({ top: chatMsgs.scrollHeight, behavior: semMovimento() ? 'auto' : 'smooth' });
+}
+
+function adicionarBalao(html, quem){
+  const el = document.createElement('div');
+  el.className = `chat-msg chat-msg-${quem}`;
+  el.innerHTML = html;
+  chatMsgs.appendChild(el);
+  rolarChat();
+  return el;
+}
+
+// Fala do chat, com um "digitando…" curto para a conversa não parecer instantânea demais
+function falar(html, opcoes = {}){
+  return new Promise(resolve => {
+    const digitando = adicionarBalao('<span class="chat-digitando"><i></i><i></i><i></i></span>', 'bot');
+    setTimeout(() => {
+      digitando.remove();
+      const el = adicionarBalao(html, opcoes.urgente ? 'bot chat-msg-urgente' : 'bot');
+      if(opcoes.atalhos) mostrarAtalhos(opcoes.atalhos, opcoes.aoEscolher);
+      if(opcoes.depois) opcoes.depois(el);
+      rolarChat();
+      resolve(el);
+    }, semMovimento() ? 0 : 550);
+  });
+}
+
+function mostrarAtalhos(lista, aoEscolher){
+  const wrap = document.createElement('div');
+  wrap.className = 'chat-atalhos';
+  wrap.innerHTML = lista.map(t => `<button type="button" class="chat-atalho">${t}</button>`).join('');
+  wrap.querySelectorAll('.chat-atalho').forEach(btn => {
+    btn.addEventListener('click', () => {
+      wrap.remove();
+      (aoEscolher || receberMensagem)(btn.textContent);
+    });
+  });
+  chatMsgs.appendChild(wrap);
+}
+function limparAtalhos(){ chatMsgs.querySelectorAll('.chat-atalhos').forEach(a => a.remove()); }
+
+// Envio sem <form>: funciona também em pré-visualizações que bloqueiam formulários
+function enviarChat(){
+  const texto = chatInput.value.trim();
+  if(!texto){ chatInput.focus(); return; }
+  chatInput.value = '';
+  receberMensagem(texto);
+  chatInput.focus();
+}
+document.getElementById('chatEnviar').addEventListener('click', enviarChat);
+chatInput.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' && !e.isComposing){ e.preventDefault(); enviarChat(); }
+});
+
+// "É para você ou para outra pessoa?" — muda o texto das perguntas e, para criança, coloca o pediatra no caminho
+function lerParaQuem(texto){
+  const t = removerAcentos(texto.toLowerCase());
+  if(/\b(meu filho|minha filha|meus filhos|filho|filha|crianca|bebe|nenem|neto|neta|enteado|enteada)\b/.test(t)) return 'crianca';
+  if(/\b(minha mae|meu pai|minha esposa|meu marido|minha namorada|meu namorado|minha avo|meu avo|amig[oa]|outra pessoa|ela|ele)\b/.test(t)) return 'outro';
+  if(/\b(para mim|pra mim|eu mesm[oa]|sou eu|e pra mim|mim)\b/.test(t)) return 'eu';
+  return null;
+}
+function ajustarParaCrianca(queixa){
+  if(chatPara !== 'crianca') return queixa;
+  const esp = queixa.especialidades.filter(e => chaveQueixa(e) !== 'pediatria');
+  const primeiraFica = ['odontologia','psicologia'].includes(chaveQueixa(esp[0] || ''));
+  const nova = primeiraFica ? [esp[0], 'Pediatria', ...esp.slice(1)] : ['Pediatria', ...esp];
+  return { ...queixa, especialidades: nova, dicas: Object.assign({}, queixa.dicas, { Pediatria: 'Para crianças, o pediatra é a porta de entrada' }) };
+}
+function perguntaTempoPara(queixa){
+  return `Entendi: <strong>${queixa.rotulo}</strong>. Faz quanto tempo que está assim?`;
+}
+function seguirDepoisDeQuem(queixa){
+  const partes = queixa.rotulo.split(' e ');
+  const perguntaTempo = !SEM_PERGUNTA_TEMPO.has(queixa.rotulo) && partes.some(p => !SEM_PERGUNTA_TEMPO.has(p));
+  if(perguntaTempo){
+    chatEsperando = queixa;
+    falar(perguntaTempoPara(queixa), {
+      atalhos: ['Começou hoje','Alguns dias','Mais de uma semana'],
+      aoEscolher: (t) => {
+        adicionarBalao(escaparHtml(t), 'eu');
+        const q = chatEsperando; chatEsperando = null;
+        responderComCaminho(q, t === 'Começou hoje' ? 'hoje' : t === 'Alguns dias' ? 'dias' : 'muito');
+      }
+    });
+  } else {
+    responderComCaminho(queixa, null, `Entendi: <strong>${queixa.rotulo}</strong>.`);
+  }
+}
+// "Estou passando mal", "me sinto estranho": a pessoa não disse o quê. Perguntamos com opções.
+function ehMalEstar(texto){
+  const t = removerAcentos(texto.toLowerCase());
+  return /(passando mal|sentindo mal|sinto mal|\bto mal|\btou mal|estou mal|nao (estou|to|tou) bem|nao me sinto bem|mal estar|mal-estar|indispost[oa]|estranh[oa]|me sentindo ruim|sinto ruim|esquisit[oa])/.test(t);
+}
+function perguntarMalEstar(){
+  const mapa = { 'Enjoo ou vômito':'enjoo', 'Febre':'febre', 'Tontura':'tontura', 'Fraqueza ou cansaço':'cansaço', 'Ansiedade ou tristeza':'ansiedade' };
+  falar('Entendi. O que você está sentindo?', {
+    atalhos: ['Enjoo ou vômito','Febre','Dor','Tontura','Fraqueza ou cansaço','Ansiedade ou tristeza'],
+    aoEscolher: (t) => {
+      if(t === 'Dor'){ adicionarBalao('Dor', 'eu'); perguntarOndeDoi(); return; }
+      receberMensagem(mapa[t], t);
+    }
+  });
+}
+function perguntarOndeDoi(){
+  const mapa = { 'Cabeça':'dor de cabeça', 'Barriga':'dor de barriga', 'Costas':'dor nas costas', 'Peito':'dor no peito', 'Juntas ou músculos':'dor nas articulações', 'Dente':'dor de dente' };
+  falar('Onde está doendo?', {
+    atalhos: [...Object.keys(mapa), 'Outro lugar'],
+    aoEscolher: (t) => {
+      if(t === 'Outro lugar'){ adicionarBalao(t, 'eu'); falar('Me conta onde está doendo.'); return; }
+      receberMensagem(mapa[t], t);
+    }
+  });
+}
+
+// texto: o que o chat interpreta; balao: o que aparece como fala da pessoa (quando ela tocou numa opção)
+function receberMensagem(texto, balao){
+  limparAtalhos();
+  adicionarBalao(escaparHtml(balao || texto), 'eu');
+  document.getElementById('chatEncerrar').hidden = false;
+
+  // Se o chat tinha perguntado o tempo e a pessoa escreveu em vez de tocar, tentamos entender
+  if(chatEsperando){
+    const t = removerAcentos(texto.toLowerCase());
+    const tempo = /hoje|agora|ontem|horas?/.test(t) ? 'hoje'
+      : /semana|semanas|mes|meses|ano|anos|sempre|muito tempo/.test(t) ? 'muito'
+      : /dias?|uns dias|alguns/.test(t) ? 'dias' : null;
+    if(tempo){ const q = chatEsperando; chatEsperando = null; responderComCaminho(q, tempo); return; }
+    chatEsperando = null; // não era resposta de tempo: segue como uma nova queixa
+  }
+
+  chatUltimoTexto = texto;
+  const queixa = lerQueixa(texto);
+
+  if(queixa && queixa.emergencia === 'fisica'){
+    falar(`<strong>Isso pode ser uma emergência.</strong> Não espere por uma consulta: ligue para o SAMU ou vá agora ao pronto-socorro mais próximo.
+      <a class="chat-btn chat-btn-urgente" href="tel:192">${ICON.phone}Ligar para o SAMU (192)</a>`, { urgente:true });
+    return;
+  }
+
+  if(queixa && queixa.emergencia === 'emocional'){
+    falar(`Obrigado por me contar. Você não precisa passar por isso sozinho. O CVV conversa com você agora, 24 horas por dia, de graça. Se houver risco imediato, ligue para o SAMU (192).
+      <span class="chat-btns">
+        <a class="chat-btn" href="tel:188">${ICON.phone}Ligar para o CVV (188)</a>
+        <a class="chat-btn chat-btn-sec" href="https://cvv.org.br" target="_blank" rel="noopener">Conversar pelo chat do CVV</a>
+      </span>`).then(() => {
+        const lista = melhoresProfissionais(queixa, 3);
+        if(lista.length) falar('Quando se sentir pronto, estes profissionais podem te acompanhar:', { depois: el => anexarCards(el, lista, queixa) });
+      });
+    return;
+  }
+
+  if(!queixa && ehMalEstar(texto)){ perguntarMalEstar(); return; }
+  if(!queixa && /\b(dor|doendo|doi|doi|dolorido)\b/.test(removerAcentos(texto.toLowerCase()))){ perguntarOndeDoi(); return; }
+
+  if(!queixa){
+    falar('Não entendi bem. Você pode me contar onde dói ou o que está sentindo? Se preferir, toque em uma das opções:', { atalhos: ATALHOS_CHAT });
+    return;
+  }
+
+  // "Meu filho está com febre": o pediatra entra no caminho, sem precisar perguntar
+  chatPara = lerParaQuem(texto) === 'crianca' ? 'crianca' : 'eu';
+  seguirDepoisDeQuem(queixa);
+}
+
+function responderComCaminho(queixa, tempo, abertura){
+  queixa = ajustarParaCrianca(queixa);
+  let especialidades = queixa.especialidades.slice();
+  let comentario = abertura || '';
+  if(tempo === 'muito' && especialidades.length > 1 && chaveQueixa(especialidades[0]) === 'clinica geral'){
+    especialidades = [especialidades[1], especialidades[0], ...especialidades.slice(2)];
+    comentario = 'Como já faz um tempo, vale ir direto em um especialista.';
+  } else if(tempo === 'hoje'){
+    comentario = 'Se piorar rápido ou ficar muito forte, procure um pronto atendimento.';
+  } else if(tempo === 'dias'){
+    comentario = 'Certo.';
+  }
+  const q = { ...queixa, especialidades, dicas: tempo === 'muito' && especialidades[0] !== queixa.especialidades[0]
+    ? Object.assign({ [especialidades[0]]: 'Comece por aqui', [especialidades[1]]: 'Também pode te atender' }, queixa.dicas) : queixa.dicas };
+
+  const etapas = q.especialidades.map((esp, i) => {
+    const n = profissionaisDaEspecialidade(esp).length;
+    return `<li class="${n ? '' : 'vazia'}"><span class="chat-num">${i + 1}</span><span><strong>${nomeProfissao(esp).replace('(a)', '')}</strong><small>${n ? dicaDaEtapa(q.dicas, esp, i) : 'Ainda sem cadastro por aqui'}</small></span></li>`;
+  }).join('');
+
+  falar(`${comentario ? comentario + ' ' : ''}Para esse caso, o caminho indicado é:
+    <ol class="chat-caminho">${etapas}</ol>
+    <span class="chat-nota">É um ponto de partida, não um diagnóstico.</span>`).then(() => {
+      const lista = melhoresProfissionais(q, 3);
+      if(!lista.length){
+        falar('Ainda não temos essas especialidades cadastradas. Enquanto isso, um clínico geral ou a UBS do seu bairro podem te atender.',
+          { atalhos: ['Contar outra coisa'], aoEscolher: (t) => { adicionarBalao(t, 'eu'); falar('Pode contar. O que você está sentindo?'); } });
+        return;
+      }
+      const total = profissionais.filter(p => q.especialidades.map(chaveQueixa).includes(chaveQueixa(p.categoria))).length;
+      falar(localizacaoUsuario ? 'Quem atende mais perto de você:' : 'Quem pode te atender:', {
+        depois: el => {
+          anexarCards(el, lista, q);
+          const acoes = document.createElement('span');
+          acoes.className = 'chat-btns';
+          if(total > lista.length){
+            acoes.innerHTML = `<button type="button" class="chat-btn chat-btn-sec" data-acao="todos">Ver todos os ${total}</button>`;
+            el.appendChild(acoes);
+            acoes.querySelector('[data-acao]').addEventListener('click', () => { fecharChat(); aplicarBusca(chatUltimoTexto); orientacaoEl.scrollIntoView({ behavior: semMovimento() ? 'auto' : 'smooth' }); });
+          }
+        }
+      }).then(() => localizacaoUsuario || estadoLocal === 'indisponivel'
+        ? oferecerContinuar()
+        : perguntarLocalizacaoNoChat(q));
+    });
+}
+
+// Depois de mostrar os profissionais, o chat oferece a localização (ou explica como liberar, se estiver bloqueada)
+function perguntarLocalizacaoNoChat(queixa){
+  const html = estadoLocal === 'negado'
+    ? `Sua localização está bloqueada no navegador. Para ver quem está mais perto, toque no cadeado ao lado do endereço do site e permita a localização.
+       <span class="chat-btns"><button type="button" class="chat-btn" data-acao="liberei">Já liberei</button><button type="button" class="chat-btn chat-btn-sec" data-acao="agora-nao">Agora não</button></span>`
+    : `Quer ver quem está mais perto de você?
+       <span class="chat-btns"><button type="button" class="chat-btn" data-acao="local">${ICON.locate}Usar minha localização</button><button type="button" class="chat-btn chat-btn-sec" data-acao="agora-nao">Agora não</button></span>`;
+  return falar(html, { depois: el => ligarLocalNoChat(el, queixa) });
+}
+
+function ligarLocalNoChat(el, queixa){
+  el.querySelectorAll('[data-acao]').forEach(b => b.addEventListener('click', () => {
+    const acao = b.dataset.acao;
+    const btns = b.closest('.chat-btns');
+    if(btns) btns.remove();
+    if(acao === 'agora-nao'){
+      adicionarBalao('Agora não', 'eu');
+      falar('Tudo bem.').then(oferecerContinuar);
+      return;
+    }
+    adicionarBalao(acao === 'liberei' ? 'Já liberei' : 'Usar minha localização', 'eu');
+    pedirLocalizacao().then(ok => {
+      if(ok){
+        falar('Pronto. Os mais perto de você:', { depois: e => anexarCards(e, melhoresProfissionais(queixa, 3), queixa) })
+          .then(oferecerContinuar);
+      } else if(estadoLocal === 'negado'){
+        perguntarLocalizacaoNoChat(queixa);
+      } else {
+        falar('Não consegui pegar sua localização agora. Você pode tentar de novo pelo botão de cidade, na busca.');
+      }
+    });
+  }));
+}
+
+function melhoresProfissionais(queixa, limite){
+  const chaves = queixa.especialidades.map(chaveQueixa);
+  return profissionais
+    .filter(p => chaves.includes(chaveQueixa(p.categoria)))
+    .sort((a, b) => {
+      const prio = chaves.indexOf(chaveQueixa(a.categoria)) - chaves.indexOf(chaveQueixa(b.categoria));
+      if(prio) return prio;
+      const da = distanciasPorProfissional[profissionais.indexOf(a)] ?? Infinity;
+      const db = distanciasPorProfissional[profissionais.indexOf(b)] ?? Infinity;
+      return da - db;
+    })
+    .slice(0, limite);
+}
+
+function anexarCards(el, lista, queixa){
+  const wrap = document.createElement('div');
+  wrap.className = 'chat-cards';
+  wrap.innerHTML = lista.map(p => {
+    const idx = profissionais.indexOf(p);
+    const d = distanciasPorProfissional[idx];
+    return `
+    <div class="chat-card" data-idx="${idx}" tabindex="0" role="button" aria-label="Ver perfil de ${p.nome}">
+      <span class="chat-card-foto">${p.foto ? `<img src="${p.foto}" alt="" loading="lazy">` : iniciais(p.nome)}</span>
+      <span class="chat-card-info"><strong>${p.nome}</strong><small>${nomeProfissao(p.categoria).replace('(a)', '')} · ${d !== undefined ? formatarDistancia(d) : textoCidades(p)}</small></span>
+      <a class="chat-card-whats" href="https://wa.me/${p.whats}" target="_blank" rel="noopener" aria-label="Chamar ${p.nome} no WhatsApp">${ICON.chat}</a>
+    </div>`;
+  }).join('');
+  wrap.querySelectorAll('.chat-card').forEach(c => {
+    const abrir = () => abrirModal(profissionais[c.dataset.idx]);
+    c.addEventListener('click', (e) => { if(!e.target.closest('.chat-card-whats')) abrir(); });
+    c.addEventListener('keydown', (e) => { if(e.target === c && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); abrir(); } });
+  });
+  el.appendChild(wrap);
+  rolarChat();
+}
+
+
+chatFab.addEventListener('click', abrirChat);
+document.getElementById('btnConversar').addEventListener('click', (e) => { e.stopPropagation(); abrirChat(); });
+document.getElementById('chatFechar').addEventListener('click', () => { pararMic(); fecharChat(); });
+document.getElementById('chatEncerrar').addEventListener('click', () => encerrarChat(false));
+
+// ---------- Falar em vez de escrever (reconhecimento de voz do próprio navegador) ----------
+// Funciona no Chrome (Android e computador), Edge e Safari (iPhone). Onde não existe, o botão não aparece.
+const Reconhecimento = window.SpeechRecognition || window.webkitSpeechRecognition;
+const chatMic = document.getElementById('chatMic');
+let reconhecedor = null;
+let micTexto = '';
+function pararMic(){ if(reconhecedor){ try{ reconhecedor.stop(); }catch(_){} } }
+if(Reconhecimento){
+  chatMic.hidden = false;
+  chatMic.addEventListener('click', () => {
+    if(reconhecedor){ pararMic(); return; }
+    reconhecedor = new Reconhecimento();
+    reconhecedor.lang = 'pt-BR';
+    reconhecedor.interimResults = true;
+    reconhecedor.continuous = false;
+    micTexto = '';
+    const placeholderAntes = chatInput.placeholder;
+    chatMic.classList.add('gravando');
+    chatMic.setAttribute('aria-label', 'Parar de gravar');
+    chatInput.placeholder = 'Estou ouvindo…';
+    reconhecedor.onresult = (e) => {
+      micTexto = Array.from(e.results).map(r => r[0].transcript).join(' ').trim();
+      chatInput.value = micTexto;
+    };
+    reconhecedor.onerror = (e) => {
+      if(e.error === 'not-allowed' || e.error === 'service-not-allowed')
+        falar('Não consegui usar o microfone. Para liberar, toque no cadeado ao lado do endereço do site e permita o microfone. Ou, se preferir, é só escrever.');
+    };
+    reconhecedor.onend = () => {
+      reconhecedor = null;
+      chatMic.classList.remove('gravando');
+      chatMic.setAttribute('aria-label', 'Falar em vez de escrever');
+      chatInput.placeholder = placeholderAntes;
+      if(micTexto) enviarChat(); // terminou de falar: já envia
+    };
+    try{ reconhecedor.start(); }catch(_){ reconhecedor = null; chatMic.classList.remove('gravando'); }
+  });
+}
+// O botão flutuante só aparece depois que a barra de busca sai da tela
+const heroPanel = document.querySelector('.hero-panel');
+// ---------- Buscador que acompanha a rolagem ----------
+// Quando o campo do balão some atrás do cabeçalho, um buscador compacto aparece no cabeçalho.
+// É a mesma busca: o que se digita em um aparece no outro. O ícone de conversa abre o chat.
+const siteHeaderEl = document.getElementById('siteHeader');
+const buscaMiniInput = document.getElementById('buscaMiniInput');
+let campoPrincipalForaDaTela = false;
+
+function atualizarBuscaFixa(){
+  const mostrar = campoPrincipalForaDaTela || document.activeElement === buscaMiniInput;
+  siteHeaderEl.classList.toggle('com-busca', mostrar);
+  document.body.classList.toggle('busca-fixa-ativa', mostrar);
+  // fora de vista, os controles do cabeçalho não entram na navegação por teclado
+  buscaMiniInput.tabIndex = mostrar ? 0 : -1;
+  document.getElementById('buscaMiniChat').tabIndex = mostrar ? 0 : -1;
+}
+
+buscaMiniInput.addEventListener('focus', atualizarBuscaFixa);
+buscaMiniInput.addEventListener('blur', atualizarBuscaFixa);
+buscaMiniInput.addEventListener('input', () => {
+  aplicarBusca(buscaMiniInput.value);
+  // mantém o começo dos resultados logo abaixo do cabeçalho enquanto a pessoa digita
+  const faixa = document.getElementById('buscaMiniFaixa');
+  const extra = getComputedStyle(faixa).position === 'absolute' ? faixa.offsetHeight : 0;
+  // o balão fica todo escondido atrás do cabeçalho e os resultados começam logo depois
+  const alvo = document.getElementById('buscaBalao').getBoundingClientRect().bottom + scrollY - siteHeaderEl.offsetHeight - extra + 2;
+  window.scrollTo(0, Math.max(alvo, 0));
+});
+buscaMiniInput.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter'){ e.preventDefault(); buscaMiniInput.blur(); }
+});
+document.getElementById('buscaMiniChat').addEventListener('click', (e) => { e.stopPropagation(); abrirChat(); });
+
+// Observa só o campo branco do balão: quando ele passa por baixo do cabeçalho, o buscador compacto entra
+let observadorBuscaFixa = null;
+function observarCampoPrincipal(){
+  if(observadorBuscaFixa) observadorBuscaFixa.disconnect();
+  observadorBuscaFixa = new IntersectionObserver(([e]) => {
+    campoPrincipalForaDaTela = !e.isIntersecting;
+    atualizarBuscaFixa();
+  }, { rootMargin: `-${siteHeaderEl.offsetHeight}px 0px 0px 0px` });
+  observadorBuscaFixa.observe(document.querySelector('.busca-balao .tag-search-inner'));
+}
+observarCampoPrincipal();
+matchMedia('(max-width:560px)').addEventListener('change', observarCampoPrincipal);
+
+render();
+abrirPorLink();
+</script>
+
+</body>
+</html>
