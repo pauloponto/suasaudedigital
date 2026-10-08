@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" translate="no">
 <head>
 <meta charset="UTF-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Como funciona | Sua Saúde Digital</title>
 <meta name="description" content="O sua saúde.digital encurta o caminho entre você e o profissional de saúde certo: veja se atende o seu plano, onde fica, a que distância está e chame no WhatsApp.">
@@ -324,6 +325,33 @@
   .prof h2{font-size:30px;}
   .prof .bt{width:100%;justify-content:center;}
   }
+
+  /* topo com o motion */
+  .topo-missao{padding:48px 0 0;}
+  .topo-missao .missao-cab{margin-top:20px;}
+  .topo-missao h1{font-size:58px;line-height:1.03;max-width:760px;}
+  /* por que existimos */
+  .porque{display:grid;grid-template-columns:1fr 480px;gap:60px;align-items:center;padding:110px 0 30px;}
+  .porque .pergunta{font-family:'Urbanist';font-size:22px;font-weight:500;color:var(--teal);line-height:1.25;max-width:520px;}
+  .porque h2{font-size:52px;line-height:1.04;margin-top:16px;}
+  .porque-texto > p{font-size:18px;color:var(--ink-soft);margin-top:18px;max-width:500px;}
+  .porque .destaque{color:var(--ink);font-weight:500;border-left:3px solid var(--coral);padding-left:14px;}
+  .seis{row-gap:26px;}
+  .deslize{display:none;}
+  @media (max-width:980px){ .porque{grid-template-columns:1fr;} .topo-missao h1{font-size:46px;} }
+  @media (max-width:640px){
+    .topo-missao{padding-top:28px;}
+    .topo-missao h1{font-size:34px;}
+    .porque{padding:64px 0 10px;gap:28px;}
+    .porque h2{font-size:36px;}
+    .porque .pergunta{font-size:19px;}
+    .porque-texto > p{font-size:16px;}
+    /* passos viram carrossel de deslizar */
+    .trio.seis{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -16px;padding:4px 16px 18px;scrollbar-width:none;}
+    .trio.seis::-webkit-scrollbar{display:none;}
+    .deslize{display:block;font-size:13.5px !important;font-weight:600;color:var(--teal) !important;}
+    .trio.seis .passo{flex:0 0 84%;scroll-snap-align:center;opacity:1;transform:none;}
+  }
 </style>
 </head>
 <body>
@@ -340,43 +368,26 @@
 
 <main class="wrap">
 
-  <!-- 1. Pergunta + história -->
-  <section class="abertura">
+  <!-- 1. Objetivo + motion -->
+  <section class="topo-missao">
     <span class="kicker"><i></i>Como funciona</span>
-    <h1>Quanto tempo você leva para achar o profissional <em>certo</em> para o seu caso?</h1>
-
-    <div class="historia">
-      <div class="historia-rotulo"><span>Sem o sua saúde.digital</span><em class="total">cerca de 30 dias</em></div>
-      <div class="trilha">
-        <div class="etapa"><div class="etapa-dia">D1</div><b>Dia 1</b><p>Pesquisa no Google e abre dezenas de abas, sem saber em quem confiar.</p></div>
-        <div class="etapa"><div class="etapa-dia">D4</div><b>Dia 4</b><p>Liga para três consultórios. Um não atende o seu plano.</p></div>
-        <div class="etapa"><div class="etapa-dia">D12</div><b>Dia 12</b><p>Consulta com alguém que não era a especialidade do seu caso.</p></div>
-        <div class="etapa fim"><div class="etapa-dia">D30</div><b>Dia 30</b><p>Finalmente encontra o profissional certo.</p></div>
-      </div>
-
-      <div class="historia-nova surge">
-        <div class="historia-rotulo"><span>Com o sua saúde.digital</span><em class="total">poucos minutos</em></div>
-        <div class="trilha trilha-nova">
-          <div class="etapa"><div class="etapa-dia">1 min</div><b>Minuto 1</b><p>Busca a especialidade ou conta no chat o que está sentindo.</p></div>
-          <div class="etapa"><div class="etapa-dia">2 min</div><b>Minuto 2</b><p>Vê quem atende o seu plano e quem está mais perto.</p></div>
-          <div class="etapa"><div class="etapa-dia">3 min</div><b>Minuto 3</b><p>Abre o perfil, confere o registro e toca no endereço para ver onde fica.</p></div>
-          <div class="etapa fim"><div class="etapa-dia">4 min</div><b>Minuto 4</b><p>Chama o profissional certo no WhatsApp e marca a consulta.</p></div>
-        </div>
-      </div>
+    <div class="missao-cab">
+      <h1 class="ponto">Nosso objetivo: conectar quem precisa a quem <em>cuida</em>, em qualquer lugar</h1>
+      <p>Começamos pelo Brasil inteiro. A cada profissional que entra, a rede fica mais perto de você.</p>
+    </div>
+    <div class="motion">
+      <canvas id="motion" role="img" aria-label="Mapa do mundo com conexões entre pacientes e profissionais de saúde, começando pelo Brasil"></canvas>
+      <div class="legenda"><span><i style="background:#F7F5F0"></i>Pacientes</span><span><i style="background:#D85A30"></i>Profissionais</span></div>
     </div>
   </section>
 
-  <!-- 2. Manifesto -->
-  <section class="manifesto surge">
-    <h2 class="ponto">Nascemos para encurtar o caminho entre o paciente e o <em>profissional de saúde</em></h2>
-    <p>Conectamos você aos profissionais certos, para que encontre a solução para o que procura. Sem rodeios e sem perder semanas.</p>
-  </section>
-
-  <!-- 3. Perto de você -->
-  <section class="perto surge">
-    <div>
-      <h2 class="ponto">Talvez ele esteja bem perto de você, e você <em>ainda não sabe</em></h2>
-      <p>Com a localização ligada, a lista se organiza por distância. O especialista que você procura pode estar a poucas quadras.</p>
+  <!-- 2. Por que existimos -->
+  <section class="porque surge">
+    <div class="porque-texto">
+      <p class="pergunta">Quanto tempo você leva para achar o profissional certo para o seu caso?</p>
+      <h2 class="ponto">Nascemos para <em>encurtar</em> esse caminho</h2>
+      <p>Conectamos você aos profissionais certos para que encontre a solução para o que procura, sem rodeios e sem perder semanas.</p>
+      <p class="destaque">E talvez ele esteja bem perto de você, e você ainda não sabe.</p>
     </div>
     <div class="radar">
       <div class="anel a3"></div><div class="anel a2"></div><div class="anel a1"></div>
@@ -389,142 +400,22 @@
     </div>
   </section>
 
-  <!-- 4. Motion -->
-  <section class="missao surge">
-    <div class="missao-cab">
-      <h2 class="ponto">Nosso objetivo: conectar quem precisa a quem <em>cuida</em>, em qualquer lugar</h2>
-      <p>Começamos pelo Brasil inteiro. A cada profissional que entra, a rede fica mais perto de você.</p>
-    </div>
-    <div class="motion">
-      <canvas id="motion" role="img" aria-label="Mapa do mundo com conexões entre pacientes e profissionais de saúde, começando pelo Brasil"></canvas>
-      <div class="legenda"><span><i style="background:#F7F5F0"></i>Pacientes</span><span><i style="background:#D85A30"></i>Profissionais</span></div>
-    </div>
-  </section>
-
-  <!-- 5. Benefícios -->
-  <section class="beneficios">
-    <div class="cab surge">
-      <h2>Tudo o que você precisa saber, <em>antes de marcar</em></h2>
-      <p>Nada de ligar para descobrir o básico. Cada perfil já responde as perguntas que importam.</p>
-    </div>
-    <div class="bento">
-
-      <article class="surge tile t-plano">
-        <span class="selo">Sem surpresa</span>
-        <div class="tile-tag"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg>Convênios</div>
-        <h3>Atende o seu <em>plano</em>? Você vê na hora.</h3>
-        <p class="tile-txt">Cada perfil mostra os convênios aceitos, ou avisa que o atendimento é particular.</p>
-        <div class="demo">
-          <div class="busca-plano">
-            <div class="q">Seu plano</div>
-            <div class="planos">
-              <span class="plano-chip sim"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Unimed</span>
-              <span class="plano-chip">Bradesco Saúde</span><span class="plano-chip">SulAmérica</span><span class="plano-chip">Particular</span>
-            </div>
-            <div class="mini-card">
-              <span class="av">CT</span>
-              <div><b>Dra. Camila Torres</b><small>Cardiologia · 2 km de você</small>
-                <div class="card-info">
-                  <span class="card-conv destaque"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg>Unimed, Bradesco Saúde</span>
-                  <span class="card-online"><svg class="icon" viewBox="0 0 24 24"><path d="M4 20.5V9.5L12 4l8 5.5v11"/><path d="M12 10.5v6M9 13.5h6"/></svg>Presencial</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="surge tile t-mapa t-escuro">
-        <div class="tile-tag"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.2"/></svg>Endereço</div>
-        <h3>Toque no endereço e <em>chegue lá</em>.</h3>
-        <p class="tile-txt">O endereço de cada profissional abre direto no Google Maps, com o caminho até o consultório.</p>
-        <div class="demo">
-          <div class="linha-end"><strong>Endereço</strong><a>Av. Paulista, 1000, Bela Vista, São Paulo/SP<span class="toque"></span></a></div>
-          <div class="seta-fluxo"><svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
-          <div class="mapa">
-            <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice">
-              <rect width="400" height="230" fill="#E9F0EB"/>
-              <path d="M0 160 C90 150 140 120 210 118 S330 95 400 70" stroke="#C9DCCF" stroke-width="26" fill="none"/>
-              <path d="M0 160 C90 150 140 120 210 118 S330 95 400 70" stroke="#fff" stroke-width="16" fill="none"/>
-              <path d="M120 0 L150 230" stroke="#fff" stroke-width="10"/><path d="M290 0 L270 230" stroke="#fff" stroke-width="10"/>
-              <path d="M0 60 L400 40" stroke="#fff" stroke-width="7"/><path d="M0 210 L400 195" stroke="#fff" stroke-width="7"/>
-              <rect x="20" y="78" width="80" height="50" rx="8" fill="#D6E7DC"/><rect x="168" y="20" width="90" height="70" rx="8" fill="#D6E7DC"/>
-              <rect x="305" y="120" width="80" height="60" rx="8" fill="#D6E7DC"/>
-              <path d="M60 205 C120 190 160 150 205 82" stroke="#0F6E56" stroke-width="4" stroke-dasharray="2 8" stroke-linecap="round" fill="none"/>
-              <circle cx="60" cy="205" r="7" fill="#0F6E56" stroke="#fff" stroke-width="3"/>
-            </svg>
-            <div class="mapa-pin"><span class="gota"><i></i></span></div>
-            <div class="mapa-cartao"><div><b>Consultório Dra. Camila</b><small>12 min de carro · 2 km</small></div><span class="rota"><svg class="icon" viewBox="0 0 24 24"><path d="M3 11 21 3l-8 18-2-8z"/></svg>Como chegar</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="surge tile t-sm">
-        <div class="tile-tag">Distância</div>
-        <h3>Do mais perto ao mais longe</h3>
-        <div class="demo lista-km">
-          <div class="km">Dentista<span>600 m</span></div><div class="km">Dentista<span>1,9 km</span></div><div class="km">Dentista<span>4,2 km</span></div>
-        </div>
-      </article>
-
-      <article class="surge tile t-sm">
-        <div class="tile-tag">Formato</div>
-        <h3>Presencial ou online</h3>
-        <p class="tile-txt">Saiba se dá para ir ao consultório ou fazer a consulta por vídeo.</p>
-        <div class="demo chips-modo">
-          <span class="card-online"><svg class="icon" viewBox="0 0 24 24"><path d="M4 20.5V9.5L12 4l8 5.5v11"/><path d="M12 10.5v6M9 13.5h6"/></svg>Presencial</span>
-          <span class="card-online"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="2.5"/><path d="m15.5 10.5 5-3v9l-5-3"/></svg>Online</span>
-        </div>
-      </article>
-
-      <article class="surge tile t-sm">
-        <div class="tile-tag">Confiança</div>
-        <h3>Registro à vista</h3>
-        <p class="tile-txt">Todo perfil mostra o número no conselho da profissão.</p>
-        <div class="demo"><div class="reg"><strong>Registro</strong><b><svg class="icon" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg>CRM-SP 123456</b></div></div>
-      </article>
-
-      <article class="surge tile t-plano">
-        <div class="tile-tag"><svg class="icon" viewBox="0 0 24 24"><path d="M4.5 19.5 6 15.6A8 8 0 1 1 9 18.7z"/></svg>Chat</div>
-        <h3>Não sabe quem procurar? <em>Conte o que sente</em>.</h3>
-        <p class="tile-txt">O chat indica por qual especialidade começar e quem atende perto de você. Não é diagnóstico: é o caminho até quem faz.</p>
-        <div class="demo bolhas">
-          <div class="bolha eu">Tô com dor nas costas faz uma semana</div>
-          <div class="bolha bot">Para esse caso, comece por <b>Fisioterapia</b>. Se a dor for forte ou não passar, <b>Ortopedia</b>.</div>
-          <div class="bolha bot">Quem atende mais perto de você: <b>3 profissionais</b></div>
-        </div>
-      </article>
-
-      <article class="surge tile t-mapa">
-        <div class="tile-tag">Contato</div>
-        <h3>Achou? Chame no <em>WhatsApp</em>.</h3>
-        <p class="tile-txt">A conversa é direto com o profissional, para tirar dúvidas e agendar. Sem intermediários.</p>
-        <div class="demo">
-          <div class="conversa">
-            <div class="conversa-topo"><span class="av">CT</span><div><b>Dra. Camila Torres</b><small>Cardiologia</small></div></div>
-            <div class="bolhas">
-              <div class="bolha eu">Olá, doutora! Vi seu perfil no sua saúde.digital. Tem horário essa semana?</div>
-              <div class="bolha bot">Olá! Tenho quinta às 14h. Pode ser?</div>
-              <div class="bolha eu">Perfeito, pode marcar 🙌</div>
-            </div>
-          </div>
-          <div class="whats"><svg class="icon" viewBox="0 0 24 24"><path d="M4.5 19.5 6 15.6A8 8 0 1 1 9 18.7z"/></svg>Chamar no WhatsApp</div>
-          <div class="whats-nota">Valores, horários e agenda são combinados com o profissional.</div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- 6. Passo a passo -->
+  <!-- 3. Passo a passo -->
   <section class="passos">
-    <div class="cab surge"><h2>Na prática, <em>três passos</em></h2></div>
-    <div class="trio">
-      <article class="surge passo"><span class="passo-num"><b>1</b>Busque</span><h3>Pela especialidade ou pelo que sente</h3><p>Escreva a especialidade no buscador, como "cardiologista", ou conte no chat o que está acontecendo.</p>
-        <div class="celular"><div class="tela"><img src="como-funciona-video-busca.webp" alt="Vídeo: buscando cardiologista e contando no chat o que sente" loading="lazy" decoding="async"></div></div></article>
-      <article class="surge passo"><span class="passo-num"><b>2</b>Compare</span><h3>Plano, endereço e distância</h3><p>Abra o perfil para ver convênios, formato de atendimento e onde fica.</p>
-        <div class="celular"><div class="tela"><img src="como-funciona-video-perfil.webp" alt="Vídeo: vendo o plano, o registro e tocando no endereço para abrir o mapa" loading="lazy" decoding="async"></div></div></article>
-      <article class="surge passo"><span class="passo-num"><b>3</b>Chame</span><h3>Direto no WhatsApp</h3><p>Abra o endereço no Google Maps, compartilhe o perfil ou chame o profissional para marcar sua consulta.</p>
-        <div class="celular"><div class="tela"><img src="como-funciona-video-whatsapp.webp" alt="Vídeo: abrindo o endereço e chamando no WhatsApp" loading="lazy" decoding="async"></div></div></article>
+    <div class="cab surge"><h2>Na prática, <em>passo a passo</em></h2><p>Veja cada função funcionando no celular. No computador é do mesmo jeito.</p><p class="deslize">Deslize para o lado para ver os seis passos →</p></div>
+    <div class="trio seis">
+      <article class="surge passo"><span class="passo-num"><b>1</b>Busque</span><h3>Pela especialidade</h3><p>Escreva o que procura, como "dentista". As sugestões aparecem enquanto você digita.</p>
+        <div class="celular"><div class="tela"><img src="cf-passo-1.webp" alt="Buscando dentista e vendo as sugestões" loading="lazy" decoding="async"></div></div></article>
+      <article class="surge passo"><span class="passo-num"><b>2</b>Converse</span><h3>Ou conte o que sente</h3><p>Não sabe qual especialidade? Conte no chat e veja por onde começar.</p>
+        <div class="celular"><div class="tela"><img src="cf-passo-2.webp" alt="Contando no chat que está com dor nas costas" loading="lazy" decoding="async"></div></div></article>
+      <article class="surge passo"><span class="passo-num"><b>3</b>Plano</span><h3>Veja se atende o seu plano</h3><p>O card já mostra os convênios aceitos. No perfil, aparece a lista completa.</p>
+        <div class="celular"><div class="tela"><img src="cf-passo-3.webp" alt="Zoom nos convênios aceitos do profissional" loading="lazy" decoding="async"></div></div></article>
+      <article class="surge passo"><span class="passo-num"><b>4</b>Distância</span><h3>Descubra quem está mais perto</h3><p>Com a localização ligada, a lista vai do mais perto ao mais longe.</p>
+        <div class="celular"><div class="tela"><img src="cf-passo-4.webp" alt="Profissionais ordenados pela distância" loading="lazy" decoding="async"></div></div></article>
+      <article class="surge passo"><span class="passo-num"><b>5</b>Endereço</span><h3>Toque no endereço e chegue lá</h3><p>O endereço do perfil abre direto no Google Maps, com o caminho.</p>
+        <div class="celular"><div class="tela"><img src="cf-passo-5.webp" alt="Tocando no endereço para abrir o mapa" loading="lazy" decoding="async"></div></div></article>
+      <article class="surge passo"><span class="passo-num"><b>6</b>Contato</span><h3>Chame no WhatsApp</h3><p>Converse direto com o profissional e marque a sua consulta.</p>
+        <div class="celular"><div class="tela"><img src="cf-passo-6.webp" alt="Chamando o profissional no WhatsApp" loading="lazy" decoding="async"></div></div></article>
     </div>
   </section>
 
