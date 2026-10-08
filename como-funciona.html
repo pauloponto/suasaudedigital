@@ -520,11 +520,11 @@
     <div class="cab surge"><h2>Na prática, <em>três passos</em></h2></div>
     <div class="trio">
       <article class="surge passo"><span class="passo-num"><b>1</b>Busque</span><h3>Pela especialidade ou pelo que sente</h3><p>Escreva a especialidade no buscador, como "cardiologista", ou conte no chat o que está acontecendo.</p>
-        <div class="celular"><div class="tela"><video poster="como-funciona-video-busca.jpg" muted loop playsinline preload="none" aria-label="Vídeo: buscando cardiologista e contando no chat o que sente"><source src="como-funciona-video-busca.mp4" type="video/mp4"><source src="como-funciona-video-busca.webm" type="video/webm"></video></div></div></article>
+        <div class="celular"><div class="tela"><img src="como-funciona-video-busca.webp" alt="Vídeo: buscando cardiologista e contando no chat o que sente" loading="lazy" decoding="async"></div></div></article>
       <article class="surge passo"><span class="passo-num"><b>2</b>Compare</span><h3>Plano, endereço e distância</h3><p>Abra o perfil para ver convênios, formato de atendimento e onde fica.</p>
-        <div class="celular"><div class="tela"><video poster="como-funciona-video-perfil.jpg" muted loop playsinline preload="none" aria-label="Vídeo: vendo o plano, o registro e tocando no endereço para abrir o mapa"><source src="como-funciona-video-perfil.mp4" type="video/mp4"><source src="como-funciona-video-perfil.webm" type="video/webm"></video></div></div></article>
+        <div class="celular"><div class="tela"><img src="como-funciona-video-perfil.webp" alt="Vídeo: vendo o plano, o registro e tocando no endereço para abrir o mapa" loading="lazy" decoding="async"></div></div></article>
       <article class="surge passo"><span class="passo-num"><b>3</b>Chame</span><h3>Direto no WhatsApp</h3><p>Abra o endereço no Google Maps, compartilhe o perfil ou chame o profissional para marcar sua consulta.</p>
-        <div class="celular"><div class="tela"><video poster="como-funciona-video-whatsapp.jpg" muted loop playsinline preload="none" aria-label="Vídeo: abrindo o endereço e chamando no WhatsApp"><source src="como-funciona-video-whatsapp.mp4" type="video/mp4"><source src="como-funciona-video-whatsapp.webm" type="video/webm"></video></div></div></article>
+        <div class="celular"><div class="tela"><img src="como-funciona-video-whatsapp.webp" alt="Vídeo: abrindo o endereço e chamando no WhatsApp" loading="lazy" decoding="async"></div></div></article>
     </div>
   </section>
 
@@ -586,16 +586,6 @@ const surgir = new IntersectionObserver(itens => itens.forEach(e => {
   if(e.isIntersecting){ e.target.classList.add('visivel'); surgir.unobserve(e.target); }
 }), { rootMargin:'0px 0px -8% 0px' });
 document.querySelectorAll('.surge').forEach(el => surgir.observe(el));
-
-// Vídeos dos passos: tocam quando aparecem na tela e pausam quando saem
-const semMov = matchMedia('(prefers-reduced-motion: reduce)').matches;
-document.querySelectorAll('.tela video').forEach(v => {
-  if(semMov){ v.controls = true; return; }
-  new IntersectionObserver(([e]) => {
-    if(e.isIntersecting){ v.preload = 'auto'; const p = v.play(); if(p) p.catch(() => { v.controls = true; }); }
-    else v.pause();
-  }, { threshold:0.4 }).observe(v);
-});
 
 // ---------- Motion: rede de profissionais pelo mundo ----------
 (function(){
