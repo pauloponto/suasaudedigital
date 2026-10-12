@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Para profissionais · sua saúde.digital</title>
+<meta name="description" content="Você cuida dos pacientes. A gente traz eles até você. Sem post, sem anúncio, sem algoritmo: a divulgação da Sua Saúde Digital é por nossa conta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F7F5F0; --ink:#1B2420; --ink-soft:#5B6560;
+  --teal:#0F6E56; --teal-deep:#0A4A3A; --teal-pale:#E1F0EA;
+  --line:#DCD8CE; --coral:#D85A30; --white:#fff;
+  --radius:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+h1,h2,h3,.u{font-family:Urbanist,sans-serif}
+h1,h2,h3{font-weight:400;line-height:1.1;letter-spacing:-.015em}
+h1 b,h2 b,h3 b{font-weight:700}
+h1{font-size:clamp(40px,6vw,70px)}
+h2{font-size:clamp(30px,4.2vw,48px);margin-bottom:18px}
+h3{font-size:21px;margin-bottom:6px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;display:block}
+.lead{font-size:19px;color:var(--ink-soft);max-width:620px}
+.center{text-align:center}
+.center .lead{margin-left:auto;margin-right:auto}
+section{padding:104px 0}
+.coral{color:var(--coral)}
+
+/* header */
+header{position:sticky;top:0;z-index:30;background:rgba(247,245,240,.88);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+header.scrolled{border-bottom-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:Fraunces,serif;font-weight:600;font-size:23px;color:var(--teal-deep);text-decoration:none;font-variation-settings:"opsz" 24;letter-spacing:-.01em}
+.logo i{color:var(--coral);font-style:normal}
+.nav-links{display:flex;gap:28px;align-items:center;font-size:15px}
+.nav-links a{text-decoration:none;color:var(--ink-soft)}
+.nav-links a:hover{color:var(--ink)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--teal-deep);color:#fff;text-decoration:none;font-weight:600;font-size:16px;padding:17px 30px;border-radius:999px;transition:transform .15s,background .15s,box-shadow .15s;box-shadow:0 10px 24px -12px rgba(10,74,58,.6)}
+.btn:hover{background:var(--teal);transform:translateY(-2px)}
+.btn svg{width:18px;height:18px}
+.btn-sm{padding:10px 18px;font-size:14px;color:#fff!important;box-shadow:none}
+.note{font-size:14px;color:var(--ink-soft);margin-top:14px;display:flex;gap:16px;flex-wrap:wrap}
+.note span{display:inline-flex;gap:6px;align-items:center}
+.note svg{width:15px;height:15px;color:var(--teal)}
+
+/* ===== HERO ===== */
+.hero{padding:64px 0 104px;background:radial-gradient(900px 520px at 88% 10%,var(--teal-pale),transparent 70%)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero h1{margin-bottom:22px}
+.hero .lead{margin-bottom:34px}
+.stage{position:relative;display:flex;justify-content:center;padding:84px 0 20px}
+.phone{width:300px;background:var(--ink);border-radius:44px;padding:12px;box-shadow:0 40px 80px -30px rgba(10,74,58,.55),0 0 0 1px rgba(0,0,0,.05);position:relative;z-index:2}
+.screen{background:var(--cream);border-radius:34px;height:560px;overflow:hidden;position:relative;padding:18px 16px}
+.notch{width:96px;height:24px;background:var(--ink);border-radius:0 0 14px 14px;position:absolute;top:0;left:50%;transform:translateX(-50%)}
+.scr-top{display:flex;justify-content:space-between;align-items:center;margin:22px 2px 14px}
+.scr-logo{font-family:Fraunces,serif;font-weight:600;font-size:15px;color:var(--teal-deep)}
+.scr-logo i{color:var(--coral);font-style:normal}
+.scr-hello{font-family:Urbanist,sans-serif;font-size:21px;line-height:1.15;margin-bottom:12px}
+.scr-hello b{font-weight:700}
+.search{background:var(--teal-deep);border-radius:16px;padding:10px}
+.search-in{background:#fff;border-radius:10px;padding:10px 12px;font-size:13.5px;display:flex;align-items:center;gap:8px;min-height:40px}
+.search-in svg{width:15px;height:15px;color:var(--ink-soft);flex-shrink:0}
+.typed{color:var(--ink)}
+.caret{display:inline-block;width:1.5px;height:15px;background:var(--teal);margin-left:1px;animation:blink 1s steps(1) infinite;vertical-align:middle}
+@keyframes blink{50%{opacity:0}}
+.res-label{font-size:11.5px;font-weight:600;color:var(--ink-soft);margin:14px 2px 8px;display:flex;align-items:center;gap:6px;opacity:0;transition:opacity .4s}
+.res-label svg{width:13px;height:13px;color:var(--teal)}
+.res{display:grid;gap:8px}
+.rc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;gap:10px;align-items:center;opacity:0;transform:translateY(10px);transition:opacity .45s,transform .45s,box-shadow .4s,border-color .4s}
+.rc.show{opacity:1;transform:none}
+.rc .av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:Urbanist,sans-serif;font-weight:700;font-size:14px;flex-shrink:0}
+.rc .nm{font-family:Urbanist,sans-serif;font-weight:700;font-size:14px;line-height:1.2}
+.rc .sp{font-size:11.5px;color:var(--teal);font-weight:600}
+.rc .mini{display:flex;gap:4px;margin-top:4px}
+.rc .mini span{font-size:9.5px;background:var(--teal-pale);color:var(--teal-deep);padding:2px 6px;border-radius:5px;font-weight:600}
+.rc.you{border-color:var(--coral)}
+.rc.you.glow{box-shadow:0 0 0 4px rgba(216,90,48,.18)}
+.you-tag{margin-left:auto;font-size:10px;font-weight:700;background:var(--coral);color:#fff;padding:3px 8px;border-radius:999px;align-self:flex-start}
+.bubble{position:absolute;z-index:3;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;font-size:13.5px;box-shadow:0 18px 40px -18px rgba(10,74,58,.4);display:flex;gap:10px;align-items:center;max-width:230px;opacity:0;transform:translateY(8px) scale(.97);transition:opacity .5s,transform .5s}
+.bubble.show{opacity:1;transform:none}
+.bubble .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex-shrink:0}
+.bubble .ic svg{width:18px;height:18px}
+.bubble b{display:block;font-family:Urbanist,sans-serif;font-size:14.5px}
+.bubble small{color:var(--ink-soft);font-size:12px;line-height:1.35;display:block}
+.b1{top:0;left:0}
+.b1 .ic{background:var(--teal-pale);color:var(--teal-deep)}
+.b2{bottom:70px;right:-14px}
+.b2 .ic{background:#FBE7DF;color:var(--coral)}
+.view-label{position:absolute;top:26px;right:20px;font-size:12px;font-weight:600;color:var(--ink-soft);display:flex;gap:6px;align-items:center}
+.view-label::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--coral);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(216,90,48,.5)}100%{box-shadow:0 0 0 10px rgba(216,90,48,0)}}
+
+/* ticker */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--white);padding:22px 0}
+.strip-row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.strip-item{display:flex;gap:10px;align-items:center;font-size:15px;font-weight:500}
+.strip-item svg{width:20px;height:20px;color:var(--teal)}
+
+/* ===== PROBLEM: before/after ===== */
+.problem{background:var(--ink);color:var(--cream)}
+.problem .eyebrow{color:#8FC9B5}
+.problem .lead{color:#C9CFCB}
+.problem .lead strong{color:#fff}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:56px}
+.panel{border-radius:24px;padding:28px;position:relative;min-height:340px}
+.panel-tag{display:inline-flex;gap:8px;align-items:center;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:999px;margin-bottom:22px}
+.before{background:#262F2B;border:1px dashed #46524C}
+.before .panel-tag{background:#3A4440;color:#C9CFCB}
+.after{background:var(--cream);color:var(--ink)}
+.after .panel-tag{background:var(--teal-pale);color:var(--teal-deep)}
+.chatg{display:grid;gap:8px;margin-bottom:18px}
+.msg{font-size:14px;padding:9px 13px;border-radius:14px;max-width:85%;line-height:1.4}
+.msg.l{background:#38433E;color:#E3E7E4;border-bottom-left-radius:4px}
+.msg.r{background:#1F5A49;color:#E3F2EC;margin-left:auto;border-bottom-right-radius:4px}
+.msg em{display:block;font-style:normal;font-size:11px;color:#8FA59B;margin-bottom:2px;font-weight:600}
+.fade-list{display:grid;gap:8px;opacity:.55}
+.fl{height:38px;border-radius:10px;background:#323C38;display:flex;align-items:center;gap:10px;padding:0 12px}
+.fl i{width:22px;height:22px;border-radius:50%;background:#4A5550;flex-shrink:0}
+.fl span{height:8px;border-radius:4px;background:#4A5550}
+.panel-cap{margin-top:20px;font-size:15px;line-height:1.5}
+.before .panel-cap{color:#9EAAA4}
+.after .panel-cap{color:var(--ink-soft)}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 20px 40px -26px rgba(10,74,58,.4)}
+.pcard-top{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.pcard .av{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:Urbanist,sans-serif;font-weight:700;font-size:19px;flex-shrink:0;background:linear-gradient(135deg,var(--teal),var(--teal-deep))}
+.pcard .nm{font-family:Urbanist,sans-serif;font-weight:700;font-size:18px;line-height:1.2}
+.pcard .sp{color:var(--teal);font-size:13px;font-weight:600}
+.pcard .ph{font-size:14px;color:var(--ink-soft);margin-bottom:12px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tag{font-size:12px;padding:4px 10px;border-radius:999px;background:var(--cream);border:1px solid var(--line)}
+.seals{display:flex;flex-wrap:wrap;gap:6px;padding-top:12px;border-top:1px solid var(--line)}
+.seal{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:8px;background:var(--teal-pale);color:var(--teal-deep)}
+.seal svg{width:13px;height:13px}
+.contact{margin-top:14px;display:flex;justify-content:center;gap:8px;background:var(--teal-deep);color:#fff;border-radius:12px;padding:11px;font-size:14px;font-weight:600}
+.contact svg{width:16px;height:16px}
+
+/* ===== JOURNEY ===== */
+.journey-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:center}
+.jsteps{list-style:none;display:grid;gap:4px;margin-top:28px;position:relative}
+.jsteps li{display:flex;gap:16px;padding:14px 0;position:relative}
+.jsteps li:not(:last-child)::after{content:"";position:absolute;left:17px;top:52px;bottom:-10px;width:2px;background:var(--line)}
+.jn{width:36px;height:36px;border-radius:50%;background:var(--white);border:2px solid var(--line);display:grid;place-items:center;font-family:Urbanist,sans-serif;font-weight:700;font-size:15px;color:var(--ink-soft);flex-shrink:0;transition:all .4s}
+.jsteps li.on .jn{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff}
+.jsteps li strong{display:block;font-family:Urbanist,sans-serif;font-size:18px}
+.jsteps li p{font-size:15px;color:var(--ink-soft)}
+.chatbox{background:var(--white);border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:0 40px 80px -40px rgba(10,74,58,.45);max-width:480px;margin-left:auto;width:100%}
+.chat-head{display:flex;gap:12px;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.chat-head .bot{width:40px;height:40px;border-radius:12px;background:var(--teal-deep);display:grid;place-items:center;color:#fff;font-family:Fraunces,serif;font-weight:600;font-size:17px}
+.chat-head .bot i{color:var(--coral);font-style:normal}
+.chat-head b{font-family:Urbanist,sans-serif;font-size:16px;display:block}
+.chat-head small{font-size:12px;color:var(--teal);display:flex;gap:5px;align-items:center}
+.chat-head small::before{content:"";width:7px;height:7px;border-radius:50%;background:#2DBE8A}
+.chat-body{display:grid;gap:10px;min-height:400px;align-content:start}
+.cm{font-size:14.5px;line-height:1.45;padding:11px 15px;border-radius:18px;max-width:84%;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+.cm.show{opacity:1;transform:none}
+.cm.bot{background:var(--cream);border-bottom-left-radius:5px}
+.cm.user{background:var(--teal-deep);color:#fff;margin-left:auto;border-bottom-right-radius:5px}
+.typing{display:none;gap:4px;padding:14px 16px;background:var(--cream);border-radius:18px;border-bottom-left-radius:5px;width:max-content}
+.typing.show{display:flex}
+.typing span{width:7px;height:7px;border-radius:50%;background:var(--ink-soft);opacity:.5;animation:dot 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,60%,100%{transform:none;opacity:.4}30%{transform:translateY(-4px);opacity:1}}
+.cm-card{max-width:100%;padding:0;background:none}
+.cm-card .rcx{background:#fff;border:1.5px solid var(--coral);border-radius:16px;padding:12px;display:flex;gap:12px;align-items:center;box-shadow:0 0 0 4px rgba(216,90,48,.12)}
+.rcx .av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-deep));display:grid;place-items:center;color:#fff;font-family:Urbanist,sans-serif;font-weight:700}
+.rcx .nm{font-family:Urbanist,sans-serif;font-weight:700;font-size:15px;line-height:1.2}
+.rcx .sp{font-size:12px;color:var(--teal);font-weight:600}
+.rcx .go{margin-left:auto;background:var(--teal-deep);color:#fff;font-size:12px;font-weight:600;padding:7px 12px;border-radius:999px;white-space:nowrap}
+
+/* ===== DIVULGAÇÃO ===== */
+.promo{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.promo-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.risks{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.risk{display:inline-flex;align-items:center;gap:10px;background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:8px 18px 8px 8px}
+.risk .ic{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--ink-soft);display:grid;place-items:center;transition:background .4s,color .4s}
+.risk .ic svg{width:17px;height:17px}
+.risk b{font-family:Urbanist,sans-serif;font-size:19px;font-weight:700;position:relative;color:var(--ink)}
+.risk b::after{content:"";position:absolute;left:-3px;right:-3px;top:52%;height:3px;border-radius:3px;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.6,0,.3,1)}
+.in .risk b::after{transform:scaleX(1)}
+.in .risk:nth-child(1) b::after{transition-delay:.5s}.in .risk:nth-child(2) b::after{transition-delay:.85s}.in .risk:nth-child(3) b::after{transition-delay:1.2s}
+.in .risk .ic{background:#FBE7DF;color:var(--coral)}
+.stamp{display:inline-flex;align-items:center;gap:12px;margin-top:22px;background:var(--teal-deep);color:#fff;border-radius:999px;padding:10px 22px 10px 10px;font-family:Urbanist,sans-serif;font-size:19px;
+  opacity:0;transform:scale(.94);transition:opacity .5s 1.7s,transform .5s 1.7s cubic-bezier(.3,1.5,.5,1)}
+.in .stamp{opacity:1;transform:none}
+.stamp i{width:34px;height:34px;border-radius:50%;background:var(--coral);display:grid;place-items:center}
+.stamp svg{width:17px;height:17px}
+.split{display:grid;gap:14px;max-width:460px;margin-left:auto;width:100%}
+.side{border-radius:24px;padding:24px}
+.side-tag{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+.side-tag span{font-family:Urbanist,sans-serif;font-size:13px;letter-spacing:0;text-transform:none;padding:3px 11px;border-radius:999px}
+.mine{background:var(--cream);border:1px solid var(--line)}
+.mine .side-tag{color:var(--teal)}
+.mine .side-tag span{background:var(--teal-pale);color:var(--teal-deep)}
+.one{display:flex;align-items:center;gap:14px}
+.one .ic{width:52px;height:52px;border-radius:16px;background:var(--teal-deep);color:#fff;display:grid;place-items:center;flex-shrink:0;box-shadow:0 0 0 6px var(--teal-pale)}
+.one .ic svg{width:24px;height:24px}
+.one strong{font-family:Urbanist,sans-serif;font-size:22px;display:block;line-height:1.2}
+.one small{font-size:13.5px;color:var(--ink-soft)}
+.ours{background:linear-gradient(160deg,var(--teal),var(--teal-deep));color:#fff;box-shadow:0 30px 60px -34px rgba(10,74,58,.7)}
+.ours .side-tag{color:#9BD6C1}
+.ours .side-tag span{background:rgba(255,255,255,.14);color:#fff}
+.todo{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:15.5px;opacity:0;transform:translateX(12px);transition:opacity .4s,transform .4s}
+.todo:last-child{border-bottom:0;padding-bottom:0}
+.in .todo{opacity:1;transform:none}
+.in .todo:nth-child(2){transition-delay:.3s}.in .todo:nth-child(3){transition-delay:.45s}.in .todo:nth-child(4){transition-delay:.6s}.in .todo:nth-child(5){transition-delay:.75s}.in .todo:nth-child(6){transition-delay:.9s}
+.todo i{width:26px;height:26px;border-radius:8px;background:#9BD6C1;color:var(--teal-deep);display:grid;place-items:center;flex-shrink:0}
+.todo i svg{width:15px;height:15px}
+
+/* ===== BENEFITS ===== */
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.ben{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:transform .25s,box-shadow .25s}
+.ben:hover{transform:translateY(-4px);box-shadow:0 24px 44px -28px rgba(10,74,58,.45)}
+.ben-ico{width:50px;height:50px;border-radius:14px;background:var(--teal-pale);color:var(--teal-deep);display:grid;place-items:center;margin-bottom:20px}
+.ben-ico svg{width:24px;height:24px}
+.ben.hl{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}
+.ben.hl .ben-ico{background:rgba(255,255,255,.12);color:#fff}
+.ben.hl p{color:#CFE6DC}
+.ben p{color:var(--ink-soft);font-size:15.5px}
+
+/* ===== ANATOMY ===== */
+.anat{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.anat-card{position:relative;max-width:420px;margin:0 auto;width:100%}
+.anat-card .pcard{padding:24px}
+.pin{position:absolute;width:26px;height:26px;border-radius:50%;background:var(--coral);color:#fff;font-size:13px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 5px rgba(216,90,48,.2);font-family:Urbanist,sans-serif}
+.p1{top:24px;left:-12px}.p2{top:104px;right:-12px}.p3{top:150px;left:-12px}.p4{bottom:58px;right:-12px}
+.nopreco{margin-top:16px;display:flex;gap:10px;align-items:center;background:#fff;border:1.5px dashed var(--coral);border-radius:14px;padding:12px 14px;font-size:14px}
+.nopreco s{color:var(--ink-soft)}
+.nopreco svg{width:20px;height:20px;color:var(--coral);flex-shrink:0}
+.anat-list{list-style:none;display:grid;gap:18px;margin-top:28px}
+.anat-list li{display:flex;gap:14px}
+.anat-list .n{width:28px;height:28px;border-radius:50%;background:var(--coral);color:#fff;font-weight:700;font-size:13px;display:grid;place-items:center;flex-shrink:0;font-family:Urbanist,sans-serif;margin-top:1px}
+.anat-list strong{font-family:Urbanist,sans-serif;font-size:18px;display:block;line-height:1.3}
+.anat-list p{font-size:15px;color:var(--ink-soft)}
+
+/* ===== VISION ===== */
+.vision{background:radial-gradient(800px 500px at 75% 50%,#0F6E56 0%,transparent 70%),var(--teal-deep);color:#fff;overflow:hidden}
+.vision .eyebrow{color:#9BD6C1}
+.vision .lead{color:#CFE6DC}
+.vision-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.globe-wrap{position:relative;max-width:480px;margin:0 auto;width:100%}
+.globe{width:100%;height:auto;display:block}
+.globe .grid{fill:none;stroke:rgba(255,255,255,.14);stroke-width:1}
+.globe .rim{fill:rgba(255,255,255,.03);stroke:rgba(255,255,255,.3);stroke-width:1.2}
+.globe .arc{fill:none;stroke:#F0A07F;stroke-width:1.8;stroke-linecap:round;stroke-dasharray:4 7;animation:flow 2.4s linear infinite}
+.globe .arc.t{stroke:#7FD6B6}
+@keyframes flow{to{stroke-dashoffset:-44}}
+.globe .node{fill:#fff}
+.globe .halo{fill:#fff;opacity:.35;transform-box:fill-box;transform-origin:center;animation:halo 2.6s ease-out infinite}
+.globe .node.c{fill:var(--coral)}
+.globe .halo.c{fill:var(--coral)}
+@keyframes halo{0%{transform:scale(1);opacity:.5}100%{transform:scale(3.4);opacity:0}}
+.globe .spin{animation:spin 40s linear infinite;transform-origin:240px 240px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.road{display:grid;gap:0;margin-top:36px;border-left:2px solid rgba(255,255,255,.18);padding-left:24px}
+.road div{position:relative;padding:10px 0 18px}
+.road div::before{content:"";position:absolute;left:-32px;top:15px;width:14px;height:14px;border-radius:50%;background:var(--teal-deep);border:2px solid rgba(255,255,255,.5)}
+.road div.now::before{background:var(--coral);border-color:var(--coral);box-shadow:0 0 0 5px rgba(216,90,48,.25)}
+.road small{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9BD6C1}
+.road strong{display:block;font-family:Urbanist,sans-serif;font-size:21px;font-weight:700;margin:2px 0}
+.road p{font-size:15px;color:#CFE6DC}
+.quote{margin-top:72px;text-align:center;font-family:Urbanist,sans-serif;font-size:clamp(24px,3.2vw,36px);line-height:1.25;max-width:860px;margin-left:auto;margin-right:auto}
+.quote b{font-weight:700}
+
+/* ===== STEPS ===== */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px;position:relative}
+.step{padding:30px;border-radius:var(--radius);background:var(--white);border:1px solid var(--line);position:relative}
+.step-n{font-family:Urbanist,sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--teal-deep);width:40px;height:40px;border-radius:12px;display:grid;place-items:center;margin-bottom:18px}
+.step p{color:var(--ink-soft);font-size:15.5px}
+.step .time{display:inline-block;margin-top:14px;font-size:12.5px;font-weight:600;color:var(--teal);background:var(--teal-pale);padding:4px 10px;border-radius:999px}
+
+/* ===== PIONEER ===== */
+.pioneer{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pio-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.growth{background:var(--cream);border:1px solid var(--line);border-radius:24px;padding:28px}
+.growth svg{width:100%;height:auto;display:block}
+.growth-cap{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);margin-top:10px;font-weight:600}
+
+/* ===== FAQ ===== */
+.faq{max-width:780px;margin:40px auto 0}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:22px 0;font-family:Urbanist,sans-serif;font-size:20px;font-weight:700;display:flex;justify-content:space-between;gap:20px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-weight:400;font-size:28px;color:var(--teal);transition:transform .2s;flex-shrink:0}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 22px;color:var(--ink-soft);max-width:680px}
+
+/* ===== FINAL ===== */
+.final{background:linear-gradient(160deg,var(--teal-deep),var(--teal));color:#fff;text-align:center;border-radius:32px;padding:96px 32px;margin:0 24px;position:relative;overflow:hidden}
+.final::before,.final::after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.12)}
+.final::before{width:520px;height:520px;top:-260px;left:-160px}
+.final::after{width:420px;height:420px;bottom:-240px;right:-120px}
+.final h2{font-size:clamp(32px,4.8vw,56px);position:relative}
+.final p{color:#D5EBE2;font-size:19px;margin:0 auto 36px;max-width:560px;position:relative}
+.final .btn{background:var(--cream);color:var(--teal-deep);position:relative}
+.final .btn:hover{background:#fff}
+
+footer{padding:48px 0;text-align:center;color:var(--ink-soft);font-size:14px}
+footer .logo{display:inline-block;margin-bottom:8px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}
+  .todo,.stamp{opacity:1;transform:none;transition:none}.risk b::after{transform:scaleX(1);transition:none}
+  .globe .arc,.globe .halo,.globe .spin,.caret,.view-label::before{animation:none}
+}
+
+/* responsive */
+@media (max-width:960px){
+  section{padding:80px 0}
+  .hero-grid,.journey-grid,.anat,.vision-grid,.pio-grid,.ba,.promo-grid{grid-template-columns:1fr;gap:48px}
+  .split{margin:0 auto}
+  .benefits,.steps{grid-template-columns:1fr 1fr}
+  .nav-links a:not(.btn){display:none}
+  .chatbox{margin:0 auto}
+  .b2{right:0}
+}
+@media (max-width:620px){
+  .wrap{padding:0 16px}
+  body{font-size:16px}
+  .lead,.final p{font-size:17px}
+  .benefits,.steps{grid-template-columns:1fr}
+  .final{margin:0 16px;padding:72px 22px;border-radius:24px}
+  .btn{width:100%;justify-content:center}
+  .nav .btn{width:auto}
+  .phone{width:272px}
+  .screen{height:520px}
+  .bubble{max-width:190px;padding:10px 12px}
+  .b1{top:0;left:0}.b2{bottom:30px;right:-4px}
+  .view-label{display:none}
+  .strip-row{flex-direction:column;gap:12px}
+  .panel{padding:22px}
+  .p1,.p3{left:-6px}.p2,.p4{right:-6px}
+  .chat-body{min-height:430px}
+  .risks{gap:8px}
+  .risk{padding:6px 14px 6px 6px;gap:8px}
+  .risk .ic{width:30px;height:30px}
+  .risk b{font-size:16px}
+  .stamp{font-size:17px}
+  .side{padding:20px}
+}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a class="logo" href="index.html">sua saúde<i>.</i>digital</a>
+    <nav class="nav-links">
+      <a href="#como-chega">Como o paciente chega</a>
+      <a href="#divulgacao">Divulgação</a>
+      <a href="#visao">Nossa visão</a>
+      <a href="#perguntas">Perguntas</a>
+      <a class="btn btn-sm" href="cadastro.html">Cadastrar</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="rv">
+      <span class="eyebrow">Para profissionais de saúde</span>
+      <h1>Você cuida dos pacientes. <b>A gente traz eles até você.</b></h1>
+      <p class="lead">Sem post, sem anúncio, sem algoritmo. A divulgação é por nossa conta: você se cadastra e a gente trabalha para os pacientes te encontrarem.</p>
+      <a class="btn" href="cadastro.html">Quero meu perfil no ar
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <div class="note">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Cadastro em minutos</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Divulgação por nossa conta</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Seu preço não aparece</span>
+      </div>
+    </div>
+
+    <div class="stage rv" aria-label="Simulação: um paciente buscando um profissional no celular">
+      <span class="view-label">Como o paciente vê</span>
+      <div class="phone">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="scr-top"><span class="scr-logo">sua saúde<i>.</i>digital</span></div>
+          <div class="scr-hello">Encontre quem cuida <b>de você.</b></div>
+          <div class="search"><div class="search-in">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+            <span class="typed" id="typed"></span><span class="caret"></span>
+          </div></div>
+          <div class="res-label" id="resLabel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0114 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Mais perto de você</div>
+          <div class="res" id="res">
+            <div class="rc you"><div class="av" style="background:linear-gradient(135deg,#0F6E56,#0A4A3A)">VC</div><div><div class="nm">Seu nome aqui</div><div class="sp" id="spec1">Fisioterapeuta</div><div class="mini"><span>Convênios</span><span>Online</span></div></div><span class="you-tag">Você</span></div>
+            <div class="rc"><div class="av" style="background:#8BA59A">MS</div><div><div class="nm">M. Souza</div><div class="sp" id="spec2">Fisioterapeuta</div><div class="mini"><span>Particular</span></div></div></div>
+            <div class="rc"><div class="av" style="background:#A9B8B1">RL</div><div><div class="nm">R. Lima</div><div class="sp" id="spec3">Fisioterapeuta</div><div class="mini"><span>Convênios</span></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="bubble b1" id="b1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div><div><b>Alguém perto buscou</b><small>sua especialidade</small></div></div>
+      <div class="bubble b2" id="b2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg></div><div><b>E entrou em contato</b><small>no telefone que você informar</small></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap strip-row">
+    <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Busca que entende até erro de digitação</div>
+    <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0114 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Resultados por proximidade</div>
+    <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg>Chat que indica pelo que a pessoa sente</div>
+  </div>
+</div>
+
+<!-- ============ PROBLEM ============ -->
+<section class="problem">
+  <div class="wrap">
+    <div class="rv" style="max-width:820px">
+      <span class="eyebrow">A verdade que ninguém fala</span>
+      <h2>Todo dia alguém precisa de você. <b>E acaba encontrando outro profissional.</b></h2>
+      <p class="lead">Não porque o outro é melhor. <strong>Porque ele estava mais fácil de achar.</strong> Enquanto você atende, estuda e se especializa, o paciente que era seu está perguntando no grupo da família quem indicar.</p>
+    </div>
+
+    <div class="ba">
+      <div class="panel before rv">
+        <span class="panel-tag">Hoje, sem a Sua Saúde</span>
+        <div class="chatg">
+          <div class="msg l"><em>Grupo da família</em>Alguém conhece um bom fisioterapeuta? Tô com dor no joelho faz uma semana</div>
+          <div class="msg r">Tinha um perto do centro, não lembro o nome 😅</div>
+          <div class="msg l">Procura no Google</div>
+        </div>
+        <div class="fade-list">
+          <div class="fl"><i></i><span style="width:55%"></span></div>
+          <div class="fl"><i></i><span style="width:40%"></span></div>
+        </div>
+        <p class="panel-cap">Indicação vaga, listas sem rosto, nenhuma informação. A pessoa desiste ou escolhe no escuro.</p>
+      </div>
+
+      <div class="panel after rv">
+        <span class="panel-tag">Com a Sua Saúde</span>
+        <div class="pcard">
+          <div class="pcard-top"><div class="av">VC</div><div><div class="nm">Você</div><div class="sp">Fisioterapeuta</div></div></div>
+          <p class="ph">Reabilitação com método e acompanhamento de perto.</p>
+          <div class="tags"><span class="tag">Ortopedia</span><span class="tag">Pós-operatório</span><span class="tag">Joelho</span></div>
+          <div class="seals">
+            <span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>Convênios</span>
+            <span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg>Atende online</span>
+          </div>
+          <div class="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg>Entrar em contato</div>
+        </div>
+        <p class="panel-cap">Rosto, especialidade, convênio e contato num só lugar. A pessoa confia, escolhe e chama você.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOURNEY ============ -->
+<section id="como-chega">
+  <div class="wrap journey-grid">
+    <div class="rv">
+      <span class="eyebrow">Como o paciente chega até você</span>
+      <h2>Do que a pessoa sente <b>até o seu consultório.</b></h2>
+      <p class="lead">Nem todo paciente sabe qual especialista procurar. Nosso chat entende o que ele sente e indica quem resolve. Se for você, ele chega até você.</p>
+      <ol class="jsteps" id="jsteps">
+        <li><span class="jn">1</span><div><strong>Ela conta o que sente</strong><p>Com as palavras dela, sem precisar saber termo técnico.</p></div></li>
+        <li><span class="jn">2</span><div><strong>O chat indica a especialidade</strong><p>Direto ao ponto, sem enrolação.</p></div></li>
+        <li><span class="jn">3</span><div><strong>Mostra quem atende perto</strong><p>E o seu perfil aparece com foto, convênios e atendimento.</p></div></li>
+        <li><span class="jn">4</span><div><strong>Ela entra em contato</strong><p>No telefone que você informar, seu ou da sua secretária. Sem comissão por consulta.</p></div></li>
+      </ol>
+    </div>
+
+    <div class="chatbox rv" aria-label="Simulação do chat da Sua Saúde">
+      <div class="chat-head"><div class="bot">s<i>.</i></div><div><b>Sua Saúde</b><small>online</small></div></div>
+      <div class="chat-body" id="chat">
+        <div class="cm bot" data-s="0">Oi! Aqui é a Sua Saúde. Me conta o que você está sentindo.</div>
+        <div class="cm user" data-s="0">Tô com dor no joelho faz uma semana, piora quando subo escada.</div>
+        <div class="typing" id="typing"><span></span><span></span><span></span></div>
+        <div class="cm bot" data-s="1">Para isso, o indicado é um <b>Fisioterapeuta</b> ou <b>Ortopedista</b>. Estes atendem perto de você:</div>
+        <div class="cm cm-card" data-s="2"><div class="rcx"><div class="av">VC</div><div><div class="nm">Você</div><div class="sp">Fisioterapeuta</div></div><span class="go">Ver perfil</span></div></div>
+        <div class="cm user" data-s="3">Perfeito, vou chamar agora 🙌</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIVULGAÇÃO ============ -->
+<section class="promo" id="divulgacao">
+  <div class="wrap promo-grid">
+    <div class="rv">
+      <span class="eyebrow">A divulgação é por nossa conta</span>
+      <h2>Seu único trabalho aqui é <b>atender bem.</b></h2>
+      <p class="lead">Fazer as pessoas conhecerem a Sua Saúde é trabalho nosso. A gente investe em publicidade e conteúdo para levar pacientes até a plataforma, e até o seu perfil.</p>
+      <div class="risks">
+        <div class="risk"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg></span><b>Post</b></div>
+        <div class="risk"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 001 1h2l5 4V6L6 10H4a1 1 0 00-1 1zM16 8a5 5 0 010 8"/></svg></span><b>Anúncio</b></div>
+        <div class="risk"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></svg></span><b>Algoritmo</b></div>
+      </div>
+      <div class="stamp"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>A divulgação é <b>por nossa conta</b></span></div>
+    </div>
+
+    <div class="split rv" aria-label="Divisão do trabalho: o profissional atende, a Sua Saúde divulga">
+      <div class="side mine">
+        <div class="side-tag">Sua parte <span>1 item</span></div>
+        <div class="one">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0016.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></svg></span>
+          <div><strong>Atender seus pacientes</strong><small>do jeito que você já faz</small></div>
+        </div>
+      </div>
+      <div class="side ours">
+        <div class="side-tag">Nossa parte <span>todo o resto</span></div>
+        <div class="todo"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Campanhas e publicidade o ano todo</div>
+        <div class="todo"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Conteúdo para a plataforma ser conhecida</div>
+        <div class="todo"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Seu perfil montado e publicado</div>
+        <div class="todo"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Chat que indica você a quem precisa</div>
+        <div class="todo"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Levar novos pacientes até você</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BENEFITS ============ -->
+<section>
+  <div class="wrap">
+    <div class="rv center">
+      <span class="eyebrow">O que muda para você</span>
+      <h2>Enquanto você atende, a gente trabalha para <b>novos pacientes te encontrarem.</b></h2>
+      <p class="lead">Instagram pede post todo dia. Anúncio pede orçamento todo mês. Aqui, a divulgação é por nossa conta e você aparece para quem já está procurando.</p>
+    </div>
+    <div class="benefits">
+      <div class="ben hl rv">
+        <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></div>
+        <h3>Paciente <b>com intenção</b></h3>
+        <p>Quem chega aqui não está rolando o feed. Está procurando atendimento, agora.</p>
+      </div>
+      <div class="ben rv">
+        <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0114 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>
+        <h3>Visível <b>para quem está perto</b></h3>
+        <p>A lista é ordenada pela distância. Quem mora ou trabalha perto de você te vê primeiro.</p>
+      </div>
+      <div class="ben rv">
+        <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/><circle cx="12" cy="8" r="4"/></svg></div>
+        <h3>Apresentação <b>profissional</b></h3>
+        <p>Foto, especialidade, sua frase e sua história. Um perfil que passa confiança antes do primeiro contato.</p>
+      </div>
+      <div class="ben rv">
+        <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
+        <h3>Seu preço <b>é só seu</b></h3>
+        <p>O valor da consulta não aparece. Você não entra em guerra de preço com ninguém.</p>
+      </div>
+      <div class="ben rv">
+        <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <h3>Divulgação <b>por nossa conta</b></h3>
+        <p>Campanhas e conteúdo levando pacientes até a plataforma. Você não precisa postar nem anunciar.</p>
+      </div>
+      <div class="ben rv">
+        <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
+        <h3>Cresce <b>junto com a rede</b></h3>
+        <p>Cada novo paciente que chega à plataforma chega a um lugar onde você já está.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANATOMY ============ -->
+<section style="padding-top:0">
+  <div class="wrap anat">
+    <div class="anat-card rv">
+      <div class="pcard">
+        <div class="pcard-top"><div class="av">VC</div><div><div class="nm">Seu nome</div><div class="sp">Sua especialidade</div></div></div>
+        <p class="ph">Sua frase de apresentação, em até 60 caracteres.</p>
+        <div class="tags"><span class="tag">Serviço 1</span><span class="tag">Serviço 2</span><span class="tag">Serviço 3</span></div>
+        <div class="seals">
+          <span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>Convênios</span>
+          <span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 10h4.5a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3H15"/></svg>Particular</span>
+          <span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg>Online</span>
+        </div>
+      </div>
+      <span class="pin p1">1</span><span class="pin p2">2</span><span class="pin p3">3</span><span class="pin p4">4</span>
+      <div class="nopreco"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg><span><s>Valor da consulta</s> &nbsp;nunca aparece no seu perfil</span></div>
+    </div>
+    <div class="rv">
+      <span class="eyebrow">Seu perfil</span>
+      <h2>Você do jeito que <b>quer ser apresentado.</b></h2>
+      <ul class="anat-list">
+        <li><span class="n">1</span><div><strong>Foto e especialidade</strong><p>Um rosto gera confiança. É a primeira coisa que o paciente olha.</p></div></li>
+        <li><span class="n">2</span><div><strong>Sua frase de apresentação</strong><p>Uma linha que diz por que escolher você, logo no card.</p></div></li>
+        <li><span class="n">3</span><div><strong>Seus serviços</strong><p>Até quatro áreas em destaque. E, ao abrir o perfil, um texto completo sobre sua atuação.</p></div></li>
+        <li><span class="n">4</span><div><strong>Convênios, particular e online</strong><p>O paciente já sabe se pode ser atendido por você antes de chamar.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISION ============ -->
+<section class="vision" id="visao">
+  <div class="wrap">
+    <div class="vision-grid">
+      <div class="rv">
+        <span class="eyebrow">Nossa visão</span>
+        <h2>Começamos pelo Brasil. <b>O destino é o mundo.</b></h2>
+        <p class="lead">A Sua Saúde Digital nasceu de uma ideia simples: ninguém deveria ficar sem cuidado por não saber a quem procurar. Estamos construindo a ponte entre quem precisa e quem cuida, primeiro em todo o Brasil, depois em qualquer lugar onde alguém precise de um profissional de saúde.</p>
+        <div class="road">
+          <div class="now"><small>Agora</small><strong>Os pioneiros</strong><p>Os primeiros profissionais formam a base da rede.</p></div>
+          <div><small>Próximo passo</small><strong>Todo o Brasil</strong><p>Profissionais e pacientes conectados de norte a sul.</p></div>
+          <div><small>Destino</small><strong>O mundo</strong><p>Uma rede global de saúde, que começou com quem acreditou primeiro.</p></div>
+        </div>
+      </div>
+
+      <div class="globe-wrap rv" aria-hidden="true">
+        <svg class="globe" viewBox="0 0 480 480">
+          <defs>
+            <radialGradient id="gl" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#1A8A6C" stop-opacity=".55"/><stop offset="1" stop-color="#0A4A3A" stop-opacity="0"/></radialGradient>
+            <clipPath id="clip"><circle cx="240" cy="240" r="190"/></clipPath>
+          </defs>
+          <circle cx="240" cy="240" r="190" fill="url(#gl)"/>
+          <g clip-path="url(#clip)">
+            <g class="grid">
+              <ellipse cx="240" cy="240" rx="190" ry="60"/>
+              <ellipse cx="240" cy="240" rx="190" ry="125"/>
+              <line x1="50" y1="240" x2="430" y2="240"/>
+              <ellipse cx="240" cy="240" rx="45" ry="190"/>
+              <ellipse cx="240" cy="240" rx="100" ry="190"/>
+              <ellipse cx="240" cy="240" rx="150" ry="190"/>
+              <line x1="240" y1="50" x2="240" y2="430"/>
+            </g>
+          </g>
+          <circle class="rim" cx="240" cy="240" r="190"/>
+          <g class="spin"><circle cx="240" cy="240" r="222" fill="none" stroke="rgba(255,255,255,.12)" stroke-dasharray="2 8"/></g>
+
+          <!-- arcs: from Brazil (coral) outward -->
+          <path class="arc" d="M200 300 Q 230 230 290 240"/>
+          <path class="arc" d="M200 300 Q 160 250 150 200"/>
+          <path class="arc" d="M200 300 Q 260 330 320 320"/>
+          <path class="arc t" d="M290 240 Q 330 160 340 150"/>
+          <path class="arc t" d="M150 200 Q 170 130 230 120"/>
+          <path class="arc t" d="M320 320 Q 380 300 380 250"/>
+          <path class="arc t" d="M230 120 Q 290 100 340 150"/>
+
+          <g>
+            <circle class="halo c" cx="200" cy="300" r="7"/><circle class="node c" cx="200" cy="300" r="7"/>
+            <circle class="halo" cx="290" cy="240" r="4" style="animation-delay:.4s"/><circle class="node" cx="290" cy="240" r="4"/>
+            <circle class="halo" cx="150" cy="200" r="4" style="animation-delay:.8s"/><circle class="node" cx="150" cy="200" r="4"/>
+            <circle class="halo" cx="320" cy="320" r="4" style="animation-delay:1.2s"/><circle class="node" cx="320" cy="320" r="4"/>
+            <circle class="halo" cx="340" cy="150" r="4" style="animation-delay:1.6s"/><circle class="node" cx="340" cy="150" r="4"/>
+            <circle class="halo" cx="230" cy="120" r="4" style="animation-delay:2s"/><circle class="node" cx="230" cy="120" r="4"/>
+            <circle class="halo" cx="380" cy="250" r="4" style="animation-delay:.6s"/><circle class="node" cx="380" cy="250" r="4"/>
+            <circle class="node" cx="120" cy="290" r="2.5" opacity=".6"/>
+            <circle class="node" cx="270" cy="370" r="2.5" opacity=".6"/>
+            <circle class="node" cx="180" cy="160" r="2.5" opacity=".6"/>
+            <circle class="node" cx="400" cy="200" r="2.5" opacity=".6"/>
+          </g>
+          <g font-family="Urbanist,sans-serif" font-size="13" font-weight="700">
+            <rect x="140" y="318" width="120" height="28" rx="14" fill="#D85A30"/>
+            <text x="200" y="337" text-anchor="middle" fill="#fff">Brasil · hoje</text>
+            <rect x="300" y="108" width="110" height="28" rx="14" fill="rgba(255,255,255,.14)"/>
+            <text x="355" y="127" text-anchor="middle" fill="#fff">o mundo</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <p class="quote rv">Você não está entrando em um site.<br><b>Está entrando em uma rede que vai conectar a saúde do mundo.</b></p>
+  </div>
+</section>
+
+<!-- ============ STEPS ============ -->
+<section id="como-funciona">
+  <div class="wrap">
+    <div class="rv center">
+      <span class="eyebrow">Como entrar</span>
+      <h2>Três passos e <b>você está no ar.</b></h2>
+      <p class="lead">Nada de site para montar, domínio para comprar ou app para aprender.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv">
+        <div class="step-n">01</div>
+        <h3>Preencha o <b>cadastro</b></h3>
+        <p>Seus dados e textos de apresentação. Você vê a prévia do seu card antes de enviar.</p>
+        <span class="time">Poucos minutos</span>
+      </div>
+      <div class="step rv">
+        <div class="step-n">02</div>
+        <h3>A gente <b>confirma</b> com você</h3>
+        <p>Entramos em contato para confirmar suas informações, pegar sua foto e mandar o link para ativar sua assinatura.</p>
+        <span class="time">A gente chama você</span>
+      </div>
+      <div class="step rv">
+        <div class="step-n">03</div>
+        <h3>Pagamento feito, <b>você no ar</b></h3>
+        <p>Assinatura ativada, perfil no ar. A partir daí, a divulgação é com a gente.</p>
+        <span class="time">Você só atende</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PIONEER ============ -->
+<section class="pioneer">
+  <div class="wrap pio-grid">
+    <div class="rv">
+      <span class="eyebrow">Por que entrar agora</span>
+      <h2>Quem chega primeiro <b>está onde todo mundo vai chegar.</b></h2>
+      <p class="lead">Toda rede tem os seus pioneiros. São eles que ocupam o espaço enquanto a concorrência ainda é pequena e que já estão lá quando os pacientes começam a chegar em massa.</p>
+      <p class="lead" style="margin-top:16px">Daqui a pouco, sua especialidade vai estar cheia de perfis. <b style="color:var(--ink)">A pergunta é se o seu vai ser um dos primeiros ou mais um na fila.</b></p>
+      <a class="btn" href="cadastro.html" style="margin-top:32px">Quero ser pioneiro
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="growth rv" aria-hidden="true">
+      <svg viewBox="0 0 400 260">
+        <defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0F6E56" stop-opacity=".25"/><stop offset="1" stop-color="#0F6E56" stop-opacity="0"/></linearGradient></defs>
+        <g stroke="#DCD8CE" stroke-width="1"><line x1="20" y1="60" x2="380" y2="60"/><line x1="20" y1="120" x2="380" y2="120"/><line x1="20" y1="180" x2="380" y2="180"/><line x1="20" y1="230" x2="380" y2="230"/></g>
+        <path d="M20 228 C 120 222, 180 200, 240 160 S 340 60, 380 30 L380 230 L20 230 Z" fill="url(#ga)"/>
+        <path d="M20 228 C 120 222, 180 200, 240 160 S 340 60, 380 30" fill="none" stroke="#0A4A3A" stroke-width="3" stroke-linecap="round"/>
+        <rect x="20" y="20" width="96" height="210" rx="10" fill="#D85A30" opacity=".08"/>
+        <circle cx="60" cy="225" r="8" fill="#D85A30"/><circle cx="60" cy="225" r="15" fill="none" stroke="#D85A30" stroke-opacity=".35" stroke-width="2"/>
+        <g font-family="Urbanist,sans-serif" font-weight="700">
+          <rect x="30" y="160" width="88" height="40" rx="10" fill="#fff" stroke="#DCD8CE"/>
+          <text x="74" y="178" text-anchor="middle" font-size="12" fill="#D85A30">VOCÊ</text>
+          <text x="74" y="193" text-anchor="middle" font-size="11" fill="#5B6560" font-weight="400">entra aqui</text>
+          <text x="370" y="22" text-anchor="end" font-size="12" fill="#0A4A3A">pacientes chegando</text>
+        </g>
+      </svg>
+      <div class="growth-cap"><span>Pioneiros</span><span>Rede em crescimento</span><span>Rede consolidada</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="perguntas">
+  <div class="wrap">
+    <div class="rv center">
+      <span class="eyebrow">Perguntas frequentes</span>
+      <h2>Ficou <b>alguma dúvida?</b></h2>
+    </div>
+    <div class="faq rv">
+      <details>
+        <summary>Quanto custa?</summary>
+        <p>É uma assinatura mensal. Depois do cadastro, a gente entra em contato, confirma suas informações e envia o link para ativar.</p>
+      </details>
+      <details>
+        <summary>Por que pagar se o Instagram é de graça?</summary>
+        <p>O Instagram só te mostra se você postar o tempo todo, e mesmo assim para quem já te segue. Aqui você aparece para quem está procurando sua especialidade, perto de você, sem precisar produzir conteúdo. Um não substitui o outro: soma.</p>
+      </details>
+      <details>
+        <summary>Vou precisar postar ou fazer anúncio?</summary>
+        <p>Não. A divulgação é por nossa conta: a gente investe em publicidade e conteúdo para os pacientes conhecerem a plataforma e chegarem até o seu perfil. Seu único trabalho é atender bem.</p>
+      </details>
+      <details>
+        <summary>Preciso entender de tecnologia?</summary>
+        <p>Não. Você preenche o cadastro e a gente cuida do resto: confirma suas informações, monta e publica seu perfil.</p>
+      </details>
+      <details>
+        <summary>A plataforma cobra comissão por paciente?</summary>
+        <p>Não. O paciente entra em contato pelo telefone que você informar, e a consulta e o valor são combinados com você ou com sua equipe.</p>
+      </details>
+      <details>
+        <summary>Posso alterar meu perfil depois?</summary>
+        <p>Pode. É só falar com a gente que atualizamos para você.</p>
+      </details>
+      <details>
+        <summary>A plataforma guarda dados de saúde dos pacientes?</summary>
+        <p>Não. A Sua Saúde Digital é um guia de profissionais, não um prontuário. Nenhum dado clínico passa por aqui.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL ============ -->
+<section style="padding-top:0">
+  <div class="final rv">
+    <h2>Daqui a um ano, quem vai ser encontrado: <b>você ou o concorrente?</b></h2>
+    <p>Você cuida dos pacientes. A gente traz eles até você.</p>
+    <a class="btn" href="cadastro.html">Quero meu perfil na Sua Saúde
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <a class="logo" href="index.html">sua saúde<i>.</i>digital</a>
+  <div>Encurtando o caminho entre quem precisa e quem cuida.</div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var h=document.getElementById('top');
+  window.addEventListener('scroll',function(){h.classList.toggle('scrolled',window.scrollY>8)},{passive:true});
+
+  /* reveal on scroll */
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')})}
+  else{
+    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+    els.forEach(function(e){io.observe(e)});
+  }
+
+  /* hero phone: typing loop */
+  var specs=['Fisioterapeuta','Nutricionista','Psicólogo','Dermatologista'];
+  var typed=document.getElementById('typed'), label=document.getElementById('resLabel');
+  var cards=document.querySelectorAll('#res .rc'), you=cards[0];
+  var b1=document.getElementById('b1'), b2=document.getElementById('b2');
+  var sp=[document.getElementById('spec1'),document.getElementById('spec2'),document.getElementById('spec3')];
+  var idx=0;
+  function wait(ms){return new Promise(function(r){setTimeout(r,ms)})}
+  function reset(){typed.textContent='';label.style.opacity=0;cards.forEach(function(c){c.classList.remove('show')});you.classList.remove('glow');b1.classList.remove('show');b2.classList.remove('show')}
+  async function cycle(){
+    var word=specs[idx%specs.length]; idx++;
+    reset(); await wait(500);
+    for(var i=1;i<=word.length;i++){typed.textContent=word.slice(0,i).toLowerCase();await wait(85)}
+    sp.forEach(function(s){s.textContent=word});
+    await wait(350); label.style.opacity=1; b1.classList.add('show');
+    for(var j=0;j<cards.length;j++){await wait(260);cards[j].classList.add('show')}
+    await wait(600); you.classList.add('glow');
+    await wait(500); b2.classList.add('show');
+    await wait(3200); cycle();
+  }
+  if(reduce){typed.textContent='fisioterapeuta';label.style.opacity=1;cards.forEach(function(c){c.classList.add('show')});you.classList.add('glow');b1.classList.add('show');b2.classList.add('show')}
+  else cycle();
+
+  /* chat sequence when visible */
+  var chat=document.getElementById('chat'), typing=document.getElementById('typing');
+  var steps=document.querySelectorAll('#jsteps li');
+  var msgs=chat.querySelectorAll('.cm');
+  function stage(n){
+    msgs.forEach(function(m){if(+m.dataset.s<=n)m.classList.add('show')});
+    steps.forEach(function(s,i){s.classList.toggle('on',i<=n)});
+  }
+  async function playChat(){
+    msgs.forEach(function(m){m.classList.remove('show')}); steps.forEach(function(s){s.classList.remove('on')});
+    await wait(300); msgs[0].classList.add('show');
+    await wait(900); msgs[1].classList.add('show'); steps[0].classList.add('on');
+    await wait(500); typing.classList.add('show');
+    await wait(1400); typing.classList.remove('show'); stage(1);
+    await wait(1100); stage(2);
+    await wait(1300); stage(3);
+    await wait(5000); playChat();
+  }
+  if(reduce || !('IntersectionObserver' in window)){stage(3)}
+  else{
+    var started=false;
+    new IntersectionObserver(function(en,o){en.forEach(function(e){if(e.isIntersecting&&!started){started=true;playChat();o.disconnect()}})},{threshold:.35}).observe(chat);
+  }
+})();
+</script>
+</body>
+</html>
