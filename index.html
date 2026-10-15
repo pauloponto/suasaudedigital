@@ -3168,7 +3168,8 @@ function tourIr(i){
   document.getElementById('tourTexto').innerHTML = p.texto;
   document.getElementById('tourVoltar').hidden = tourAtual === 0;
   tourProximo.textContent = tourAtual === TOUR_PASSOS.length - 1 ? 'Começar a usar' : (tourAtual === 0 ? 'Mostrar' : 'Próximo');
-  document.getElementById('tourLembrar').hidden = tourAtual !== TOUR_PASSOS.length - 1;
+  // a caixinha aparece no primeiro e no último passo (é a mesma: marcar em um vale para o outro)
+  document.getElementById('tourLembrar').hidden = tourAtual !== 0 && tourAtual !== TOUR_PASSOS.length - 1;
   tourPontos.querySelectorAll('i').forEach((d, k) => d.classList.toggle('ativo', k === tourAtual));
   // passos do perfil abrem o primeiro profissional da lista; os outros fecham o perfil
   const perfilAberto = modalOverlay.classList.contains('open');
