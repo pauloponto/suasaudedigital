@@ -1404,6 +1404,44 @@
   .menu-prof .menu-seta{color:#9FD8C2;}
   @media (max-width:560px){ .menu-btn{width:40px;height:40px;} .menu-btn span:nth-child(1){top:13px;} .menu-btn span:nth-child(2){top:19px;} .menu-btn span:nth-child(3){top:25px;} }
   @media (prefers-reduced-motion:reduce){ .menu-btn span,.menu-painel{transition:none;} }
+  /* ===== Ver em cards ou em lista ===== */
+  .filtros-barra .filters-row{align-items:center;}
+  .vista-toggle{margin-left:auto;display:inline-flex;gap:2px;padding:3px;background:var(--card);border:1px solid var(--line);border-radius:100px;flex-shrink:0;}
+  .vista-btn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 13px;border:0;border-radius:100px;background:none;color:var(--ink-soft);font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;transition:background .15s ease,color .15s ease;}
+  .vista-btn .icon{width:16px;height:16px;}
+  .vista-btn[aria-pressed="true"]{background:var(--teal-deep);color:#fff;}
+  .vista-btn:not([aria-pressed="true"]):hover{color:var(--teal-deep);}
+  .grid.lista{display:flex;flex-direction:column;gap:26px;max-width:820px;}
+  .lista-grupo-cab{display:flex;align-items:baseline;gap:8px;margin:0 4px 10px;}
+  .lista-grupo-cab h2{font-family:'Urbanist',system-ui,sans-serif;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:var(--teal-deep);}
+  .lista-grupo-cab span{font-size:13px;color:var(--ink-soft);}
+  .lista-grupo-itens{background:var(--card);border-radius:20px;box-shadow:var(--float);overflow:hidden;}
+  .prof-linha{display:flex;align-items:center;gap:14px;padding:12px 14px;cursor:pointer;border-top:1px solid #EEEBE4;transition:background .15s ease;animation:fadeIn .3s ease both;}
+  .prof-linha:first-child{border-top:0;}
+  .prof-linha:hover{background:var(--cream);}
+  .prof-linha:focus-visible{outline-offset:-3px;}
+  .linha-foto{width:60px;height:60px;flex-shrink:0;border-radius:16px;overflow:hidden;background:var(--teal-pale);color:var(--teal);
+    font-family:'Urbanist',system-ui,sans-serif;font-size:20px;font-weight:600;display:flex;align-items:center;justify-content:center;}
+  .linha-foto img{width:100%;height:100%;object-fit:cover;object-position:center 15%;}
+  .linha-corpo{flex:1;min-width:0;display:flex;flex-direction:column;}
+  .linha-nome{font-family:'Urbanist',system-ui,sans-serif;font-size:17px;font-weight:600;line-height:1.2;letter-spacing:-0.01em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .linha-sub{font-size:13px;color:var(--ink-soft);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .linha-selos{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
+  .linha-selos span{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:500;line-height:1.2;padding:3px 8px 3px 7px;border-radius:100px;color:var(--teal-deep);background:var(--teal-pale);}
+  .linha-selos .selo-conv{background:var(--cream);box-shadow:inset 0 0 0 1px var(--line);}
+  .linha-selos .icon{width:12px;height:12px;color:var(--teal);}
+  .linha-exemplo{font-family:'Inter',system-ui,sans-serif;font-size:10.5px;font-weight:700;letter-spacing:0;color:#fff;background:var(--coral);padding:2px 7px;border-radius:100px;margin-left:6px;vertical-align:2px;}
+  .linha-whats{width:44px;height:44px;flex-shrink:0;border-radius:50%;background:var(--teal-deep);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .15s ease;}
+  .linha-whats:hover{background:var(--teal);}
+  .linha-whats .icon{width:19px;height:19px;}
+  @media (max-width:560px){
+    .vista-txt{display:none;}
+    .vista-btn{padding:0 10px;}
+    .grid.lista{gap:22px;}
+    .prof-linha{padding:11px 12px;gap:12px;}
+    .linha-foto{width:54px;height:54px;border-radius:14px;font-size:18px;}
+    .linha-nome{font-size:16px;}
+  }
 </style>
 </head>
 <body>
@@ -1473,6 +1511,10 @@
             <span class="selector-chevron"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </div>
           <div class="selector-dropdown" id="selectorDropdown"></div>
+        </div>
+        <div class="vista-toggle" role="group" aria-label="Como ver os profissionais">
+          <button type="button" class="vista-btn" id="vistaCards" aria-pressed="true" title="Ver em cards"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></svg><span class="vista-txt">Cards</span></button>
+          <button type="button" class="vista-btn" id="vistaLista" aria-pressed="false" title="Ver em lista"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.1"/><circle cx="4.5" cy="12" r="1.1"/><circle cx="4.5" cy="18" r="1.1"/></svg><span class="vista-txt">Lista</span></button>
         </div>
       </div>
     </div>
@@ -1708,6 +1750,10 @@ let categoriaAtiva = null; // null = todas
 let categoriaDaBusca = null; // especialidade que a busca por texto encontrou (ex: "dentista" → Odontologia); só mostra no botão
 let cidadeAtiva = null; // null = todas
 let cidadePerto = false; // o botão de cidade mostra "Perto de você" (localização ativa)
+// Ver em cards (um por tela no celular) ou em lista (vários por tela, separados por especialidade).
+// A escolha fica guardada no aparelho da pessoa.
+const VISTA_CHAVE = 'ssd-vista';
+let modoVista = (() => { try { return localStorage.getItem(VISTA_CHAVE) === 'lista' ? 'lista' : 'cards'; } catch(_) { return 'cards'; } })();
 
 const gridEl = document.getElementById('grid');
 const countEl = document.getElementById('resultCount');
@@ -2214,6 +2260,21 @@ function render(){
       + (semCadastroAqui && filtrados.length ? `<span class="aviso-cidade">Ainda não temos profissionais em ${cidadeUsuario}. Mostrando os mais próximos.</span>` : '');
   }
 
+  // Durante o tour sempre mostramos os cards (o tour aponta para partes do card)
+  const emLista = modoVista === 'lista' && filtrados.length > 0 && !document.body.classList.contains('tour-ativo');
+  gridEl.classList.toggle('lista', emLista);
+  if(emLista){
+    gridEl.innerHTML = htmlLista(filtrados);
+    gridEl.querySelectorAll('.prof-linha').forEach(el => {
+      el.addEventListener('click', () => abrirModal(profissionais[el.dataset.idx]));
+      el.addEventListener('keydown', (e) => {
+        if(e.target !== el) return;
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); abrirModal(profissionais[el.dataset.idx]); }
+      });
+    });
+    return;
+  }
+
   gridEl.innerHTML = filtrados.length ? filtrados.map((p, i) => {
     const idx = profissionais.indexOf(p);
     const distancia = p.exemplo ? 1.2 : distanciasPorProfissional[idx];
@@ -2221,7 +2282,7 @@ function render(){
     <div class="card" data-idx="${idx}" tabindex="0" role="button" aria-label="Ver perfil de ${p.nome}" style="animation-delay:${Math.min(i,8)*45}ms">
       <div class="card-media">
         ${p.foto ? `<img src="${p.foto}" alt="Foto de ${p.nome}" loading="lazy">` : `<span class="avatar-fallback">${iniciais(p.nome)}</span>`}
-        <span class="card-chip">${p.categoria}</span>${p.exemplo ? '<span class="card-exemplo">Exemplo</span>' : ''}
+        <span class="card-chip">${p.categoria}</span>${p.exemplo || p.amostra ? '<span class="card-exemplo">Exemplo</span>' : ''}
       </div>
       <div class="card-body">
         <div class="card-name">${p.nome}</div>
@@ -2248,6 +2309,43 @@ function render(){
     });
   });
   ligarBotoesAcoes(gridEl);
+}
+
+// ---------- Lista: linhas compactas, agrupadas por especialidade ----------
+// Os grupos seguem a ordem dos resultados (quem está mais perto puxa a especialidade para cima)
+function htmlLista(lista){
+  const grupos = [];
+  lista.forEach(p => {
+    let g = grupos.find(x => x.cat === p.categoria);
+    if(!g){ g = { cat:p.categoria, itens:[] }; grupos.push(g); }
+    g.itens.push(p);
+  });
+  let n = 0;
+  return grupos.map(g => `
+    <section class="lista-grupo">
+      <div class="lista-grupo-cab"><h2>${g.cat}</h2><span>${g.itens.length} ${g.itens.length !== 1 ? 'profissionais' : 'profissional'}</span></div>
+      <div class="lista-grupo-itens">${g.itens.map(p => linhaProfissional(p, n++)).join('')}</div>
+    </section>`).join('');
+}
+function linhaProfissional(p, i){
+  const idx = profissionais.indexOf(p);
+  const d = p.exemplo ? 1.2 : distanciasPorProfissional[idx];
+  const selos = [];
+  if(p.particular === true) selos.push('<span class="selo-conv">Particular</span>');
+  const conv = (p.particular === true && Array.isArray(p.convenios) && !p.convenios.length) ? '' : textoConvenios(p, 1);
+  if(conv) selos.push(`<span class="selo-conv">${ICON.escudo}${conv}</span>`);
+  const modo = textoAtendimento(p);
+  if(modo) selos.push(`<span>${p.atendimento === 'presencial' ? ICON.consultorio : ICON.video}${modo}</span>`);
+  return `
+    <div class="prof-linha" data-idx="${idx}" tabindex="0" role="button" aria-label="Ver perfil de ${p.nome}" style="animation-delay:${Math.min(i, 10) * 30}ms">
+      <span class="linha-foto">${p.foto ? `<img src="${p.foto}" alt="" loading="lazy">` : iniciais(p.nome)}</span>
+      <span class="linha-corpo">
+        <span class="linha-nome">${p.nome}${p.exemplo || p.amostra ? '<span class="linha-exemplo">Exemplo</span>' : ''}</span>
+        <span class="linha-sub">${textoCidades(p, idx)}${d !== undefined ? ` · <b style="color:var(--teal);font-weight:600">${formatarDistancia(d)} de você</b>` : ''}</span>
+        ${selos.length ? `<span class="linha-selos">${selos.join('')}</span>` : ''}
+      </span>
+      <a class="linha-whats" href="https://wa.me/${p.whats}" target="_blank" rel="noopener" aria-label="Chamar ${p.nome} no WhatsApp" onclick="event.stopPropagation()">${ICON.chat}</a>
+    </div>`;
 }
 
 // ---------- Orientação acima dos resultados quando a busca é uma queixa ----------
@@ -3750,6 +3848,17 @@ function observarCampoPrincipal(){
 }
 observarCampoPrincipal();
 matchMedia('(max-width:560px)').addEventListener('change', observarCampoPrincipal);
+
+// ---------- Botões Cards / Lista ----------
+function aplicarVista(modo, salvar){
+  modoVista = modo;
+  document.getElementById('vistaCards').setAttribute('aria-pressed', String(modo === 'cards'));
+  document.getElementById('vistaLista').setAttribute('aria-pressed', String(modo === 'lista'));
+  if(salvar){ try { localStorage.setItem(VISTA_CHAVE, modo); } catch(_) {} }
+}
+document.getElementById('vistaCards').addEventListener('click', () => { aplicarVista('cards', true); render(); });
+document.getElementById('vistaLista').addEventListener('click', () => { aplicarVista('lista', true); render(); });
+aplicarVista(modoVista);
 
 render();
 abrirPorLink();
